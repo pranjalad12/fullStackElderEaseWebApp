@@ -40,7 +40,7 @@ const Homepage = () => {
         </div>
         {mes}
         <div>
-          {{ msg }}
+          {mes}
         </div>
       </section>
     </div>

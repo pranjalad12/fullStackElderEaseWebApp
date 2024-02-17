@@ -47,3 +47,4 @@ tornado==6.3.2
 traitlets==5.9.0
 wcwidth==0.2.6
 Flask==2.1.0
+Werkzeug==2.2.2
