@@ -1,0 +1,33 @@
+{
+  "name": "next_full_stack",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^4.29.7",
+    "bcrypt": "^5.1.1",
+    "encoding": "^0.1.13",
+    "firebase": "^10.8.0",
+    "framer-motion": "^11.0.5",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.2",
+    "next": "14.1.0",
+    "next-auth": "^4.24.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-type-animation": "^3.2.0",
+    "typewriter-effect": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.55",
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "5.3.3"
+  }
+}
