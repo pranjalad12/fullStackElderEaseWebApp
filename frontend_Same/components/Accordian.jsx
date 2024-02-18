@@ -5,7 +5,7 @@ import MultipleSelect from './Dropdown'
 const AccordionItem = ({ header, text ,options,array,setarray}) => {
     const [active, setActive] = useState(false);
     
-console.log({ options});
+// console.log({ options});
 
     const handleToggle = (event) => {
         event.preventDefault();

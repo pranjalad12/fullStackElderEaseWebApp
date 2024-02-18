@@ -2,31 +2,98 @@
 // pages/profile.jsx
 
 import React, { useEffect, useState } from 'react';
+import { getFirestore, collection, where, query, getDocs, or , doc, updateDoc, getDoc} from 'firebase/firestore';
+import {app, auth} from "../firebase"
 import { UserAuth } from "../context/AuthContext";
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import AccordionItem from '../../components/Accordian.jsx'
+import { onAuthStateChanged } from 'firebase/auth';
+
+
+
+const db = getFirestore(app);
+
+
 
 const Profile = () => {
     const { user } = UserAuth();
      const [first,setfirst]=useState([]);
     const [second,setsecond]=useState([]);
     const [third,setthird]=useState([]);
-    const options2 = ["Arthritis", "Balance issues", "Indigestion","Diabetes","Hypertension"];
-    const options1=["Neck", "shoulders", "back", "knee" ,"hips"]
-    const options3 =[" Increase Flexibility & Mobility","Improve balance and stability "," Reduce Stress & Relax"]
+    const options2 = ["Arthritis", "sciatica", "Indigestion","diabetes","Hypertension"];
+    const options1=["neck", "shoulders", "back", "knee" ,"hips"]
+    const options3 =["Increase Flexibility & Mobility","Improve Balance & Stability","Reduce Stress & Relax"]
+    const[matchingPoses, setMatchingPoses] = useState([]);
+    const[diseases, setDisease] =useState(first); // Replace with user input
+    const[painAreas, setPainAreas]= useState(second);
+    const[aim, setAim]=useState(third);
 
+            const fetchData = async () => {
+              try {
+                console.log({first})
+                const posesCollection = collection(db, 'yogaPose');
+                const q = query(posesCollection,  or(where('diseases', 'array-contains-any', first),
+                where('painAreas', 'array-contains-any',second),
+                where('Aim','array-contains-any',third)
+                ));
+                const querySnapshot = await getDocs(q);
+                const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
+                // console.log(matchingPosesData)
+                setMatchingPoses(matchingPosesData);
+              } catch (error) {
+                console.error(error);
+                console.log("error caught");
+              }
 
-    const updateData=()=>{
-        
-    }
+            };
+            
+            const saveData=async() => {
+                try{
+                    // console.log(user.uid)
+                    if(user && user.uid) await updateDoc(doc(db, 'users', user.uid),{
+                        painAreas: second,
+                        diseases: first,
+                        motive:third
+                
+                      })
+                } catch(error){
+                    console.log(error);
+
+                }
+
+            }
+            // const [disease, setDiseases]= useState[null];
+            // const [aim, setAim]= useState[null];
+
+            const fetchUserOptions= async()=> {
+                try{
+                    // const userCollection = collection(db, 'users');
+                    const docRef=doc(db,"users",user.uid)
+                    const docSnapshot = await getDoc(docRef)
+                    console.log(docSnapshot.data().diseases)
+                    console.log(docSnapshot.data().motive)
+                    console.log(docSnapshot.data().painAreas)
+                } catch(error){
+                    console.log('Error fetching document data:', error)
+                }
+            }
+            const bothFxn=()=>{
+                saveData();
+                fetchData();
+                fetchUserOptions();
+            }
+        //   useEffect(()=>{
+        //     if(matchingPoses.length > 0)
+        //     console.log(matchingPoses);
+        //   }, [matchingPoses])
 
     // Add a useeffect to print first,second,third arrray with names first second and third in object
     useEffect(() => {
-        console.log("first"+first);
-        console.log("second"+second);
-        console.log("third"+third);
+        // console.log("first"+first);
+        // console.log("second"+second);
+        // console.log("third"+third);
     }, [first,second,third]);
     return (
         <>
@@ -43,6 +110,7 @@ const Profile = () => {
                                 Cancel
                             </button>
                             <button
+                            onClick={()=>bothFxn()}
                                 className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                                 Save
                             </button>
