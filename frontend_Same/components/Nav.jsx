@@ -53,7 +53,7 @@ const Nav = () => {
           <div className="flex gap-3 md:gap-5">
             {/* Mount the UserButton component */}
             <Link href="/" className="black_btn">
-              Create Post
+              Home Page
             </Link>
             <button type='button' className='outline_btn' onClick={handleSignOut}>
               Sign Out

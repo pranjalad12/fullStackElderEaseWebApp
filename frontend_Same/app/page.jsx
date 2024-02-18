@@ -1,6 +1,6 @@
 
  "use client"
- 
+
  import Typewriter from 'typewriter-effect';
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
           Promptopia is an interactive learning platform for AI-powered prompts, for modern
           world to discover, create and share creative prompts.
         </p>
-        
+       
     </section>
   )
 }
