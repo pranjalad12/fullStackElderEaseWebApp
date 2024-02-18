@@ -1,46 +1,29 @@
 "use client"
 import React, { useEffect, useState } from "react";
-
+import {UserAuth} from "../context/AuthContext.js"
 
 const Homepage = () => {
-  const [videoSrc, setVideoSrc] = useState('');
-
-  const startVideo = () => {
-    setVideoSrc("http://127.0.0.1:8080/video_feed");
+  const {user}=UserAuth();
+  const [videoSrcTPose, setVideoSrcTPose] = useState('');
+  const startVideoTPose = (params) => {
+   
+    setVideoSrcTPose(`http://127.0.0.1:8080/${params}`);
+  };
+  const endSessionTPose = () => {
+    setVideoSrcTPose("");
   };
 
-  const endSession = () => {
-    setVideoSrc("");
-    fetch('/end_session', { method: 'GET' });
-  };
-
-
-  const [mes, setMes] = useState("Loading...");
-  useEffect(() => {
-    fetch("http://127.0.0.1:8080/api/home")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.body);
-        setMes(data.body);
-      })
-    // .catch((error) => {
-    //   console.error('Error fetching data:', error);
-    // });
-  }, []);
   return (
     <div>
       <section className="w-full flex-center flex-col">
-        Hello bhavya
-        <br></br>
+        <h3>Welcome to your session {user?.displayName}</h3>
         <div>
-          <button onClick={startVideo}>Start Video</button>
-          <button onClick={endSession}>End Session</button>
-          <br />
-          <img id="video_feed" src={videoSrc} width="640" height="480" style={{ border: '1px solid black' }} />
-        </div>
-        {mes}
-        <div>
-          {mes}
+          <button onClick={()=> {startVideoTPose('tPose_video') }}>Start your T Pose   </button>
+          <button onClick={()=> {startVideoTPose('treePose_video') }}>Start your treepose</button> 
+          <br/>
+          <br/>
+          <button onClick={endSessionTPose}>End your Current Pose  </button>
+          <img id="video_feed" src={videoSrcTPose} width="640" height="480" style={{ border: '1px solid black' }} />
         </div>
       </section>
     </div>
