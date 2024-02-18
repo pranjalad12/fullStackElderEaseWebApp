@@ -10,11 +10,24 @@ import AccordionItem from '../../components/Accordian.jsx'
 
 const Profile = () => {
     const { user } = UserAuth();
-    const [first, setfirst] = useState({ first: "" });
+     const [first,setfirst]=useState([]);
+    const [second,setsecond]=useState([]);
+    const [third,setthird]=useState([]);
     const options2 = ["Arthritis", "Balance issues", "Indigestion","Diabetes","Hypertension"];
     const options1=["Neck", "shoulders", "back", "knee" ,"hips"]
     const options3 =[" Increase Flexibility & Mobility","Improve balance and stability "," Reduce Stress & Relax"]
-    
+
+
+    const updateData=()=>{
+        
+    }
+
+    // Add a useeffect to print first,second,third arrray with names first second and third in object
+    useEffect(() => {
+        console.log("first"+first);
+        console.log("second"+second);
+        console.log("third"+third);
+    }, [first,second,third]);
     return (
         <>
             {user ? (<div className='w-full'>
@@ -112,21 +125,26 @@ const Profile = () => {
 
                             <div className="mx-2  flex-wrap flex justify-center w-full">
                                 <div className="w-full px-4 flex flex-col justify-center items-center">
-                                    <AccordionItem
+                                <AccordionItem
                                         header="What is the disease you are facing?"
                                         text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
                                         options={options2}
+                                        array={first}
+                                        setarray={setfirst}
                                     />
                                     <AccordionItem
                                         header="Do you have any pain in your body?"
                                         text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
                                         options={options1}
+                                        array={second}
+                                        setarray={setsecond}
                                     />
                                     <AccordionItem
                                         header="What is your primary goal?"
                                         text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
                                         options={options3}
-                                    />
+                                        array={third}
+                                        setarray={setthird}/>
                                 </div>
                                 
                             </div>

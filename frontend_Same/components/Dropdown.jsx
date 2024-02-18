@@ -26,7 +26,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect({names}) {
+export default function MultipleSelect({names,array,setarray}) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -51,6 +51,7 @@ export default function MultipleSelect({names}) {
           onChange={handleChange}
           input={<OutlinedInput />}
           renderValue={(selected) => {
+            setarray(selected);
             if (selected.length === 0) {
               return <em>Select options</em>;
             }

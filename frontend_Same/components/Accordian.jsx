@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import MultipleSelect from './Dropdown'
 
-const AccordionItem = ({ header, text ,options}) => {
+const AccordionItem = ({ header, text ,options,array,setarray}) => {
     const [active, setActive] = useState(false);
     
 console.log({ options});
@@ -49,7 +49,7 @@ console.log({ options});
                     }`}
             >
                
-            <MultipleSelect names={options}/>
+            <MultipleSelect names={options} array={array} setarray={setarray}/>
             </div>
         </div>
     );
