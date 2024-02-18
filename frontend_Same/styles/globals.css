@@ -9,7 +9,7 @@
 */
 
 .main {
-  width: 100vw;
+  width: 220vw;
   min-height: 8vh;
   position: fixed;
   display: flex;
@@ -27,7 +27,25 @@
   height: 100%;
   top: 0;
 }
+.btn_grad {
+  background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97  51%, #DD5E89  100%);
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
 
+.btn_grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
 .main:after {
   content: "";
   background-image: url("/assets/images/grid.svg");
@@ -44,7 +62,7 @@
   height: fit-content;
   z-index: 3;
   width: 100%;
-  max-width: 640px;
+  max-width: 840px;
   background-image: radial-gradient(
       at 27% 37%,
       hsla(215, 98%, 61%, 1) 0px,
@@ -75,6 +93,7 @@
 
 .app {
   @apply relative z-10 flex justify-center items-center flex-col max-w-5xl mx-auto sm:px-16 px-6;
+  max-width: 100%;
 }
 
 .black_btn {
@@ -87,6 +106,9 @@
 
 .head_text {
   @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+}
+.head_texto {
+  @apply mt-5 text-2xl font-extrabold  text-black;
 }
 
 .orange_gradient {
@@ -167,4 +189,78 @@
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+
+.container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+#cards {
+	list-style: none;
+	padding-left: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(var(--cards), var(--cardHeight));
+	gap: var(--cardMargin);
+	padding-bottom: calc(var(--cards) * var(--cardTopPadding));
+	margin-bottom: var(--cardMargin);
+}
+
+#card1 {
+	--index: 1;
+}
+#card2 {
+	--index: 2;
+}
+#card3 {
+	--index: 3;
+}
+#card4 {
+	--index: 4;
+}
+
+.card {
+	position: sticky;
+	top: 0;
+	padding-top: calc(var(--index) * var(--cardTopPadding));
+}
+
+#card1 .card-body {
+	background-color: white;
+}
+#card2 .card-body {
+	/* background-color: #7EC4CF; */
+	background-color: white;
+	
+}
+#card3 .card-body {
+	background-color: white;
+}
+#card4 .card-body {
+	background-color: white;
+}
+
+.card-body {
+	box-sizing: border-box;
+	padding: 10px;
+	border-radius: 50px;
+	box-shadow: 0 0 15px 0 rgba(0,0,0,0.3);
+	height: var(--cardHeight);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.5s;
+}
+
+h2 {
+	font-size: 2.5em;
+}
+
+:root {
+	--cards: 4;
+	--cardHeight: 50vh;
+	--cardTopPadding: 1.5em;
+	--cardMargin: 4vw;
 }
