@@ -17,7 +17,7 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
-def classifyTreepose(landmarks, output_image, display=False):
+def classifyTreePose(landmarks, output_image, display=False):
     label = 'Unknown Pose'
     color = (0, 0, 255)
 

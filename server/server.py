@@ -3,8 +3,8 @@ from flask_cors import CORS
 import cv2
 import mediapipe as mp
 from tpose import classifyTPose
-from treepose import classifyTreepose
-
+from treepose import classifyTreePose
+from warrior import classifyWarriorPose
 
 app = Flask(__name__)
 CORS(app)
@@ -52,7 +52,7 @@ def generateFramesTPose():
 
 def treePose(landmarks, output_image):
     color = (0, 0, 255)
-    output_image, label = classifyTreepose(landmarks, output_image, False)
+    output_image, label = classifyTreePose(landmarks, output_image, False)
 
     if label == 'T Pose': color = (0,255,0)
 
@@ -78,6 +78,34 @@ def generateFramesTreePose():
 
     cap.release()
 
+def warriorPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyWarriorPose(landmarks, output_image, False)
+
+    if label == 'T Pose': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+
+def generateFramesWarriorPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = warriorPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
 @app.route("/")
 def default():
     return jsonify({
@@ -85,12 +113,16 @@ def default():
     })
 
 @app.route('/tPose_video')
-def video_feed():
+def video_feed_t():
     return Response(generateFramesTPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/treePose_video')
 def video_feed_tree():
     return Response(generateFramesTreePose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/warriorPose_video')
+def video_feed_warrior():
+    return Response(generateFramesWarriorPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
