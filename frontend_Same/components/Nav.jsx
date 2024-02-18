@@ -16,7 +16,7 @@ const Nav = () => {
   //   }
   //   setUpProviders();
   //  },[]);
-  console.log(user);
+  // console.log(user);
   const handleSignIn = async () => {
     try {
       await googleSignIn();

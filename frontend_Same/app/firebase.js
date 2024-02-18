@@ -9,14 +9,23 @@ import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCm4TBmhby1o0OnYH_91d0i1pRC3SGN1ww",
-  authDomain: "eldereaseyoga.firebaseapp.com",
-  projectId: "eldereaseyoga",
-  storageBucket: "eldereaseyoga.appspot.com",
-  messagingSenderId: "786252871023",
-  appId: "1:786252871023:web:df0b6d911295364d9be49a"
+  apiKey: "AIzaSyDPq7T3VDqGL7Y2i-2JiAUhPuofyZf0lkQ",
+
+  authDomain: "elder-ease-1141b.firebaseapp.com",
+
+  projectId: "elder-ease-1141b",
+
+  storageBucket: "elder-ease-1141b.appspot.com",
+
+  messagingSenderId: "879930004021",
+
+  appId: "1:879930004021:web:eaa4f795b92306a786977c",
+
+  measurementId: "G-J0W0VBXWZM"
+
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
+export {app, auth}
