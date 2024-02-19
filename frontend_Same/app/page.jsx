@@ -16,7 +16,7 @@ const Home = () => {
           <h1 className="orange_gradient text-center">
             <Typewriter
               options={{
-                strings: ['New Hello', 'New World'],
+                strings: ['New Way', 'New World'],
                 autoStart: true,
                 loop: true,
               }}
@@ -115,7 +115,7 @@ const Home = () => {
         </ul>
       </div>
       {
-        Array.from({ length: 20 }, () => <p>test</p>)
+        Array.from({ length: 2 }, () => <p className='head_text'>Footer</p>)
       }
 
     </section>

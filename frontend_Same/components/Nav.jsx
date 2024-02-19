@@ -44,7 +44,7 @@ const Nav = () => {
           height={30}
           className='object-contain'
         />
-        <p className="logo_text">Promptopia</p>
+        <p className="logo_text">ElderEase</p>
       </Link>
       {/* {console.log(providers)} */}
       {/* //Desktop navigation */}
@@ -52,7 +52,7 @@ const Nav = () => {
         {user ? (
           <div className="flex gap-3 md:gap-5">
             {/* Mount the UserButton component */}
-            <Link href="/" className="black_btn">
+            <Link href="/home" className="black_btn">
               Home Page
             </Link>
             <button type='button' className='outline_btn' onClick={handleSignOut}>

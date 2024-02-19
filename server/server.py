@@ -112,15 +112,15 @@ def default():
         "home" : "idk"
     })
 
-@app.route('/tPose_video')
+@app.route('/tPoseVideo')
 def video_feed_t():
     return Response(generateFramesTPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/treePose_video')
+@app.route('/treePoseVideo')
 def video_feed_tree():
     return Response(generateFramesTreePose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/warriorPose_video')
+@app.route('/warriorPoseVideo')
 def video_feed_warrior():
     return Response(generateFramesWarriorPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
