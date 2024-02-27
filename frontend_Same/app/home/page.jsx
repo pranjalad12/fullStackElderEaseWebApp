@@ -14,6 +14,7 @@ const Homepage = () => {
     setVideoSrc("");
   };
 
+  //fetch the data of personalised poses from db 
   const yogaPoses = ['tPoseVideo', 'warriorPoseVideo', 'treePoseVideo'];
 
   const handleStartVideo = (poseName) => {

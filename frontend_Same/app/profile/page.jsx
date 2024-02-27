@@ -97,7 +97,7 @@ const Profile = () => {
     }, [first,second,third]);
     return (
         <>
-            {user ? (<div className='w-full'>
+            {user ? (<div className='w-7/12'>
                 <div className='flex-between w-full mb-5 pt-3'>
                     <p className='text-2xl font-semibold'>User Profile</p>
                     {/* Desktop Navigation */}
@@ -124,7 +124,7 @@ const Profile = () => {
 
                 </div>
                 <div className=" w-full bg-white-200 mb-24 border-2 border-grey-300">
-                    <div className="md:flex border-4 border-amber-200">
+                    <div className="md:flex justify-center items-center border-4 border-amber-200">
 
                         <div className="flex items-center p-8">
                             <Image
