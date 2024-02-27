@@ -1,5 +1,5 @@
 "use client"
-import '/home/bhavya/Desktop/ElderEase/fullStackElderEaseWebApp/frontend_Same/app/style.css'
+import './style.css'
 import Typewriter from 'typewriter-effect';
 import Slider from "../components/slider";
 
