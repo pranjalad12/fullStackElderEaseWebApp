@@ -17,42 +17,39 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
-def giveLabelForVajrasanaSide(left_elbow_angle, right_elbow_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle):
+def giveLabelForCobraPose(left_elbow_angle, right_elbow_angle, left_hip_angle, right_hip_angle, left_knee_angle, right_knee_angle):
     label = 'Unknown'
-    
-    if (left_elbow_angle > 110 and left_elbow_angle < 170) or (right_elbow_angle > 180 and right_elbow_angle < 240):
-        if (left_hip_angle > 70 and left_hip_angle < 110) or (right_hip_angle > 250 and right_hip_angle < 290):
-            if (left_knee_angle > 0 and left_knee_angle < 100) or (right_knee_angle > 290 and right_knee_angle < 360):
-                label = 'VAJRASANA'
+    if (left_elbow_angle > 150 and left_elbow_angle < 190) or (right_elbow_angle > 150 and right_elbow_angle < 190):
+        if (left_hip_angle > 205 and left_hip_angle < 245) or (right_hip_angle > 75 and right_hip_angle < 145):
+            if (left_knee_angle > 150 and left_knee_angle < 190) or (right_knee_angle > 150 and right_knee_angle < 190):
+                label = 'COBRA POSE'
             else:
-                label = 'ADJUST THE ANGLE OF BOTH KNEES FOR VAJRASANA'
+                label = 'STRAIGHTEN YOUR KNEES'
         else:
-            label = 'ENSURE A STRAIGHT BACK WITH HIPS AT PROPER ANGLE FOR VAJRASANA'
+            label = 'KEEP YOUR HIPS DOWN'
     else:
-        label = 'ENSURE PROPER ALIGNMENT OF ELBOWS FOR VAJRASANA'
+        label = 'ELBOW SHOULD BE STRAIGHT'
     
-    return label 
+    return label
 
-def classifyVajrasanaPose(landmarks, output_image, display=False):
+def classifyCobraPose(landmarks, output_image, display=False):
     label = 'Unknown Pose'
     color = (0, 0, 255)
 
     left_elbow_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value], landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value])
     right_elbow_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value], landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value])
-    # left_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value], landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
-    # right_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value], landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value])
+    left_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value], landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
+    right_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value], landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value])
     left_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_HIP.value], landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value], landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value])
     right_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value], landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value], landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value])
     left_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_HIP.value], landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value])
     right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
     
-    # Classify the pose based on the angles
-    label = giveLabelForVajrasanaSide(left_elbow_angle,right_elbow_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle)
-    if label == 'VAJRASANA': color = (0,255,0)
-    else: color=(0,0,255)
+    label = giveLabelForCobraPose(left_elbow_angle, right_elbow_angle, left_hip_angle, right_hip_angle, left_knee_angle, right_knee_angle)
+    if label == 'COBRA POSE': color = (0, 255, 0)
+    else: color = (0, 0, 255)
 
-    cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
 
     if display: return output_image
     else: return output_image, label
-

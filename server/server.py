@@ -6,8 +6,15 @@ from tpose import classifyTPose
 from treepose import classifyTreePose
 from warrior import classifyWarriorPose
 from vajrasana import classifyVajrasanaPose
+from plank import classifyPlankPose
+from padmasana import classifyLotusPose
+from bhujangasana import classifyCobraPose
+from toeTouch import classifyToeTouchPose
+from backBend import classifyBackBendPose
+from balasana import classifyBalasanaPose
+from corpse import classifyCorpsePose
 
-
+#initialisation
 app = Flask(__name__)
 CORS(app)
 
@@ -15,6 +22,7 @@ mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
 
+#detection
 def detectPose(image):
     imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = pose.process(imageRGB)
@@ -24,6 +32,7 @@ def detectPose(image):
             landmarks.append((int(landmark.x * image.shape[1]), int(landmark.y * image.shape[0]), int(landmark.z * image.shape[1])))
     return landmarks
 
+#tpose
 def TPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyTPose(landmarks, output_image, False)
@@ -33,7 +42,6 @@ def TPose(landmarks, output_image):
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
-
 def generateFramesTPose():
     cap = cv2.VideoCapture(0)
     while True:
@@ -52,6 +60,7 @@ def generateFramesTPose():
 
     cap.release()
 
+#treePose
 def treePose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyTreePose(landmarks, output_image, False)
@@ -61,7 +70,6 @@ def treePose(landmarks, output_image):
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
-
 def generateFramesTreePose():
     cap = cv2.VideoCapture(0)
     while True:
@@ -80,6 +88,7 @@ def generateFramesTreePose():
 
     cap.release()
 
+#warrior
 def warriorPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyWarriorPose(landmarks, output_image, False)
@@ -89,7 +98,6 @@ def warriorPose(landmarks, output_image):
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
-
 def generateFramesWarriorPose():
     cap = cv2.VideoCapture(0)
     while True:
@@ -108,6 +116,7 @@ def generateFramesWarriorPose():
 
     cap.release()
 
+#vajrasana
 def vajrasanaPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyVajrasanaPose(landmarks, output_image, False)
@@ -117,7 +126,6 @@ def vajrasanaPose(landmarks, output_image):
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
-
 def generateFramesVajrasanaPose():
     cap = cv2.VideoCapture(0)
     while True:
@@ -129,6 +137,202 @@ def generateFramesVajrasanaPose():
         landmarks = detectPose(frame)
         if landmarks:
             output_image = vajrasanaPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
+#plank pose
+def plankPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyPlankPose(landmarks, output_image, False)
+
+    if label == 'T Pose': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+def generateFramesPlankPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = plankPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
+#lotus pose
+def lotusPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyLotusPose(landmarks, output_image, False)
+
+    if label == 'Lotus Pose': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+def generateFramesLotusPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = lotusPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
+#cobra pose
+def cobraPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyCobraPose(landmarks, output_image, False)
+
+    if label == 'COBRA POSE': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+def generateFramesCobraPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = cobraPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
+#toe touch
+def toeTouchPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyToeTouchPose(landmarks, output_image, False)
+
+    if label == 'COBRA POSE': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+def generateFramesToeTouchPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = toeTouchPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
+#backBend
+def backBendPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyBackBendPose(landmarks, output_image, False)
+
+    if label == 'COBRA POSE': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+def generateFramesBackBendPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = backBendPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
+#balasana
+def balasanaPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyBalasanaPose(landmarks, output_image, False)
+
+    if label == 'BALASANA POSE': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+def generateFramesBalasanaPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = balasanaPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
+#corpse pose
+def corpsePose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyCorpsePose(landmarks, output_image, False)
+
+    if label == 'CORPSE POSE': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+def generateFramesCorpsePose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = corpsePose(landmarks, frame)
             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
         else:
             _, jpeg = cv2.imencode('.jpg', frame)
@@ -157,6 +361,34 @@ def video_feed_warrior():
 @app.route('/vajrasanaPoseVideo')
 def video_feed_vajrasana():
     return Response(generateFramesVajrasanaPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/plankPoseVideo')
+def video_feed_plank():
+    return Response(generateFramesPlankPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/lotusPoseVideo')
+def video_feed_lotus():
+    return Response(generateFramesLotusPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/cobraPoseVideo')
+def video_feed_cobra():
+    return Response(generateFramesCobraPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/toeTouchPoseVideo')
+def video_feed_toe_touch():
+    return Response(generateFramesToeTouchPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/backBendPoseVideo')
+def video_feed_back_bend():
+    return Response(generateFramesBackBendPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/balasanaPoseVideo')
+def video_feed_balasana():
+    return Response(generateFramesBalasanaPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/corpsePoseVideo')
+def video_feed_corpse():
+    return Response(generateFramesCorpsePose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080) 
