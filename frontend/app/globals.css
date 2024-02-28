@@ -22,8 +22,14 @@
 @layer base {
   body {
     @apply relative z-1 font-inter text-regular font-normal text-waterloo dark:text-manatee;
+    /* background-image: url("../public/images/user/bg.png"); */
+    background-color: rgb(249, 246, 242)
+    /* background-color: rgb(251, 247, 243) */
   }
-}
+
+  .blue_gradient {
+    @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+  }}
 
 #gradient {
   height: fit-content;
@@ -98,7 +104,7 @@
 .blog-details h3 {
   @apply mb-10 text-xl !font-semibold leading-tight text-black dark:text-white sm:text-2xl sm:leading-tight lg:text-xl lg:leading-tight xl:text-2xl xl:leading-tight;
 }
-.orange-gradient {
+.orange_gradient {
   @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
 }
 .blog-details h4 strong,

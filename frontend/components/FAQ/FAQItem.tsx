@@ -11,7 +11,7 @@ const FAQItem = ({ faqData }: { faqData: FaqData }) => {
 
   return (
     <>
-      <div className="flex flex-col border-b border-stroke last-of-type:border-none dark:border-strokedark">
+      <div className="flex flex-col border-b border-stroke last-of-type:border-none dark:border-strokedark w-200">
         <button
           onClick={() => {
             handleFaqToggle(id);

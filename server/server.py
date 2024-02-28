@@ -5,6 +5,8 @@ import mediapipe as mp
 from tpose import classifyTPose
 from treepose import classifyTreePose
 from warrior import classifyWarriorPose
+from vajrasana import classifyVajrasanaPose
+
 
 app = Flask(__name__)
 CORS(app)
@@ -106,6 +108,34 @@ def generateFramesWarriorPose():
 
     cap.release()
 
+def vajrasanaPose(landmarks, output_image):
+    color = (0, 0, 255)
+    output_image, label = classifyVajrasanaPose(landmarks, output_image, False)
+
+    if label == 'T Pose': color = (0,255,0)
+
+    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    _, jpeg = cv2.imencode('.jpg', output_image)
+    return jpeg.tobytes()
+
+def generateFramesVajrasanaPose():
+    cap = cv2.VideoCapture(0)
+    while True:
+
+        success, frame = cap.read()
+        if not success:
+            break
+        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        landmarks = detectPose(frame)
+        if landmarks:
+            output_image = vajrasanaPose(landmarks, frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+        else:
+            _, jpeg = cv2.imencode('.jpg', frame)
+            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+
+    cap.release()
+
 @app.route("/")
 def default():
     return jsonify({
@@ -124,6 +154,9 @@ def video_feed_tree():
 def video_feed_warrior():
     return Response(generateFramesWarriorPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/vajrasanaPoseVideo')
+def video_feed_vajrasana():
+    return Response(generateFramesVajrasanaPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080) 

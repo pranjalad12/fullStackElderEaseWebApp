@@ -54,12 +54,13 @@ const Header = () => {
             />
            
           </a>
+          <p className="text-orange-500 px-2 font-bold text-3xl">ElderEase</p>
         </div>
         <div className="mt-7 flex items-center gap-6 xl:mt-0">
-          <ThemeToggler />
+          {/* <ThemeToggler /> */}
 
           <Link
-            href="https://github.com/NextJSTemplates/solid-nextjs"
+            href="/home"
             className="text-regular font-medium text-waterloo hover:text-primary"
           >
             Home Page 🌟
@@ -72,7 +73,7 @@ const Header = () => {
             Sign In
           </Link>
           <Link
-            href="https://nextjstemplates.com/templates/solid"
+            href="/profile"
             className="black_btn h-11" >
             Profile
           </Link>

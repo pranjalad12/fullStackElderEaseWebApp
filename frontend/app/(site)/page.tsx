@@ -23,19 +23,19 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Brands />
-      {/* <Feature /> */}
+      {/* <Brands /> */}
+      
       <Testimonial />
       <About />
       <FeaturesTab />
       <FunFact />
-      {/* <Integration />
-      <CTA /> */}
+       {/* <Integration />
+      <CTA />  */}
       {/* <FAQ /> */}
-     
-      {/* <Pricing /> */}
-      {/* <Contact /> */}
-      {/* <Blog /> */}
+      {/* <Feature />
+      <Pricing />
+       <Contact />
+      <Blog />  */}
     </main>
   );
 }

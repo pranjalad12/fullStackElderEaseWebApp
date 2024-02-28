@@ -31,7 +31,7 @@ const About = () => {
               <Image
                 src="/images/about/oldwoman.jpg"
                 alt="About"
-                className="dark:hidden h-auto w-auto m-3"
+                className="dark:hidden h-auto w-auto m-3 rounded-lg shadow-xl"
                 fill
                 
               />
@@ -186,7 +186,7 @@ const About = () => {
               <Image
                 src="/images/about/graph.png"
                 alt="About"
-                className="dark:hidden"
+                className="dark:hidden rounded-lg shadow-xl"
                 fill
               />
               <Image
