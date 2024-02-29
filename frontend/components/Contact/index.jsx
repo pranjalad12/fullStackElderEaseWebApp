@@ -50,7 +50,7 @@ const Contact = () => {
                 const querySnapshot = await getDocs(q);
                 const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
 
-                // console.log(matchingPosesData)
+                console.log(matchingPosesData)
                 setMatchingPoses(matchingPosesData);
               } catch (error) {
                 console.error(error);

@@ -7,8 +7,9 @@ import React, { useEffect, useState } from "react";
 import About from "components/About";
 import { UserAuth } from "app/context/AuthContext.js";
 import ErrorPage from "app/(site)/error/page";
+import { getFirestore, collection, where, query, getDocs, or , doc, updateDoc, getDoc} from 'firebase/firestore';
+import {app, auth} from "app/(site)/firebase"
 // import { UserAuth } from "../context/AuthContext.js"
-
 //1.user ne koi bhi button dabaya tbtak k us din ka time
 //2.start tumer
 //3.session end hote hi new duration uspe add hojaye firebase k existing jo liya tha first step me
@@ -57,6 +58,7 @@ const Homepage = () => {
     "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   );
 
+
   const startVideo = (poseName) => {
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
   };
@@ -78,7 +80,26 @@ const Homepage = () => {
       "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     );
   };
+  const db = getFirestore(app);
+  const fetchData = async () => {
+    try {
+      console.log({first})
+                const posesCollection = collection(db, 'yogaPose');
+                const q = query(posesCollection,  or(where('diseases', 'array-contains-any', first),
+                where('painAreas', 'array-contains-any',second),
+                where('Aim','array-contains-any',third)
+                ));
+                const querySnapshot = await getDocs(q);
+                const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
 
+                // console.log(matchingPosesData)
+                setMatchingPoses(matchingPosesData);
+              } catch (error) {
+                console.error(error);
+                console.log("error caught");
+              }
+
+  };
   //fetch the data of personalised poses from db
   const yogaPoses = [
     "toeTouchPoseVideo",
