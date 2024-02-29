@@ -2,7 +2,7 @@
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-
+import {AuthContextProvider} from "app/context/AuthContext.js";
 import Lines from "@/components/Lines";
 import ScrollToTop from "@/components/ScrollToTop";
 import { ThemeProvider } from "next-themes";
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`dark:bg-black ${inter.className}`}>
-        
+      <AuthContextProvider>
         <ThemeProvider
           enableSystem={false}
           attribute="class"
@@ -35,7 +35,7 @@ export default function RootLayout({
           <ScrollToTop />
          
         </ThemeProvider>
-        
+        </AuthContextProvider>
       </body>
     </html>
   );
