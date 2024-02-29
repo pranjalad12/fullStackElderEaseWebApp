@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import MultipleSelect from '../components/Dropbox'
 
-const AccordionItem = ({ header, text ,options,array,setarray}) => {
+const AccordionItem = ({ header, text ,options,array,setarray,displayarray}) => {
     const [active, setActive] = useState(false);
     
 // console.log({ options});
@@ -49,7 +49,7 @@ const AccordionItem = ({ header, text ,options,array,setarray}) => {
                     }`}
             >
                
-            <MultipleSelect names={options} array={array} setarray={setarray}/>
+            <MultipleSelect names={options} array={array} setarray={setarray} displayarray={displayarray}/>
             </div>
         </div>
     );

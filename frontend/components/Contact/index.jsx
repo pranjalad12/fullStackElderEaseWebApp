@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { getFirestore, collection, where, query, getDocs, or , doc, updateDoc, getDoc} from 'firebase/firestore';
 import {app, auth} from "app/(site)/firebase"
 import FAQItem from "../FAQ/FAQItem";
@@ -23,6 +23,11 @@ const Contact = () => {
   const[painAreas, setPainAreas]= useState(second);
   const[aim, setAim]=useState(third);
   const [hasMounted, setHasMounted] = React.useState(false);
+  const [showfirst, setShowFirst] = useState([]);
+  const [showsecond, setShowSecond] = useState([]);
+  const [showthird, setShowThird] = useState([]);
+
+
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -53,11 +58,30 @@ const Contact = () => {
         console.log("error caught");
       }
     };
-  
-    fetchData();
-    // fetchOptions(); // Call fetchOptions here if you want to execute it alongside fetchData
+   
+     // Call fetchOptions here if you want to execute it alongside fetchData
   
   }, []);
+  useEffect(() => {
+    const updateArrays = async () => {
+      const docRef = doc(db, "users", user.uid);
+      const docSnapshot = await getDoc(docRef);
+      const diseasesData = docSnapshot?.data()?.diseases;
+      const painAreasData = docSnapshot?.data()?.painAreas;
+      const motiveData = docSnapshot?.data()?.motive;
+  
+      // Update state variables
+      setShowFirst(diseasesData || []); // If diseasesData is null or undefined, set an empty array
+      setShowSecond(painAreasData || []);
+      setShowThird(motiveData || []);
+    };
+  
+    updateArrays();
+  
+  }, [user.uid]);
+  useEffect(() => {
+    console.log(showfirst);
+  }, [showfirst]);
   
 
   const [activeFaq, setActiveFaq] = useState(1);
@@ -373,6 +397,7 @@ const Contact = () => {
                                         options={options2}
                                         array={first}
                                         setarray={setfirst}
+                                        displayarray={showfirst}
                                     />
                                     <AccordionItem
                                         header="Do you have any pain in your body?"
@@ -380,13 +405,15 @@ const Contact = () => {
                                         options={options1}
                                         array={second}
                                         setarray={setsecond}
+                                        displayarray={showsecond}
                                     />
                                     <AccordionItem
                                         header="What is your primary goal?"
                                         text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
                                         options={options3}
                                         array={third}
-                                        setarray={setthird}/>
+                                        setarray={setthird}
+                                        displayarray={showthird}/>
                                 </div>
                                 
                             </div>

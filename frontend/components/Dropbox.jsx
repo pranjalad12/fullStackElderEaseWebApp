@@ -26,7 +26,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect({names,array,setarray}) {
+export default function MultipleSelect({names,array,setarray,displayarray}) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -53,7 +53,7 @@ export default function MultipleSelect({names,array,setarray}) {
           renderValue={(selected) => {
             setarray(selected);
             if (selected.length === 0) {
-              return <em>Select options</em>;
+              return displayarray.join(',');
             }
             // console.log(selected);
             return selected.join(', ');
