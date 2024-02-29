@@ -19,8 +19,8 @@ def giveLabelForCorpsePose(left_elbow_angle, right_elbow_angle, left_shoulder_an
     label = 'Unknown'
     
     if (left_elbow_angle > 170 and left_elbow_angle < 210) or (right_elbow_angle > 170 and right_elbow_angle < 210):
-        if (left_shoulder_angle > 30 and left_shoulder_angle < 90) or (right_shoulder_angle > 30 and right_shoulder_angle < 90):  
-            if (left_hip_angle > 150 and left_hip_angle < 200) or (right_hip_angle > 150 and right_hip_angle < 200):
+        if (left_shoulder_angle > 0 and left_shoulder_angle < 50) or (right_shoulder_angle > 310 and right_shoulder_angle < 360):  
+            if (left_hip_angle > 140 and left_hip_angle < 210) or (right_hip_angle > 140 and right_hip_angle < 210):
                 if (left_knee_angle > 150 and left_knee_angle < 200) or (right_knee_angle > 150 and right_knee_angle < 200):
                     label = 'Corpse'
                 else:

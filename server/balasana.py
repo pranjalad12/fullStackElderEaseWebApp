@@ -18,10 +18,10 @@ def calculateAngle(landmark1, landmark2, landmark3):
 def giveLabelForBalasanaPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle):
     label = 'Unknown'
     
-    if (left_elbow_angle > 170 and left_elbow_angle < 210) or (right_elbow_angle > 170 and right_elbow_angle < 210):
-        if (left_shoulder_angle > 30 and left_shoulder_angle < 90) or (right_shoulder_angle > 30 and right_shoulder_angle < 90):  
-            if (left_hip_angle > 150 and left_hip_angle < 200) or (right_hip_angle > 150 and right_hip_angle < 200):
-                if (left_knee_angle > 150 and left_knee_angle < 200) or (right_knee_angle > 150 and right_knee_angle < 200):
+    if (left_elbow_angle > 160 and left_elbow_angle < 220) or (right_elbow_angle >140  and right_elbow_angle < 200):
+        if (left_shoulder_angle > 120 and left_shoulder_angle < 190) or (right_shoulder_angle > 120 and right_shoulder_angle < 190):  
+            if (left_hip_angle > 305 and left_hip_angle < 355) or (right_hip_angle > 0 and right_hip_angle < 50):
+                if (left_knee_angle > 5 and left_knee_angle < 55) or (right_knee_angle > 300 and right_knee_angle < 350):
                     label = 'Balasana'
                 else:
                     label = 'KNEE'
