@@ -1,3 +1,5 @@
+"use client"
+
 import { Metadata } from "next";
 import Hero from "@/components/Hero";
 import Brands from "@/components/Brands";
@@ -12,14 +14,35 @@ import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
-
-export const metadata = {
-  title: "Next.js Starter Template for SaaS Startups - Solid SaaS Boilerplate",
-  description: "This is Home for Solid Pro",
-  // other metadata
-};
+import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { app, auth } from './firebase';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+  const db = getFirestore(app);
+  useEffect(() => {
+    const callFast = async () => {
+      if(user && user.uid) await setDoc(doc(db, 'users', user.uid),{
+        userId: user.uid,
+        username: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+        painAreas: [],
+        diseases: [],
+        motive:[],
+        timeSpentPerDay: 0
+      })
+
+    }
+
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    callFast();
+  }, [user]);
+  
   return (
     <main>
       <Hero />
