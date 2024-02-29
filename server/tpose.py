@@ -1,12 +1,17 @@
 import math
 import cv2
 import mediapipe as mp
-import matplotlib.pyplot as plt
-from IPython.display import HTML
+import pyttsx3
+
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    engine.say(label)
+    engine.runAndWait()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -17,7 +22,9 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def GiveLabelForTPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle):
+    global prev_label
     label = 'Unknown'
     if left_elbow_angle > 165 and left_elbow_angle < 195 and right_elbow_angle > 165 and right_elbow_angle < 195:
         if left_shoulder_angle > 80 and left_shoulder_angle < 110 and right_shoulder_angle > 80 and right_shoulder_angle < 110:
@@ -30,6 +37,9 @@ def GiveLabelForTPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, 
     else:
         label='Elbows should be at 90 degrees with arms'
     
+    if(label!=prev_label): 
+        speak_label(label)
+        prev_label=label
     return label  
 
 def classifyTPose(landmarks, output_image, display=False):

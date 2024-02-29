@@ -61,32 +61,32 @@ def generateFramesTPose():
     cap.release()
 
 #treePose
-def treePose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyTreePose(landmarks, output_image, False)
+# def treePose(landmarks, output_image):
+#     color = (0, 0, 255)
+#     output_image, label = classifyTreePose(landmarks, output_image, False)
 
-    if label == 'T Pose': color = (0,255,0)
+#     if label == 'T Pose': color = (0,255,0)
 
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
-    _, jpeg = cv2.imencode('.jpg', output_image)
-    return jpeg.tobytes()
-def generateFramesTreePose():
-    cap = cv2.VideoCapture(0)
-    while True:
+#     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+#     _, jpeg = cv2.imencode('.jpg', output_image)
+#     return jpeg.tobytes()
+# def generateFramesTreePose():
+#     cap = cv2.VideoCapture(0)
+#     while True:
 
-        success, frame = cap.read()
-        if not success:
-            break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
-        landmarks = detectPose(frame)
-        if landmarks:
-            output_image = treePose(landmarks, frame)
-            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
-        else:
-            _, jpeg = cv2.imencode('.jpg', frame)
-            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+#         success, frame = cap.read()
+#         if not success:
+#             break
+#         frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+#         landmarks = detectPose(frame)
+#         if landmarks:
+#             output_image = treePose(landmarks, frame)
+#             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+#         else:
+#             _, jpeg = cv2.imencode('.jpg', frame)
+#             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
 
-    cap.release()
+#     cap.release()
 
 #warrior
 # def warriorPose(landmarks, output_image):
@@ -350,9 +350,9 @@ def default():
 def video_feed_t():
     return Response(generateFramesTPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/treePoseVideo')
-def video_feed_tree():
-    return Response(generateFramesTreePose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+# @app.route('/treePoseVideo')
+# def video_feed_tree():
+#     return Response(generateFramesTreePose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 # @app.route('/warriorPoseVideo')
 # def video_feed_warrior():
