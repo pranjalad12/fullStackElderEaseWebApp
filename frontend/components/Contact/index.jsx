@@ -26,11 +26,39 @@ const Contact = () => {
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
-   console.log(user);
+  //  console.log(user);
 
   useEffect(() => {
-    
-  }, [first,second,third]);
+  
+  
+    const fetchData = async () => {
+      try {
+        // console.log({first})
+        const docRef=doc(db,"users",user.uid)
+          const docSnapshot = await getDoc(docRef)
+        const posesCollection = collection(db, 'yogaPose');
+        const q = query(posesCollection,  or(
+          where('diseases', 'array-contains-any', docSnapshot?.data()?.diseases),
+          where('painAreas', 'array-contains-any', docSnapshot?.data()?.painAreas),
+          where('Aim', 'array-contains-any', docSnapshot?.data()?.motive),
+        ));
+        const querySnapshot = await getDocs(q);
+        const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
+  
+        console.log(matchingPosesData);
+        setMatchingPoses(matchingPosesData);
+        console.log(matchingPosesData);
+      } catch (error) {
+        console.error(error);
+        console.log("error caught");
+      }
+    };
+  
+    fetchData();
+    // fetchOptions(); // Call fetchOptions here if you want to execute it alongside fetchData
+  
+  }, []);
+  
 
   const [activeFaq, setActiveFaq] = useState(1);
   if (!hasMounted) {
@@ -39,25 +67,7 @@ const Contact = () => {
   const handleFaqToggle = ( number) => {
     activeFaq === id ? setActiveFaq(0) : setActiveFaq(id);
   };
-  const fetchData = async () => {
-    try {
-      console.log({first})
-                const posesCollection = collection(db, 'yogaPose');
-                const q = query(posesCollection,  or(where('diseases', 'array-contains-any', first),
-                where('painAreas', 'array-contains-any',second),
-                where('Aim','array-contains-any',third)
-                ));
-                const querySnapshot = await getDocs(q);
-                const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
-
-                console.log(matchingPosesData)
-                setMatchingPoses(matchingPosesData);
-              } catch (error) {
-                console.error(error);
-                console.log("error caught");
-              }
-
-  };
+  
   
   const saveData=async() => {
       try{
@@ -75,7 +85,28 @@ const Contact = () => {
 
   }
   
+  const fetchDatas = async () => {
+    try {
+      // console.log({first})
+      const docRef=doc(db,"users",user.uid)
+        const docSnapshot = await getDoc(docRef)
+      const posesCollection = collection(db, 'yogaPose');
+      const q = query(posesCollection,  or(
+        where('diseases', 'array-contains-any', docSnapshot?.data()?.diseases),
+        where('painAreas', 'array-contains-any', docSnapshot?.data()?.painAreas),
+        where('Aim', 'array-contains-any', docSnapshot?.data()?.motive),
+      ));
+      const querySnapshot = await getDocs(q);
+      const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
 
+      console.log(matchingPosesData);
+      setMatchingPoses(matchingPosesData);
+      console.log(matchingPosesData);
+    } catch (error) {
+      console.error(error);
+      console.log("error caught");
+    }
+  };
   const fetchUserOptions= async()=> {
       try{
           // const userCollection = collection(db, 'users');
@@ -90,7 +121,7 @@ const Contact = () => {
   }
   const bothFxn=()=>{
       saveData();
-      fetchData();
+      fetchDatas();
       fetchUserOptions();
   }
   // useEffect(()=>{
