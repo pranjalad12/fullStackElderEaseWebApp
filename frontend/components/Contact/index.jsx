@@ -26,7 +26,7 @@ const Contact = () => {
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
-
+  //  console.log(user);
 
   useEffect(() => {
     

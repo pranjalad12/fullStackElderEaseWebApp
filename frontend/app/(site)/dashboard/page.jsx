@@ -8,7 +8,7 @@ import SalesCard, { SalesProps } from "@/components/SalesCard";
 import { UserAuth} from "app/context/AuthContext.js"
 import ErrorPage from "app/(site)/error/page"
 
-const cardData: CardProps[] = [
+const cardData = [
   {
     label: "Total Revenue",
     amount: "$45,231.89",
@@ -35,7 +35,7 @@ const cardData: CardProps[] = [
   }
 ];
 
-const uesrSalesData: SalesProps[] = [
+const uesrSalesData = [
   {
     name: "Olivia Martin",
     email: "olivia.martin@email.com",

@@ -167,6 +167,7 @@ const Homepage = () => {
                     Choose your Pose
                   </h2>
 
+<<<<<<< HEAD
                   <div className="5 mb-7 overflow-y-auto">
                     <h3 className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
                       <div className="overflow-y-auto">
@@ -186,6 +187,37 @@ const Homepage = () => {
                     {/* <button type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pink to Orange</button> */}
                   </div>
                   {/* <div className="5 mb-7">
+=======
+             visible: {
+               opacity: 1,
+               y: 0,
+             },
+           }}
+           l        initial="hidden"
+           whileInView="visible"
+           transition={{ duration: 2, delay: 0.1 }}
+           viewport={{ once: true }}
+           className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15"
+         >
+           <h2 className="mb-12.5 text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2">
+             Choose your Pose
+           </h2>
+
+           <div className="5 mb-7 overflow-y-auto">
+             <h3 className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
+               <div className="overflow-y-auto">
+                 {yogaPoses.map((pose, index) => (
+                   <button key={index} className='text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15' onClick={handleStartVideo(pose)}>Start your {pose}</button>
+                 ))}
+                 
+               </div>
+             </h3>
+             <p>290 Maryam Springs 260, Courbevoie, Paris, France</p>
+
+             {/* <button type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pink to Orange</button> */}
+           </div>
+           {/* <div className="5 mb-7">
+>>>>>>> 04f3d50 (changed tsx to jsx)
              <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
                Email Address
              </h3>
