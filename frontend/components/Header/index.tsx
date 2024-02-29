@@ -90,11 +90,21 @@ const Header = () => {
           >
             Sign Out
           </button>
-          <Link
+          
+          <Link href='/profile'>
+                <Image
+                  src={user?.photoURL}
+                  width={37}
+                  height={37}
+                  className='rounded-full'
+                  alt='profile'
+                />
+              </Link>
+          {/* <Link
             href="/profile"
             className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
             Profile
-          </Link>
+          </Link> */}
           <Link
             href="/dashboard"
             className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >

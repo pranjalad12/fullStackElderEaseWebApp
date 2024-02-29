@@ -26,7 +26,7 @@ const Contact = () => {
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
-  //  console.log(user);
+   console.log(user);
 
   useEffect(() => {
     
@@ -146,16 +146,26 @@ const Contact = () => {
               viewport={{ once: true }}
               className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15 flex items-center"
             >
-              <h2 className="mb-22.5 text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2">
-                Name
+              <div className="flex">
+              {/* <Image
+            src={user?.photoURL}
+            fill
+            className='rounded-full '
+            alt='profile'
+          /> */}
+              
+              <h2 className="mb-20 text-metatitle3  font-semibold text-black dark:text-white xl:text-sectiontitle2">
+              Hello, {user?.displayName.split(" ")[0]}
                 <h3 className="mb-4 mt-5 text-metatitle3 font-medium text-black dark:text-white">
                   Email
                   <br></br>
-                  email id
+                  <input type="text" id="input-group-1" value={user?.email} disabled={true}
+                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-5 mt-5"
+                                        />
                 </h3>
                 
               </h2>
-
+              </div>
               <div className="5 mb-7">
                 {/* <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
                   Email
