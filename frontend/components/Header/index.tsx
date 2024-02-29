@@ -68,14 +68,19 @@ const Header = () => {
 
           <Link
             href="https://nextjstemplates.com/templates/solid"
-            className="black_btn h-11"
+            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11"
           >
             Sign In
           </Link>
           <Link
             href="/profile"
-            className="black_btn h-11" >
+            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
             Profile
+          </Link>
+          <Link
+            href="/profile"
+            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
+            Pogress
           </Link>
         </div>
       </div>
