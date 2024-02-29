@@ -7,8 +7,8 @@ import React, { useEffect, useState } from "react";
 import About from "components/About";
 import { UserAuth } from "app/context/AuthContext.js";
 import ErrorPage from "app/(site)/error/page";
-import { getFirestore, collection, where, query, getDocs, or , doc, updateDoc, getDoc} from 'firebase/firestore';
-import {app, auth} from "app/(site)/firebase"
+import { getFirestore, collection, where, query, getDocs, or, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { app, auth } from "app/(site)/firebase"
 // import { UserAuth } from "../context/AuthContext.js"
 //1.user ne koi bhi button dabaya tbtak k us din ka time
 //2.start tumer
@@ -17,7 +17,7 @@ import {app, auth} from "app/(site)/firebase"
 const Homepage = () => {
   const { user } = UserAuth();
   const [hasMounted, setHasMounted] = React.useState(false);
-
+  const [poseData, setPosesData] = useState([]);
   const [timer, setTimer] = useState(0);
   const [startTime, setStartTime] = useState(null);
   const [totalDurationToday, setTotalDurationToday] = useState(0);
@@ -25,35 +25,44 @@ const Homepage = () => {
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
+  const db = getFirestore(app);
+  useEffect(() => {
+    // Ensure user object exists before proceeding
+    if (!user) {
+      return; // Exit early if user object is null
+    }
 
-  //1.
-  // useEffect(() => {
-  //   const today = new Date().toISOString().split('T')[0];
-  //   const userId = firebase.auth().currentUser.uid;
-  //   const yogaSessionsRef = firebase.firestore().collection('yogaSessions');
-  //   const query = yogaSessionsRef
-  //     .where('userId', '==', userId)
-  //     .where('date', '==', today);
-    
-  //   query.get().then((querySnapshot) => {
-  //     let totalDuration = 0;
-  //     querySnapshot.forEach((doc) => {
-  //       totalDuration += doc.data().duration;
-  //     });
-  //     setTotalDurationToday(totalDuration);
-  //   });
-  // }, []);
-  // useEffect(() => {
-  //   let interval;
-  //   if (startTime !== null) {
-  //     interval = setInterval(() => {
-  //       setTimer(Date.now() - startTime);
-  //     }, 1000);
-  //   }
-  //   return () => clearInterval(interval);
-  // }, [startTime]);
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "users", user.uid);
+        const docSnapshot = await getDoc(docRef);
+        const posesCollection = collection(db, 'yogaPose');
+        const q = query(posesCollection, or(
+          where('diseases', 'array-contains-any', docSnapshot?.data()?.diseases),
+          where('painAreas', 'array-contains-any', docSnapshot?.data()?.painAreas),
+          where('Aim', 'array-contains-any', docSnapshot?.data()?.motive),
+        ));
+        const querySnapshot = await getDocs(q);
+        const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
+        setPosesData(matchingPosesData);
+        console.log(poseData);
+      } catch (error) {
+        console.error(error);
+        console.log("error caught");
+      }
+    };
 
+    // Set loading state to true while fetching data
+    setLoading(true);
 
+    fetchData().then(() => {
+      // After data fetching is complete, set loading state to false
+      setLoading(false);
+    });
+
+  }, [user]); // Include user in the dependency array to re-run the effect when user changes
+
+  const [loading, setLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState(
     "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   );
@@ -80,41 +89,37 @@ const Homepage = () => {
       "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     );
   };
-  const db = getFirestore(app);
-  const fetchData = async () => {
-    try {
-      console.log({first})
-                const posesCollection = collection(db, 'yogaPose');
-                const q = query(posesCollection,  or(where('diseases', 'array-contains-any', first),
-                where('painAreas', 'array-contains-any',second),
-                where('Aim','array-contains-any',third)
-                ));
-                const querySnapshot = await getDocs(q);
-                const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
+  // const db = getFirestore(app);
+  // const fetchData = async () => {
+  //   try {
+  //     console.log({first})
+  //               const posesCollection = collection(db, 'yogaPose');
+  //               const q = query(posesCollection,  or(where('diseases', 'array-contains-any', first),
+  //               where('painAreas', 'array-contains-any',second),
+  //               where('Aim','array-contains-any',third)
+  //               ));
+  //               const querySnapshot = await getDocs(q);
+  //               const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
 
-                // console.log(matchingPosesData)
-                setMatchingPoses(matchingPosesData);
-              } catch (error) {
-                console.error(error);
-                console.log("error caught");
-              }
+  //               // console.log(matchingPosesData)
+  //               setMatchingPoses(matchingPosesData);
+  //             } catch (error) {
+  //               console.error(error);
+  //               console.log("error caught");
+  //             }
 
-  };
+  // };
   //fetch the data of personalised poses from db
-  const yogaPoses = [
+  const WarmUpPoses = [
     "toeTouchPoseVideo",
     "backBendPoseVideo",
-    "tPoseVideo",
-    "warriorPoseVideo",
-    "treePoseVideo",
-    "vajrasanaPoseVideo",
-    "plankPoseVideo",
-    "cobraPoseVideo",
-    "balasanaPoseVideo",
+
+
+  ];
+  const EndPoses = [
     "corpsePoseVideo",
     "lotusPoseVideo",
-  ];
-
+  ]
 
   if (!hasMounted) {
     return null;
@@ -191,7 +196,7 @@ const Homepage = () => {
                   <div className="5 mb-7 overflow-y-auto">
                     <h3 className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
                       <div className="overflow-y-auto">
-                        {yogaPoses.map((pose, index) => (
+                        {/* {yogaPoses.map((pose, index) => (
                           <button
                             key={index}
                             className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
@@ -199,7 +204,37 @@ const Homepage = () => {
                           >
                             Start your {pose}
                           </button>
-                        ))}
+                        ))} */}
+                        <div className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
+                          {WarmUpPoses.map((pose, index) => (
+                            <button
+                              key={index}
+                              className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
+                              onClick={() => handleStartVideo(pose)}
+                            >
+                              Start your {pose}
+                            </button>
+                          ))}
+                          {poseData.map((pose, index) => (
+                            <button
+                              key={index}
+                              className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
+                              onClick={() => handleStartVideo(pose.Name)}
+                            >
+                              Start your {pose.Name}
+                            </button>
+                          ))}
+                            {EndPoses.map((pose, index) => (
+                            <button
+                              key={index}
+                              className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
+                              onClick={() => handleStartVideo(pose)}
+                            >
+                              Start your {pose}
+                            </button>
+                          ))}
+                        </div>
+
                       </div>
                     </h3>
                     <p>290 Maryam Springs 260, Courbevoie, Paris, France</p>
@@ -258,6 +293,7 @@ const Homepage = () => {
               </div>
             </div>
           </section>
+
           {/* pose description */}
           <>
             <section className="overflow-hidden pb-0 lg:pb- xl:pb-30 w-full pt-30">
