@@ -17,6 +17,7 @@ import {
   doc,
   updateDoc,
   getDoc,
+  setDoc
 } from "firebase/firestore";
 import { app, auth } from "app/(site)/firebase";
 // import { UserAuth } from "../context/AuthContext.js"
@@ -29,7 +30,7 @@ const Homepage = () => {
   const [hasMounted, setHasMounted] = React.useState(false);
   const [poseData, setPosesData] = useState([]);
   const [timer, setTimer] = useState(0);
-  const [startTime, setStartTime] = useState(null);
+  const [startTime, setStartTime] = useState(0);
   const [totalDurationToday, setTotalDurationToday] = useState(0);
 
   React.useEffect(() => {
@@ -41,7 +42,6 @@ const Homepage = () => {
     if (!user) {
       return; // Exit early if user object is null
     }
-
     const fetchData = async () => {
       try {
         const docRef = doc(db, "users", user.uid);
@@ -66,7 +66,7 @@ const Homepage = () => {
         const querySnapshot = await getDocs(q);
         const matchingPosesData = querySnapshot.docs.map((doc) => doc.data());
         setPosesData(matchingPosesData);
-        console.log("posedata:")
+        console.log("posedata:");
         console.log(matchingPosesData);
       } catch (error) {
         console.error(error);
@@ -83,44 +83,78 @@ const Homepage = () => {
     });
   }, [user]); // Include user in the dependency array to re-run the effect when user changes
 
-  const fetchUserOptions = async () => {
+  //1.
+  const fetchUserTime = async () => {
     try {
-      
       const docRef = doc(db, "users", user.uid);
       const docSnapshot = await getDoc(docRef);
-      // console.log("date obj bla ")
-      console.log(docSnapshot?.data()?.timeSpentPerDay);
+      return docSnapshot?.data()?.timeSpentPerDay || {}; 
     } catch (error) {
       console.log("Error fetching document data:", error);
+      return {}; 
     }
   };
-  fetchUserOptions();
+  // const fetchUserTime = async () => {
+  //   try {
+  //     const docRef = doc(db, "users", user.uid);
+  //     const docSnapshot = await getDoc(docRef);
+  //     // setTotalDurationToday(docSnapshot?.data()?.timeSpentPerDay);
+  //     console.log(docSnapshot?.data()?.timeSpentPerDay);
+  //   } catch (error) {
+  //     console.log("Error fetching document data:", error);
+  //   }
+  // };
+  // fetchUserTime();
 
   const [loading, setLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState(
     "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   );
 
-  const startVideo = (poseName) => {
+  const startVideo = async (poseName) => {
+    console.log("startvideo call hua for", poseName)
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
+
+    setStartTime(Date.now()); 
+    console.log("ye start time set hua h wen i called startsesion", startTime)
   };
 
-  //2.
   const handleStartVideo = (poseName) => {
-    // setStartTime(Date.now());
-    return () => startVideo(poseName);
+    startVideo(poseName);
   };
 
-  //3.
-  const endSession = () => {
-    // const duration = Date.now() - startTime;
-    // const updatedTotalDuration = totalDurationToday + duration;
-    // setTotalDurationToday(updatedTotalDuration);
-    // setStartTime(null);
-    // setTimer(0);
+  const endSession = async () => {
+    console.log("endsession u laxi")
     setVideoSrc(
       "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    );
+    );  
+
+    const endTime = Date.now(); // Capture the end time
+    let elapsedTime = endTime - startTime; // Calculate the elapsed time
+
+    // console.log("Elapsed time:", elapsedTime); // Log the elapsed time for debugging
+    // console.log("endTime", endTime); // Log the end time for debugging
+    // console.log("start time:", startTime); // Log the start time for debugging
+
+    const existingTimeObj = await fetchUserTime(); // Fetch existing time
+    const currentDate = new Date(Date.now());
+    const formattedDate = currentDate.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const timeSpentToday = existingTimeObj[formattedDate];
+    // console.log("timeSpentToday, ", timeSpentToday)
+
+    const userRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userRef);
+    elapsedTime=Math.floor(elapsedTime/1000)
+    // console.log("elapsedTime", elapsedTime)
+    // console.log("timeSpentToday, ", timeSpentToday)
+    const toBeUpdatedtime=elapsedTime+timeSpentToday;
+    
+    // console.log("fordate", formattedDate)
+    // console.log("tobeupdatetime", toBeUpdatedtime)
+    //tobeupdated ko fb me update
+    // await updateDoc(userRef, {
+    //   timeSpentPerDay: {formattedDate: toBeUpdatedtime}
+    // });
   };
   const poseUrls = {
     "T Pose": "tPoseVideo",
@@ -134,7 +168,8 @@ const Homepage = () => {
     "Back Bend": "backBendPoseVideo",
     "Balasana": "balasanaposevideo",
     "Savasana": "corpsePoseVideo",
-};
+  };
+  // console.log(poseUrls["T Pose"])
   const WarmUpPoses = ["T Pose", "Back Bend", "Toe Touch"];
   const EndPoses = ["Savasana"];
 
@@ -213,7 +248,9 @@ const Homepage = () => {
                             <button
                               key={index}
                               className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
-                              onClick={() => handleStartVideo(poseUrls[pose.Name])}
+                              onClick={() =>
+                                handleStartVideo(poseUrls[pose.Name])
+                              }
                             >
                               Start your {pose.Name}
                             </button>
