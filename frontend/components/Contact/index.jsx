@@ -1,32 +1,51 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React, {  useEffect, useState } from 'react';
-import { getFirestore, collection, where, query, getDocs, or , doc, updateDoc, getDoc} from 'firebase/firestore';
-import {app, auth} from "app/(site)/firebase"
+import React, { useEffect, useState } from "react";
+import {
+  getFirestore,
+  collection,
+  where,
+  query,
+  getDocs,
+  or,
+  doc,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore";
+import { app, auth } from "app/(site)/firebase";
 import FAQItem from "../FAQ/FAQItem";
 import faqData from "../FAQ/faqData";
-import AccordionItem from "../../components/Accordian"
-import {UserAuth} from "app/context/AuthContext"
+import AccordionItem from "../../components/Accordian";
+import { UserAuth } from "app/context/AuthContext";
 const db = getFirestore(app);
 
 const Contact = () => {
   const { user } = UserAuth();
-  const [first,setfirst]=useState([]);
-  const [second,setsecond]=useState([]);
-  const [third,setthird]=useState([]);
-  const options2 = ["Arthritis", "sciatica", "Indigestion","diabetes","Hypertension"];
-  const options1=["neck", "shoulders", "back", "knee" ,"hips"]
-  const options3 =["Increase Flexibility & Mobility","Improve Balance & Stability","Reduce Stress & Relax"]
+  const [first, setfirst] = useState([]);
+  const [second, setsecond] = useState([]);
+  const [third, setthird] = useState([]);
+  const options2 = [
+    "Arthritis",
+    "sciatica",
+    "Indigestion",
+    "diabetes",
+    "Hypertension",
+  ];
+  const options1 = ["neck", "shoulders", "back", "knee", "hips"];
+  const options3 = [
+    "Increase Flexibility & Mobility",
+    "Improve Balance & Stability",
+    "Reduce Stress & Relax",
+  ];
   const [matchingPoses, setMatchingPoses] = useState([]);
-  const[diseases, setDisease] =useState(first); // Replace with user input
-  const[painAreas, setPainAreas]= useState(second);
-  const[aim, setAim]=useState(third);
+  const [diseases, setDisease] = useState(first); // Replace with user input
+  const [painAreas, setPainAreas] = useState(second);
+  const [aim, setAim] = useState(third);
   const [hasMounted, setHasMounted] = React.useState(false);
   const [showfirst, setShowFirst] = useState([]);
   const [showsecond, setShowSecond] = useState([]);
   const [showthird, setShowThird] = useState([]);
-
 
   React.useEffect(() => {
     setHasMounted(true);
@@ -34,33 +53,40 @@ const Contact = () => {
   //  console.log(user);
 
   useEffect(() => {
-  
-  
     const fetchData = async () => {
       try {
-        // console.log({first})
-        const docRef=doc(db,"users",user.uid)
-          const docSnapshot = await getDoc(docRef)
-        const posesCollection = collection(db, 'yogaPose');
-        const q = query(posesCollection,  or(
-          where('diseases', 'array-contains-any', docSnapshot?.data()?.diseases),
-          where('painAreas', 'array-contains-any', docSnapshot?.data()?.painAreas),
-          where('Aim', 'array-contains-any', docSnapshot?.data()?.motive),
-        ));
+        const docRef = doc(db, "users", user.uid);
+        const docSnapshot = await getDoc(docRef);
+        const posesCollection = collection(db, "yogaPose");
+        const q = query(
+          posesCollection,
+          or(
+            where(
+              "diseases",
+              "array-contains-any",
+              docSnapshot?.data()?.diseases
+            ),
+            where(
+              "painAreas",
+              "array-contains-any",
+              docSnapshot?.data()?.painAreas
+            ),
+            where("Aim", "array-contains-any", docSnapshot?.data()?.motive)
+          )
+        );
         const querySnapshot = await getDocs(q);
-        const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
-  
-        
+        const matchingPosesData = querySnapshot.docs.map((doc) => doc.data());
+
         setMatchingPoses(matchingPosesData);
-        console.log(matchingPosesData);
+        // console.log("matchingposesdata:")
+        // console.log(matchingPosesData);
       } catch (error) {
         console.error(error);
         console.log("error caught");
       }
     };
     fetchData();
-     // Call fetchOptions here if you want to execute it alongside fetchData
-  
+    // Call fetchOptions here if you want to execute it alongside fetchData
   }, []);
   useEffect(() => {
     const updateArrays = async () => {
@@ -69,59 +95,65 @@ const Contact = () => {
       const diseasesData = docSnapshot?.data()?.diseases;
       const painAreasData = docSnapshot?.data()?.painAreas;
       const motiveData = docSnapshot?.data()?.motive;
-  
+
       // Update state variables
       setShowFirst(diseasesData || []); // If diseasesData is null or undefined, set an empty array
       setShowSecond(painAreasData || []);
       setShowThird(motiveData || []);
     };
-  
+
     updateArrays();
-  
   }, [user.uid]);
   useEffect(() => {
     console.log(showfirst);
   }, [showfirst]);
-  
 
   const [activeFaq, setActiveFaq] = useState(1);
   if (!hasMounted) {
     return null;
   }
-  const handleFaqToggle = ( number) => {
+  const handleFaqToggle = (number) => {
     activeFaq === id ? setActiveFaq(0) : setActiveFaq(id);
   };
-  
-  
-  const saveData=async() => {
-      try{
-          // console.log(user.uid)
-          if(user && user.uid) await updateDoc(doc(db, 'users', user.uid),{
-              painAreas: second,
-              diseases: first,
-              motive:third
-      
-            })
-      } catch(error){
-          console.log(error);
 
-      }
+  const saveData = async () => {
+    try {
+      // console.log(user.uid)
+      if (user && user.uid)
+        await updateDoc(doc(db, "users", user.uid), {
+          painAreas: second,
+          diseases: first,
+          motive: third,
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  }
-  
   const fetchDatas = async () => {
     try {
       // console.log({first})
-      const docRef=doc(db,"users",user.uid)
-        const docSnapshot = await getDoc(docRef)
-      const posesCollection = collection(db, 'yogaPose');
-      const q = query(posesCollection,  or(
-        where('diseases', 'array-contains-any', docSnapshot?.data()?.diseases),
-        where('painAreas', 'array-contains-any', docSnapshot?.data()?.painAreas),
-        where('Aim', 'array-contains-any', docSnapshot?.data()?.motive),
-      ));
+      const docRef = doc(db, "users", user.uid);
+      const docSnapshot = await getDoc(docRef);
+      const posesCollection = collection(db, "yogaPose");
+      const q = query(
+        posesCollection,
+        or(
+          where(
+            "diseases",
+            "array-contains-any",
+            docSnapshot?.data()?.diseases
+          ),
+          where(
+            "painAreas",
+            "array-contains-any",
+            docSnapshot?.data()?.painAreas
+          ),
+          where("Aim", "array-contains-any", docSnapshot?.data()?.motive)
+        )
+      );
       const querySnapshot = await getDocs(q);
-      const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
+      const matchingPosesData = querySnapshot.docs.map((doc) => doc.data());
 
       console.log(matchingPosesData);
       setMatchingPoses(matchingPosesData);
@@ -131,40 +163,39 @@ const Contact = () => {
       console.log("error caught");
     }
   };
-  const fetchUserOptions= async()=> {
-      try{
-          // const userCollection = collection(db, 'users');
-          const docRef=doc(db,"users",user.uid)
-          const docSnapshot = await getDoc(docRef)
-          console.log(docSnapshot?.data()?.diseases)
-          console.log(docSnapshot?.data()?.motive)
-          console.log(docSnapshot?.data()?.painAreas)
-      } catch(error){
-          console.log('Error fetching document data:', error)
-      }
-  }
-  const bothFxn=()=>{
-      saveData();
-      fetchDatas();
-      fetchUserOptions();
-  }
+  const fetchUserOptions = async () => {
+    try {
+      // const userCollection = collection(db, 'users');
+      const docRef = doc(db, "users", user.uid);
+      const docSnapshot = await getDoc(docRef);
+      console.log(docSnapshot?.data()?.diseases);
+      console.log(docSnapshot?.data()?.motive);
+      console.log(docSnapshot?.data()?.painAreas);
+    } catch (error) {
+      console.log("Error fetching document data:", error);
+    }
+  };
+  const bothFxn = () => {
+    saveData();
+    fetchDatas();
+    fetchUserOptions();
+  };
   // useEffect(()=>{
   //   if(matchingPoses.length > 0)
   //   console.log(matchingPoses);
   // }, [matchingPoses])
 
-// Add a useeffect to print first,second,third arrray with names first second and third in object
-
+  // Add a useeffect to print first,second,third arrray with names first second and third in object
 
   return (
     <>
       {/* <!-- ===== Contact Start ===== --> */}
       <section id="support" className="px-4 md:px-8 2xl:px-0 pt-10">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        
+        <br />
+        <br />
+        <br />
+        <br />
+
         <div className="relative mx-auto max-w-c-1390 px-7.5 pt-10 lg:px-15 lg:pt-15 xl:px-20 xl:pt-20">
           <div className="absolute left-0 top-0 -z-1 h-2/3 w-full rounded-lg bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]"></div>
           <div className="absolute bottom-[-255px] left-0 -z-1 h-full w-full">
@@ -183,7 +214,7 @@ const Contact = () => {
           </div>
 
           <div className="flex flex-col-reverse flex-wrap gap-8 md:flex-row md:flex-nowrap md:justify-between xl:gap-20 ">
-          <motion.div
+            <motion.div
               variants={{
                 hidden: {
                   opacity: 0,
@@ -202,24 +233,27 @@ const Contact = () => {
               className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15 flex items-center"
             >
               <div className="flex">
-              {/* <Image
+                {/* <Image
             src={user?.photoURL}
             fill
             className='rounded-full '
             alt='profile'
           /> */}
-              
-              <h2 className="mb-20 text-metatitle3  font-semibold text-black dark:text-white xl:text-sectiontitle2">
-              Hello, {user?.displayName.split(" ")[0]}
-                <h3 className="mb-4 mt-5 text-metatitle3 font-medium text-black dark:text-white">
-                  Email
-                  <br></br>
-                  <input type="text" id="input-group-1" value={user?.email} disabled={true}
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-5 mt-5"
-                                        />
-                </h3>
-                
-              </h2>
+
+                <h2 className="mb-20 text-metatitle3  font-semibold text-black dark:text-white xl:text-sectiontitle2">
+                  Hello, {user?.displayName.split(" ")[0]}
+                  <h3 className="mb-4 mt-5 text-metatitle3 font-medium text-black dark:text-white">
+                    Email
+                    <br></br>
+                    <input
+                      type="text"
+                      id="input-group-1"
+                      value={user?.email}
+                      disabled={true}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-5 mt-5"
+                    />
+                  </h3>
+                </h2>
               </div>
               <div className="5 mb-7">
                 {/* <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
@@ -262,26 +296,25 @@ const Contact = () => {
               viewport={{ once: true }}
               className="animate_top w-full rounded-lg bg-white p-7.5 shadow-solid-8 dark:border dark:border-strokedark dark:bg-black md:w-3/5 lg:w-3/4 xl:p-15"
             >
-             
               <motion.div
-              variants={{
-                hidden: {
-                  opacity: 0,
-                  x: 20,
-                },
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    x: 20,
+                  },
 
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                },
-              }}
-              initial="hidden"
-              whileInView="visible"
-              transition={{ duration: 1, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="animate_right md:w-3/5 lg:w-1/2 pl-15"
-            >
-              {/* <div className="rounded-lg bg-white shadow-solid-8 dark:border dark:border-strokedark dark:bg-blacksection">
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                  },
+                }}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ duration: 1, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="animate_right md:w-3/5 lg:w-1/2 pl-15"
+              >
+                {/* <div className="rounded-lg bg-white shadow-solid-8 dark:border dark:border-strokedark dark:bg-blacksection">
                 {faqData.map((faq, key) => (
                   <FAQItem
                     key={key}
@@ -289,7 +322,7 @@ const Contact = () => {
                   />
                 ))}
               </div> */}
-            </motion.div>
+              </motion.div>
               {/* <form
                 action="https://formbold.com/s/unique_form_id"
                 method="POST"
@@ -384,68 +417,64 @@ const Contact = () => {
                   </button>
                 </div>
               </form> */}
-               <div className="mx-2  flex-wrap flex justify-center w-full">
-                                <h2 className="text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2 pb-5">
-                                   
-               Personalize your preferences!
-              </h2>
-                               
-                                <div className="w-full px-4 flex flex-col justify-center items-center">
-                                <AccordionItem
-                                        header="What is the disease you are facing?"
-                                        text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-                                        options={options2}
-                                        array={first}
-                                        setarray={setfirst}
-                                        displayarray={showfirst}
-                                    />
-                                    <AccordionItem
-                                        header="Do you have any pain in your body?"
-                                        text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-                                        options={options1}
-                                        array={second}
-                                        setarray={setsecond}
-                                        displayarray={showsecond}
-                                    />
-                                    <AccordionItem
-                                        header="What is your primary goal?"
-                                        text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-                                        options={options3}
-                                        array={third}
-                                        setarray={setthird}
-                                        displayarray={showthird}/>
-                                </div>
-                                
-                            </div>
-               <button
-                   onClick={()=>bothFxn()}
-                    aria-label="send message"
-                    className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark"
-                  >
-                    Save Preferences
-                    <svg
-                      className="fill-white"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.4767 6.16664L6.00668 1.69664L7.18501 0.518311L13.6667 6.99998L7.18501 13.4816L6.00668 12.3033L10.4767 7.83331H0.333344V6.16664H10.4767Z"
-                        fill=""
-                      />
-                    </svg>
-                  </button>
-            </motion.div>
+              <div className="mx-2  flex-wrap flex justify-center w-full">
+                <h2 className="text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2 pb-5">
+                  Personalize your preferences!
+                </h2>
 
-           
-            
+                <div className="w-full px-4 flex flex-col justify-center items-center">
+                  <AccordionItem
+                    header="What is the disease you are facing?"
+                    text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                    options={options2}
+                    array={first}
+                    setarray={setfirst}
+                    displayarray={showfirst}
+                  />
+                  <AccordionItem
+                    header="Do you have any pain in your body?"
+                    text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                    options={options1}
+                    array={second}
+                    setarray={setsecond}
+                    displayarray={showsecond}
+                  />
+                  <AccordionItem
+                    header="What is your primary goal?"
+                    text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                    options={options3}
+                    array={third}
+                    setarray={setthird}
+                    displayarray={showthird}
+                  />
+                </div>
+              </div>
+              <button
+                onClick={() => bothFxn()}
+                aria-label="send message"
+                className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark"
+              >
+                Save Preferences
+                <svg
+                  className="fill-white"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.4767 6.16664L6.00668 1.69664L7.18501 0.518311L13.6667 6.99998L7.18501 13.4816L6.00668 12.3033L10.4767 7.83331H0.333344V6.16664H10.4767Z"
+                    fill=""
+                  />
+                </svg>
+              </button>
+            </motion.div>
           </div>
         </div>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
       </section>
       {/* <!-- ===== Contact End ===== --> */}
     </>

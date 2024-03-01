@@ -7,8 +7,18 @@ import React, { useEffect, useState } from "react";
 import About from "components/About";
 import { UserAuth } from "app/context/AuthContext.js";
 import ErrorPage from "app/(site)/error/page";
-import { getFirestore, collection, where, query, getDocs, or, doc, updateDoc, getDoc } from 'firebase/firestore';
-import { app, auth } from "app/(site)/firebase"
+import {
+  getFirestore,
+  collection,
+  where,
+  query,
+  getDocs,
+  or,
+  doc,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore";
+import { app, auth } from "app/(site)/firebase";
 // import { UserAuth } from "../context/AuthContext.js"
 //1.user ne koi bhi button dabaya tbtak k us din ka time
 //2.start tumer
@@ -36,16 +46,28 @@ const Homepage = () => {
       try {
         const docRef = doc(db, "users", user.uid);
         const docSnapshot = await getDoc(docRef);
-        const posesCollection = collection(db, 'yogaPose');
-        const q = query(posesCollection, or(
-          where('diseases', 'array-contains-any', docSnapshot?.data()?.diseases),
-          where('painAreas', 'array-contains-any', docSnapshot?.data()?.painAreas),
-          where('Aim', 'array-contains-any', docSnapshot?.data()?.motive),
-        ));
+        const posesCollection = collection(db, "yogaPose");
+        const q = query(
+          posesCollection,
+          or(
+            where(
+              "diseases",
+              "array-contains-any",
+              docSnapshot?.data()?.diseases
+            ),
+            where(
+              "painAreas",
+              "array-contains-any",
+              docSnapshot?.data()?.painAreas
+            ),
+            where("Aim", "array-contains-any", docSnapshot?.data()?.motive)
+          )
+        );
         const querySnapshot = await getDocs(q);
-        const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
+        const matchingPosesData = querySnapshot.docs.map((doc) => doc.data());
         setPosesData(matchingPosesData);
-        console.log(poseData);
+        // console.log("posedata:")
+        // console.log(poseData);
       } catch (error) {
         console.error(error);
         console.log("error caught");
@@ -59,14 +81,12 @@ const Homepage = () => {
       // After data fetching is complete, set loading state to false
       setLoading(false);
     });
-
   }, [user]); // Include user in the dependency array to re-run the effect when user changes
 
   const [loading, setLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState(
     "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   );
-
 
   const startVideo = (poseName) => {
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
@@ -89,37 +109,21 @@ const Homepage = () => {
       "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     );
   };
-  // const db = getFirestore(app);
-  // const fetchData = async () => {
-  //   try {
-  //     console.log({first})
-  //               const posesCollection = collection(db, 'yogaPose');
-  //               const q = query(posesCollection,  or(where('diseases', 'array-contains-any', first),
-  //               where('painAreas', 'array-contains-any',second),
-  //               where('Aim','array-contains-any',third)
-  //               ));
-  //               const querySnapshot = await getDocs(q);
-  //               const matchingPosesData = querySnapshot.docs.map(doc => doc.data());
-
-  //               // console.log(matchingPosesData)
-  //               setMatchingPoses(matchingPosesData);
-  //             } catch (error) {
-  //               console.error(error);
-  //               console.log("error caught");
-  //             }
-
-  // };
-  //fetch the data of personalised poses from db
-  const WarmUpPoses = [
-    "toeTouchPoseVideo",
-    "backBendPoseVideo",
-
-
-  ];
-  const EndPoses = [
-    "corpsePoseVideo",
-    "lotusPoseVideo",
-  ]
+  const poseUrls = {
+    "T Pose": "tPoseVideo",
+    "Vrikshasana": "treePoseVideo",
+    "Warrior": "warriorPoseVideo",
+    "Vajrasana": "vajrasanaPoseVideo",
+    "Phalakasana": "plankPoseVideo",
+    "Padmasana": "lotusPoseVideo",
+    "Bhujangasana": "cobraPoseVideo",
+    "Toe Touch": "toeTouchPoseVideo",
+    "Back Bend": "backBendPoseVideo",
+    "Balasana": "balasanaposevideo",
+    "Savasana": "corpsePoseVideo",
+};
+  const WarmUpPoses = ["T Pose", "Back Bend", "Toe Touch"];
+  const EndPoses = ["Savasana"];
 
   if (!hasMounted) {
     return null;
@@ -134,20 +138,6 @@ const Homepage = () => {
             <br />
             <br />
             <br />
-            <section className="w-full flex-center flex-col">
-              {/* <p class="head_text text-center">Welcome to your session </p> */}
-              {/* <span className="orange_gradient text-4xl text-center">{user?.displayName}</span> <br/> */}
-              {/* <div>
-       <div className="">
-         {yogaPoses.map((pose, index) => (
-           <button key={index} className='black_btn' onClick={handleStartVideo(pose)}>Start your {pose}</button>
-         ))}
-       </div>
-       <br/>
-       <img id="video_feed" src={videoSrc} width="800" height="490" style={{ border: '1px solid black' }} />
-       <button className='mt-5 w-1/3 black_btn' onClick={endSession}>End your Current Pose</button>
-     </div> */}
-            </section>
           </div>
           <section id="support" className="px-4 md:px-8 2xl:px-0 w-90/100">
             <div className="relative mx-auto w-full px-7.5 pt-10 lg:px-15 lg:pt-15 xl:px-20 xl:pt-20">
@@ -196,21 +186,12 @@ const Homepage = () => {
                   <div className="5 mb-7 overflow-y-auto">
                     <h3 className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
                       <div className="overflow-y-auto">
-                        {/* {yogaPoses.map((pose, index) => (
-                          <button
-                            key={index}
-                            className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
-                            onClick={handleStartVideo(pose)}
-                          >
-                            Start your {pose}
-                          </button>
-                        ))} */}
                         <div className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
                           {WarmUpPoses.map((pose, index) => (
                             <button
                               key={index}
                               className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
-                              onClick={() => handleStartVideo(pose)}
+                              onClick={() => handleStartVideo(poseUrls[pose])} //pose ka url
                             >
                               Start your {pose}
                             </button>
@@ -219,22 +200,21 @@ const Homepage = () => {
                             <button
                               key={index}
                               className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
-                              onClick={() => handleStartVideo(pose.Name)}
+                              onClick={() => handleStartVideo(poseUrls[pose.Name])}
                             >
                               Start your {pose.Name}
                             </button>
                           ))}
-                            {EndPoses.map((pose, index) => (
+                          {EndPoses.map((pose, index) => (
                             <button
                               key={index}
                               className="text-white bg-red-400 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-5 text-center me-2 mb-2 mb-4 text-metatitle3 font-medium text-black dark:text-white w-4/5 h-15"
-                              onClick={() => handleStartVideo(pose)}
+                              onClick={() => handleStartVideo(poseUrls[pose])}
                             >
                               Start your {pose}
                             </button>
                           ))}
                         </div>
-
                       </div>
                     </h3>
                     <p>290 Maryam Springs 260, Courbevoie, Paris, France</p>
