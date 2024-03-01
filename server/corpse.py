@@ -22,15 +22,15 @@ def giveLabelForCorpsePose(left_elbow_angle, right_elbow_angle, left_shoulder_an
         if (left_shoulder_angle > 0 and left_shoulder_angle < 50) or (right_shoulder_angle > 310 and right_shoulder_angle < 360):  
             if (left_hip_angle > 140 and left_hip_angle < 210) or (right_hip_angle > 140 and right_hip_angle < 210):
                 if (left_knee_angle > 150 and left_knee_angle < 200) or (right_knee_angle > 150 and right_knee_angle < 200):
-                    label = 'Corpse'
+                    label = 'Thats it, Perfect Savasana'
                 else:
-                    label = 'KNEE'
+                    label = 'Keep your legs straight'
             else:
-                label = 'HIPS'
+                label = 'Keep your legs straight'
         else:
-            label = 'SHOULDERS'
+            label = 'Keep your shoulders straight'
     else:
-        label = 'ELBOWS'
+        label = 'both of your hand should be relaxed'
         
     return label
 
@@ -48,7 +48,7 @@ def classifyCorpsePose(landmarks, output_image, display=False):
     right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
     
     label = giveLabelForCorpsePose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle)
-    if label == 'Corpse': color = (0,255,0)
+    if label == 'Thats it, Perfect Savasana': color = (0,255,0)
     else: color=(0,0,255)
 
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)

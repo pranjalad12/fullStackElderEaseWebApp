@@ -1,12 +1,16 @@
 import math
 import cv2
 import mediapipe as mp
-import matplotlib.pyplot as plt
-from IPython.display import HTML
+import pyttsx3
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    engine.say(label)
+    engine.runAndWait()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -17,24 +21,29 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def giveLabelForPlankPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle):
+    global prev_label
     label = 'Unknown'
     
     if (left_elbow_angle > 170 and left_elbow_angle < 210) or (right_elbow_angle > 170 and right_elbow_angle < 210):
         if (left_shoulder_angle > 30 and left_shoulder_angle < 90) or (right_shoulder_angle > 30 and right_shoulder_angle < 90):  
             if (left_hip_angle > 150 and left_hip_angle < 200) or (right_hip_angle > 150 and right_hip_angle < 200):
                 if (left_knee_angle > 150 and left_knee_angle < 200) or (right_knee_angle > 150 and right_knee_angle < 200):
-                    label = 'PLANK POSE'
+                    label = 'Thats it, Perfect Plank'
                 else:
-                    label = 'ENSURE STRAIGHT KNEES'
+                    label = 'Ensure straight knees'
             else:
-                label = 'ENSURE HIPS ARE PARALLEL TO THE GROUND'
+                label = 'Keep your body straight'
         else:
-            label = 'ENSURE SHOULDERS ARE STRAIGHT'
+            label = 'Both shoulders should be straight'
     else:
-        label = 'ENSURE ELBOWS ARE STRAIGHT FOR PLANK'
+        label = 'Keep your elbows straight out'
         
-    return label
+    if(label!=prev_label): 
+        speak_label(label)
+        prev_label=label
+    return label 
 
 def classifyPlankPose(landmarks, output_image, display=False):
     label = 'Unknown Pose'
@@ -50,7 +59,7 @@ def classifyPlankPose(landmarks, output_image, display=False):
     right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
     
     label = giveLabelForPlankPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle)
-    if label == 'PLANK POSE': color = (0,255,0)
+    if label == 'Thats it, Perfect Plank': color = (0,255,0)
     else: color=(0,0,255)
 
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)

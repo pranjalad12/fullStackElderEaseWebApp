@@ -1,12 +1,16 @@
 import math
 import cv2
 import mediapipe as mp
-import matplotlib.pyplot as plt
-from IPython.display import HTML
+import pyttsx3
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    engine.say(label)
+    engine.runAndWait()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -17,7 +21,9 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def classifyTreePose(landmarks, output_image, display=False):
+    global prev_label
     label = 'Unknown Pose'
     color = (0, 0, 255)
 
@@ -33,16 +39,21 @@ def classifyTreePose(landmarks, output_image, display=False):
         if left_knee_angle > 305 and left_knee_angle < 355 or right_knee_angle > 15 and right_knee_angle < 65:
             if left_elbow_angle > 165 and left_elbow_angle < 195 and right_elbow_angle > 165 and right_elbow_angle < 195:
                 if left_shoulder_angle > 80 and left_shoulder_angle < 110 and right_shoulder_angle > 80 and right_shoulder_angle < 110:
-                    label = '(TREEPOSE)Tree Pose'
+                    label = 'Thats it, Perfect Tree Pose'
                 else:
-                    label='(TREEPOSE)Both left and right shoulders should be straight out at 90° with the waist.'
+                    label='Both left and right shoulders should be straight out at 90 degrees with the waist.'
             else:
-                label='(TREEPOSE)Elbows should be at 90° with arms'
+                label='Elbows should be at 90 degrees with arms'
         else:
-            label="(TREEPOSE)Keep your either foot on the knee or above"
+            label="Keep your either foot on the knee or above"
     else:
-        label="(TREEPOSE)Keep your either foot on the knee or above"
-    if label == '(TREEPOSE)Tree Pose': color = (0,255,0)
+        label="Keep your either foot on the knee or above"
+    
+    if(label!=prev_label): 
+        speak_label(label)
+        prev_label=label
+
+    if label == 'Thats it, Perfect Tree Pose': color = (0,255,0)
     else: color=(0,0,255)  
     
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)

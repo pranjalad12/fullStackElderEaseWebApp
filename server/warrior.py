@@ -1,12 +1,17 @@
 import math
 import cv2
 import mediapipe as mp
-import matplotlib.pyplot as plt
-from IPython.display import HTML
+import pyttsx3
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    engine.say(label)
+    engine.runAndWait()
+
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -17,7 +22,9 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def classifyWarriorPose(landmarks, output_image, display=False):
+   
     label = 'Unknown Pose'
     color = (0, 0, 255)
     
@@ -32,15 +39,20 @@ def classifyWarriorPose(landmarks, output_image, display=False):
         if left_shoulder_angle > 70 and left_shoulder_angle < 120 and right_shoulder_angle > 70 and right_shoulder_angle < 120:
             if left_knee_angle > 150 and left_knee_angle < 215 or right_knee_angle > 150 and right_knee_angle < 215:
                if left_knee_angle > 105 and left_knee_angle < 135 or right_knee_angle > 105 and right_knee_angle < 135:
-                    label = 'Warrior II Pose' 
+                    label = 'Thats it, Perfect Warrior Pose'
                else:
                     label='Bend your knees a little bit outwards for Warrior II pose'
         else:
             label='Both left and right shoulders should be straight out at 90° with the waist.'
     else:
         label='Elbows should be at 90deg with arms'
-        
-    if label == 'Warrior II Pose': color = (0,255,0)
+    
+    global prev_label
+    if(label!=prev_label): 
+        speak_label(label)
+        prev_label=label
+
+    if label == 'Thats it, Perfect Warrior Pose': color = (0,255,0)
     else: color=(0,0,255)  
     
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 3)

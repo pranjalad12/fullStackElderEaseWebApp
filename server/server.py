@@ -65,7 +65,7 @@ def treePose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyTreePose(landmarks, output_image, False)
 
-    if label == 'T Pose': color = (0,255,0)
+    if label == 'Thats it, Perfect Tree Pose': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -93,7 +93,7 @@ def warriorPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyWarriorPose(landmarks, output_image, False)
 
-    if label == 'T Pose': color = (0,255,0)
+    if label == 'Thats it, Perfect Warrior Pose': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -121,7 +121,7 @@ def vajrasanaPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyVajrasanaPose(landmarks, output_image, False)
 
-    if label == 'T Pose': color = (0,255,0)
+    if label == 'Thats it, Perfect Vajrasana': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -149,7 +149,7 @@ def plankPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyPlankPose(landmarks, output_image, False)
 
-    if label == 'T Pose': color = (0,255,0)
+    if label == 'Thats it, Perfect Plank': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -177,7 +177,7 @@ def lotusPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyLotusPose(landmarks, output_image, False)
 
-    if label == 'Lotus Pose': color = (0,255,0)
+    if label == 'Thats it, Perfect Padmasana': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -205,7 +205,7 @@ def cobraPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyCobraPose(landmarks, output_image, False)
 
-    if label == 'COBRA POSE': color = (0,255,0)
+    if label == 'Thats it, Perfect Bhujangasana': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -233,7 +233,7 @@ def toeTouchPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyToeTouchPose(landmarks, output_image, False)
 
-    if label == 'COBRA POSE': color = (0,255,0)
+    if label == 'Thats it, Perfect Toe Touch': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -289,7 +289,7 @@ def balasanaPose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyBalasanaPose(landmarks, output_image, False)
 
-    if label == 'BALASANA POSE': color = (0,255,0)
+    if label == 'Thats it, Perfect Balasana': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)
@@ -317,7 +317,7 @@ def corpsePose(landmarks, output_image):
     color = (0, 0, 255)
     output_image, label = classifyCorpsePose(landmarks, output_image, False)
 
-    if label == 'CORPSE POSE': color = (0,255,0)
+    if label == 'Thats it, Perfect Savasana': color = (0,255,0)
 
     output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     _, jpeg = cv2.imencode('.jpg', output_image)

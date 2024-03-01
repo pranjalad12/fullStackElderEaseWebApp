@@ -22,13 +22,13 @@ def giveLabelForCobraPose(left_elbow_angle, right_elbow_angle, left_hip_angle, r
     if (left_elbow_angle > 150 and left_elbow_angle < 190) or (right_elbow_angle > 150 and right_elbow_angle < 190):
         if (left_hip_angle > 205 and left_hip_angle < 245) or (right_hip_angle > 75 and right_hip_angle < 145):
             if (left_knee_angle > 150 and left_knee_angle < 190) or (right_knee_angle > 150 and right_knee_angle < 190):
-                label = 'COBRA POSE'
+                label = 'Thats it, Perfect Bhujangasana'
             else:
-                label = 'STRAIGHTEN YOUR KNEES'
+                label = 'Straighten out your knees a little'
         else:
-            label = 'KEEP YOUR HIPS DOWN'
+            label = 'Keep your hips down'
     else:
-        label = 'ELBOW SHOULD BE STRAIGHT'
+        label = 'Keep your elbows straight'
     
     return label
 
@@ -46,7 +46,7 @@ def classifyCobraPose(landmarks, output_image, display=False):
     right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
     
     label = giveLabelForCobraPose(left_elbow_angle, right_elbow_angle, left_hip_angle, right_hip_angle, left_knee_angle, right_knee_angle)
-    if label == 'COBRA POSE': color = (0, 255, 0)
+    if label == 'Thats it, Perfect Bhujangasana': color = (0, 255, 0)
     else: color = (0, 0, 255)
 
     cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)

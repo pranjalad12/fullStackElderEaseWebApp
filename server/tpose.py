@@ -3,7 +3,6 @@ import cv2
 import mediapipe as mp
 import pyttsx3
 
-
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils

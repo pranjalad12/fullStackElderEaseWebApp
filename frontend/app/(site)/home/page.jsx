@@ -88,6 +88,7 @@ const Homepage = () => {
       
       const docRef = doc(db, "users", user.uid);
       const docSnapshot = await getDoc(docRef);
+      // console.log("date obj bla ")
       console.log(docSnapshot?.data()?.timeSpentPerDay);
     } catch (error) {
       console.log("Error fetching document data:", error);

@@ -24,13 +24,13 @@ def GiveLabelForLotusPose(left_elbow_angle, right_elbow_angle, left_shoulder_ang
     if left_elbow_angle > 130 and left_elbow_angle < 200 and right_elbow_angle > 130 and right_elbow_angle < 200:
         if left_shoulder_angle > 10 and left_shoulder_angle < 40 and right_shoulder_angle > 10 and right_shoulder_angle < 40:
             if left_knee_angle > 320 and left_knee_angle < 360 and right_knee_angle > 0 and right_knee_angle < 40:
-                label = 'Lotus Pose'
+                label = 'Thats it, Perfect Padmasana'
             else:
-                label = 'Adjust knee position to achieve Lotus Pose'
+                label = 'Adjust knee position to achieve Padmasana'
         else:
-            label = 'Shoulders should be positioned properly for Lotus Pose'
+            label = 'Shoulders should be positioned properly'
     else:
-        label = 'Elbows should be positioned properly for Lotus Pose'
+        label = 'Keep your elbows straight'
     
     return label   
 
@@ -48,7 +48,7 @@ def classifyLotusPose(landmarks, output_image, display=False):
     # right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
     
     label = GiveLabelForLotusPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle)
-    if label == 'Lotus Pose': color = (0, 255, 0)
+    if label == 'Thats it, Perfect Padmasana': color = (0, 255, 0)
     else: color = (0, 0, 255)
 
     cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
