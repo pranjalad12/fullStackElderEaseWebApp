@@ -79,34 +79,19 @@ const Header = () => {
 
           <Link
             href="/home"
-            className="text-regular font-medium text-waterloo hover:text-primary font-bold"
+            className="text-xl font-medium text-black hover:text-primary font-extrabold "
           >
             Home Page 🌟
           </Link>
-          {/* <Link
-            href="/home"
-            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
-           Home Page 🌟
-          </Link> */}
-         
-          
-         
-          {/* <Link
-            href="/profile"
-            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
-            Profile
-          </Link> */}
           <Link
             href="/dashboard"
-            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
-            Progress
-          </Link>
-          <button
-             onClick={handleSignOut}
-            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11"
+            className="text-xl font-medium text-black hover:text-primary font-extrabold "
           >
-            Sign Out
-          </button>
+            Progress 🌟
+          </Link>
+         
+          
+           
           <Link href='/profile'>
                 <Image
                   src={user?.photoURL}
