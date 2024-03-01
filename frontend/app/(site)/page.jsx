@@ -22,6 +22,8 @@ import { doc, getFirestore, setDoc } from 'firebase/firestore';
 export default function Home() {
   const [user, setUser] = useState(null);
   const db = getFirestore(app);
+  const currentDate = new Date().toISOString().split('T')[0];
+
   useEffect(() => {
     const callFast = async () => {
       if(user && user.uid) await setDoc(doc(db, 'users', user.uid),{
@@ -32,7 +34,9 @@ export default function Home() {
         painAreas: [],
         diseases: [],
         motive:[],
-        timeSpentPerDay: 0
+        timeSpentPerDay:{
+          [currentDate]: 0
+        }
       })
 
     }
