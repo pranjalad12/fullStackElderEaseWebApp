@@ -72,34 +72,25 @@ const Header = () => {
             />
            
           </a>
-          <p className="text-orange-500 px-2 font-bold text-3xl">ElderEase</p>
+          <p className="text-pala px-2 font-bold text-3xl">ElderEase</p>
         </div>
         <div className="mt-7 flex items-center gap-6 xl:mt-0">
           {/* <ThemeToggler /> */}
 
           <Link
             href="/home"
-            className="text-regular font-medium text-waterloo hover:text-primary"
+            className="text-regular font-medium text-waterloo hover:text-primary font-bold"
           >
             Home Page 🌟
           </Link>
-
-          <button
-             onClick={handleSignOut}
-            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11"
-          >
-            Sign Out
-          </button>
+          {/* <Link
+            href="/home"
+            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
+           Home Page 🌟
+          </Link> */}
+         
           
-          <Link href='/profile'>
-                <Image
-                  src={user?.photoURL}
-                  width={37}
-                  height={37}
-                  className='rounded-full'
-                  alt='profile'
-                />
-              </Link>
+         
           {/* <Link
             href="/profile"
             className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
@@ -110,6 +101,21 @@ const Header = () => {
             className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11" >
             Progress
           </Link>
+          <button
+             onClick={handleSignOut}
+            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11"
+          >
+            Sign Out
+          </button>
+          <Link href='/profile'>
+                <Image
+                  src={user?.photoURL}
+                  width={37}
+                  height={37}
+                  className='rounded-full'
+                  alt='profile'
+                />
+              </Link>
         </div>
       </div>
     </header>):(<header

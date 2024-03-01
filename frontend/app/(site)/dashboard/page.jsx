@@ -67,7 +67,7 @@ export default function Home() {
     const {user}=UserAuth();
   return (
    <>
-   {user ? (<div className="px-20">
+   {user ? (<div className="px-20 pl-10">
    <div></div>
    <br/>
    <br/>
