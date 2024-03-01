@@ -83,6 +83,18 @@ const Homepage = () => {
     });
   }, [user]); // Include user in the dependency array to re-run the effect when user changes
 
+  const fetchUserOptions = async () => {
+    try {
+      
+      const docRef = doc(db, "users", user.uid);
+      const docSnapshot = await getDoc(docRef);
+      console.log(docSnapshot?.data()?.timeSpentPerDay);
+    } catch (error) {
+      console.log("Error fetching document data:", error);
+    }
+  };
+  fetchUserOptions();
+
   const [loading, setLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState(
     "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

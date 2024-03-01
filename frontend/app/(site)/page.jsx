@@ -17,7 +17,7 @@ import Testimonial from "@/components/Testimonial";
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { app, auth } from './firebase';
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -26,28 +26,37 @@ export default function Home() {
 
   useEffect(() => {
     const callFast = async () => {
-      if(user && user.uid) await setDoc(doc(db, 'users', user.uid),{
-        userId: user.uid,
-        username: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-        painAreas: [],
-        diseases: [],
-        motive:[],
-        timeSpentPerDay:{
-          [currentDate]: 0
-        }
-      })
+      if (user && user.uid) {
+        // Check if the document already exists
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
 
+        if (!userDocSnapshot.exists()) {
+          // Document doesn't exist, create it
+          await setDoc(userDocRef, {
+            userId: user.uid,
+            username: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+            painAreas: [],
+            diseases: [],
+            motive: [],
+            timeSpentPerDay: {
+              [currentDate]: 0
+            }
+          });
+        }
+      }
     }
 
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
+
     callFast();
   }, [user]);
-  
-  return (
+
+    return (
     <main>
       <Hero />
       {/* <Brands /> */}
@@ -66,3 +75,6 @@ export default function Home() {
     </main>
   );
 }
+
+
+
