@@ -2,7 +2,7 @@
 import Contact from "components/window";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Testimonial from "@/components/testimonialsHome";
+import Testimonial from "@/components/Testimonial";
 import React, { useEffect, useState } from "react";
 import About from "components/About";
 import { UserAuth } from "app/context/AuthContext.js";
