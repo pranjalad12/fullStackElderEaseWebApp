@@ -66,8 +66,8 @@ const Homepage = () => {
         const querySnapshot = await getDocs(q);
         const matchingPosesData = querySnapshot.docs.map((doc) => doc.data());
         setPosesData(matchingPosesData);
-        // console.log("posedata:")
-        // console.log(poseData);
+        console.log("posedata:")
+        console.log(matchingPosesData);
       } catch (error) {
         console.error(error);
         console.log("error caught");

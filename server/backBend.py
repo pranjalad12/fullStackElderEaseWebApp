@@ -1,10 +1,16 @@
 import math
 import cv2
 import mediapipe as mp
+import pyttsx3
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    engine.say(label)
+    engine.runAndWait()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -15,23 +21,28 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def giveLabelForBackBendPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle):
+    global prev_label
     label = 'Unknown'
-    
     if (left_elbow_angle > 100 and left_elbow_angle < 210) or (right_elbow_angle > 100 and right_elbow_angle < 210):
         if (left_shoulder_angle > 150 and left_shoulder_angle < 220) or (right_shoulder_angle > 150 and right_shoulder_angle < 220):  
             if (left_hip_angle > 130 and left_hip_angle < 240) or (right_hip_angle > 130 and right_hip_angle < 240):
                 if (left_knee_angle > 150 and left_knee_angle < 200) or (right_knee_angle > 150 and right_knee_angle < 200):
-                    label = 'BACK BEND'
+                    label = 'Thats it, Perfect Back Bend'
                 else:
-                    label = 'ENSURE STRAIGHT LEGS FOR BACK BEND'
+                    label = 'Straighten up your knees a little'
             else:
-                label = 'TRY BENDING A LITTLE MORE'
+                label = 'Try streching a little more'
         else:
-            label = 'ENSURE SHOULDERS ARE STRAIGHT FOR BACK BEND'
+            label = 'Both shoulders should be straight'
     else:
-        label = 'ENSURE ELBOWS ARE STRAIGHT FOR BACK BEND'
-        
+        label = 'Elbows should be at 90 degrees with arms'
+    
+    if(label!=prev_label): 
+        speak_label(label)
+        prev_label=label
+
     return label
 
 def classifyBackBendPose(landmarks, output_image, display=False):
@@ -48,7 +59,7 @@ def classifyBackBendPose(landmarks, output_image, display=False):
     right_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value],landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value])
     
     label = giveLabelForBackBendPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle)
-    if label == 'BACK BEND': color = (0,255,0)
+    if label == 'Thats it, Perfect Back Bend': color = (0,255,0)
     else: color=(0,0,255)
 
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)

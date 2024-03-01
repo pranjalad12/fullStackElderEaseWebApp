@@ -78,8 +78,8 @@ const Contact = () => {
         const matchingPosesData = querySnapshot.docs.map((doc) => doc.data());
 
         setMatchingPoses(matchingPosesData);
-        // console.log("matchingposesdata:")
-        // console.log(matchingPosesData);
+        console.log("matchingposesdata:")
+        console.log(matchingPosesData);
       } catch (error) {
         console.error(error);
         console.log("error caught");

@@ -3,7 +3,6 @@ import cv2
 import mediapipe as mp
 import pyttsx3
 
-
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
@@ -29,11 +28,11 @@ def GiveLabelForTPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, 
     if left_elbow_angle > 165 and left_elbow_angle < 195 and right_elbow_angle > 165 and right_elbow_angle < 195:
         if left_shoulder_angle > 80 and left_shoulder_angle < 110 and right_shoulder_angle > 80 and right_shoulder_angle < 110:
             if left_knee_angle > 160 and left_knee_angle < 195 and right_knee_angle > 160 and right_knee_angle < 195:
-                label = 'T Pose'
+                label = 'Thats it, Perfect T Pose'
             else:
                 label='Straighten up your knees a little and you will be doing T Pose!'
         else:
-            label='Both left and right shoulders should be straight out at 90 degrees with the waist.'
+            label='Both shoulders should be straight out at 90 degrees with the waist.'
     else:
         label='Elbows should be at 90 degrees with arms'
     
@@ -54,7 +53,7 @@ def classifyTPose(landmarks, output_image, display=False):
     right_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value], landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value], landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value])
 
     label = GiveLabelForTPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle)
-    if label == 'T Pose': color = (0,255,0)
+    if label == 'Thats it, Perfect T Pose': color = (0,255,0)
     else: color=(0,0,255)
 
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
