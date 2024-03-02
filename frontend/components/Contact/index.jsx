@@ -31,8 +31,9 @@ const Contact = () => {
     "Indigestion",
     "diabetes",
     "Hypertension",
+     "None"
   ];
-  const options1 = ["neck", "shoulders", "back", "knee", "hips"];
+  const options1 = ["neck", "shoulders", "back", "knee", "hips", "None"];
   const options3 = [
     "Increase Flexibility & Mobility",
     "Improve Balance & Stability",

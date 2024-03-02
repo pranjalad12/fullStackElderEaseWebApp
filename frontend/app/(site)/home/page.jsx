@@ -107,10 +107,9 @@ const Homepage = () => {
   // fetchUserTime();
 
   const [loading, setLoading] = useState(false);
-  const [videoSrc, setVideoSrc] = useState(
-    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  );
-
+    const [videoSrc, setVideoSrc] = useState(
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHlvZ2ElMjBwb3NlfGVufDB8fDB8fHww" );
+  
   const startVideo = async (poseName) => {
     console.log("startvideo call hua for", poseName)
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
@@ -126,8 +125,7 @@ const Homepage = () => {
   const endSession = async () => {
     console.log("endsession u laxi")
     setVideoSrc(
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    );  
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHlvZ2ElMjBwb3NlfGVufDB8fDB8fHww"  );  
 
     const endTime = Date.now(); // Capture the end time
     let elapsedTime = endTime - startTime; // Calculate the elapsed time
@@ -187,7 +185,7 @@ const Homepage = () => {
             <br />
             <br />
           </div>
-          <section id="support" className="px-4 md:px-8 2xl:px-0 w-90/100">
+          <section id="support" className="px-44 pt-10 md:px-8 2xl:px-0 w-90/100">
             <div className="relative mx-auto w-full px-7.5 pt-10 lg:px-15 lg:pt-15 xl:px-20 xl:pt-20">
               <div className="absolute left-0 top-0 -z-1 h-2/3 w-full rounded-lg bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]"></div>
               <div className="absolute bottom-[-255px] left-0 -z-1 h-full w-full">
