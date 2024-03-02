@@ -256,7 +256,7 @@ const Contact = () => {
                   </h3>
                 </h2> */}
               {/* </div> */} 
-              <main class='main w-full-screen  flex justify-center items-center before:absolute before:top-0 before:bottom-0 before:left-0 before:right-0 before:opacity-20'>
+              {/* <main class='main w-full-screen  flex justify-center items-center before:absolute before:top-0 before:bottom-0 before:left-0 before:right-0 before:opacity-20'>
 	<section class="cursor-pointer rounded-md min-w-72 min-h-96 bg-white flex flex-col items-center drop-shadow-lg hover:scale-105 active:scale-95 transition">
 		<div class='relative h-32 w-72'>
 			<div class='absolute bg-orange-400 opacity-80 w-full h-full rounded-t-md'></div>
@@ -266,7 +266,7 @@ const Contact = () => {
 		<div class='text-center mt-12'>
 			<h1 class='mb-1 text-xl font-medium dark:text-gray-900'>{user?.displayName}</h1>
 			{/* <p class='text-sm text-gray-400 dark:text-gray-500'>Michigan, United States</p> */}
-		</div>
+		{/* </div>
     <input
                       type="text"
                       id="input-group-1"
@@ -276,7 +276,7 @@ const Contact = () => {
                     />
 		
 	</section>
-</main>
+</main> */}
               <div className="">
                 {/* <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
                   Email
