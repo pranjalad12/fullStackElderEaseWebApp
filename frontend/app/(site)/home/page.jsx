@@ -17,13 +17,10 @@ import {
   doc,
   updateDoc,
   getDoc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 import { app, auth } from "app/(site)/firebase";
 // import { UserAuth } from "../context/AuthContext.js"
-//1.user ne koi bhi button dabaya tbtak k us din ka time
-//2.start tumer
-//3.session end hote hi new duration uspe add hojaye firebase k existing jo liya tha first step me
 
 const Homepage = () => {
   const { user } = UserAuth();
@@ -31,7 +28,8 @@ const Homepage = () => {
   const [poseData, setPosesData] = useState([]);
   const [timer, setTimer] = useState(0);
   const [startTime, setStartTime] = useState(0);
-  const [totalDurationToday, setTotalDurationToday] = useState(0);
+  // const [totalDurationToday, setTotalDurationToday] = useState(0);
+  const [currentPose, setCurrentPose] = useState("default pose");
 
   React.useEffect(() => {
     setHasMounted(true);
@@ -83,81 +81,86 @@ const Homepage = () => {
     });
   }, [user]); // Include user in the dependency array to re-run the effect when user changes
 
-  //1.
+  const urlToPose = {
+    tPoseVideo: "T Pose",
+    treePoseVideo: "Vrikshasana",
+    warriorPoseVideo: "Warrior",
+    vajrasanaPoseVideo: "Vajrasana",
+    plankPoseVideo: "Phalakasana",
+    lotusPoseVideo: "Padmasana",
+    cobraPoseVideo: "Bhujangasana",
+    toeTouchPoseVideo: "Toe Touch",
+    backBendPoseVideo: "Back Bend",
+    balasanaposevideo: "Balasana",
+    corpsePoseVideo: "Savasana",
+  };
+
   const fetchUserTime = async () => {
     try {
       const docRef = doc(db, "users", user.uid);
       const docSnapshot = await getDoc(docRef);
-      return docSnapshot?.data()?.timeSpentPerDay || {}; 
+      return docSnapshot?.data()?.timeSpentPerDay || {};
     } catch (error) {
       console.log("Error fetching document data:", error);
-      return {}; 
+      return {};
     }
   };
-  // const fetchUserTime = async () => {
-  //   try {
-  //     const docRef = doc(db, "users", user.uid);
-  //     const docSnapshot = await getDoc(docRef);
-  //     // setTotalDurationToday(docSnapshot?.data()?.timeSpentPerDay);
-  //     console.log(docSnapshot?.data()?.timeSpentPerDay);
-  //   } catch (error) {
-  //     console.log("Error fetching document data:", error);
-  //   }
-  // };
-  // fetchUserTime();
-
   const [loading, setLoading] = useState(false);
-    const [videoSrc, setVideoSrc] = useState("https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8eW9nYSUyMHBvc2V8ZW58MHx8MHx8fDA%3D"
-    );
+  const [videoSrc, setVideoSrc] = useState(
+    "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8eW9nYSUyMHBvc2V8ZW58MHx8MHx8fDA%3D"
+  );
   const startVideo = async (poseName) => {
-    console.log("startvideo call hua for", poseName)
+    console.log("startvideo call hua for", poseName);
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
 
-    setStartTime(Date.now()); 
-    console.log("ye start time set hua h wen i called startsesion", startTime)
+    setStartTime(Date.now());
+    console.log("ye start time set hua h wen i called startsesion", startTime);
   };
 
   const handleStartVideo = (poseName) => {
+    setCurrentPose(urlToPose[poseName]);
     startVideo(poseName);
   };
 
   const endSession = async () => {
-    console.log("endsession u laxi")
+    setCurrentPose("default pose");
+    console.log("endsession u laxi");
     setVideoSrc(
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHlvZ2ElMjBwb3NlfGVufDB8fDB8fHww"  );  
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHlvZ2ElMjBwb3NlfGVufDB8fDB8fHww"
+    );
 
-    const endTime = Date.now(); // Capture the end time
-    let elapsedTime = endTime - startTime; // Calculate the elapsed time
+    const endTime = Date.now();
+    let elapsedTime = endTime - startTime;
 
-    // console.log("Elapsed time:", elapsedTime); // Log the elapsed time for debugging
-    // console.log("endTime", endTime); // Log the end time for debugging
-    // console.log("start time:", startTime); // Log the start time for debugging
+    // console.log("Elapsed time:", elapsedTime);
+    // console.log("endTime", endTime);
+    // console.log("start time:", startTime);
 
     const existingTimeObj = await fetchUserTime(); // Fetch existing time
-    const currentDateTimeIST = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-    const formattedDate = currentDateTimeIST.split(',')[0] // Format: YYYY-MM-DD
+    const currentDateTimeIST = new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    });
+    const formattedDate = currentDateTimeIST.split(",")[0]; // Format: YYYY-MM-DD
     const timeSpentToday = existingTimeObj[formattedDate];
     // console.log("timeSpentToday, ", timeSpentToday)
 
     const userRef = doc(db, "users", user.uid);
     const userDoc = await getDoc(userRef);
-    elapsedTime=Math.floor(elapsedTime/1000)
-    const currentTimeSpentPerDay = userDoc.data()?.timeSpentPerDay|| {};
+    elapsedTime = Math.floor(elapsedTime / 1000);
+    const currentTimeSpentPerDay = userDoc.data()?.timeSpentPerDay || {};
     // console.log("elapsedTime", elapsedTime)
     // console.log("timeSpentToday, ", timeSpentToday)
-    const toBeUpdatedtime=elapsedTime+timeSpentToday;
-    
-    console.log("fordate", formattedDate)
+    const toBeUpdatedtime = elapsedTime + timeSpentToday;
+
+    console.log("fordate", formattedDate);
     // console.log("tobeupdatetime", toBeUpdatedtime)
-    // tobeupdated ko fb me update
-    if ( !currentTimeSpentPerDay.hasOwnProperty(formattedDate) ) {
+    if (!currentTimeSpentPerDay.hasOwnProperty(formattedDate)) {
       await setDoc(userRef, {
-        timeSpentPerDay: {[`${formattedDate}`]: el}
+        timeSpentPerDay: { [`${formattedDate}`]: el },
       });
-    }
-    else{
+    } else {
       await updateDoc(userRef, {
-        timeSpentPerDay: {[`${formattedDate}`]: toBeUpdatedtime}
+        timeSpentPerDay: { [`${formattedDate}`]: toBeUpdatedtime },
       });
     }
   };
@@ -174,9 +177,8 @@ const Homepage = () => {
     "Balasana": "balasanaposevideo",
     "Savasana": "corpsePoseVideo",
   };
-  // console.log(poseUrls["T Pose"])
-  const WarmUpPoses = ["T Pose", "Back Bend", "Toe Touch"];
-  const EndPoses = ["Savasana"];
+  const WarmUpPoses = ["Back Bend", "Toe Touch"];
+  const EndPoses = ["T Pose"];
 
   if (!hasMounted) {
     return null;
@@ -192,7 +194,10 @@ const Homepage = () => {
             <br />
             <br />
           </div>
-          <section id="support" className="px-44 pt-10 md:px-8 2xl:px-0 w-90/100">
+          <section
+            id="support"
+            className="px-44 pt-10 md:px-8 2xl:px-0 w-90/100"
+          >
             <div className="relative mx-auto w-full px-7.5 pt-10 lg:px-15 lg:pt-15 xl:px-20 xl:pt-20">
               <div className="absolute left-0 top-0 -z-1 h-2/3 w-full rounded-lg bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]"></div>
               <div className="absolute bottom-[-255px] left-0 -z-1 h-full w-full">
@@ -352,18 +357,20 @@ const Homepage = () => {
                     viewport={{ once: true }}
                     className="animate_left relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/3 h-1/2 "
                   >
+                    
                     <Image
-                      src="/images/about/defaultimg.webp"
+                      src={poseData.find(pose => pose.Name === currentPose)?.photoURL} 
                       alt="About"
                       className="dark:hidden m-3 p-15"
                       fill
                     />
-                    <Image
+                    {console.log("url of curretpose hopefulyl",currentPose.photoURL)}
+                    {/* <Image
                       src="/images/about/about-dark-01.png"
                       alt="About"
                       className="hidden dark:block"
                       fill
-                    />
+                    /> */}
                   </motion.div>
                   <motion.div
                     variants={{
@@ -383,24 +390,44 @@ const Homepage = () => {
                     viewport={{ once: true }}
                     className="animate_right md:w-1/2"
                   >
-                    <span className="font-medium uppercase text-black dark:text-white">
+                    {/* <span className="font-medium uppercase text-black dark:text-white">
                       <span className="mb-4 mr-4 inline-flex rounded-full bg-meta px-4.5 py-1 text-metatitle uppercase text-white ">
                         New
                       </span>{" "}
                       SaaS Boilerplate for Next.js
-                    </span>
+                    </span> */}
                     <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                      A Complete Solution for
+                      A Complete Guide to{" "}
                       <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark">
-                        SaaS Startup
+                        {currentPose}
                       </span>
                     </h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Ut ultricies lacus non fermentum ultrices. Fusce
-                      consectetur le.
-                    </p>
-
+                    {poseData.map((pose, index) => {
+                      if (pose.Name === currentPose) {
+                        let des = pose.description;
+                        return (
+                          <div>
+                            <ul key={index} className="mt-7.5">
+                              {des.split(". ").map((line, index) => (
+                                <li key={index} className="flex items-center gap-5">
+                                  <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
+                                    <p className="text-metatitle2 font-semibold text-black dark:text-white">
+                                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                                    </p>
+                                  </div>
+                                  <div className="w-3/4">
+                                    <p className="mb-0.5 text-metatitle2 text-black dark:text-white">{line}</p>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        );
+                        
+                      }
+                      return null;
+                    })}
+{/* 
                     <div className="mt-7.5 flex items-center gap-5">
                       <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
                         <p className="text-metatitle2 font-semibold text-black dark:text-white">
@@ -411,7 +438,6 @@ const Homepage = () => {
                         <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
                           React 18, Next.js 13 and TypeScript
                         </h3>
-                        <p>Ut ultricies lacus non fermentum ultrices.</p>
                       </div>
                     </div>
                     <div className="mt-7.5 flex items-center gap-5">
@@ -426,7 +452,7 @@ const Homepage = () => {
                         </h3>
                         <p>consectetur adipiscing elit fermentum ultricies.</p>
                       </div>
-                    </div>
+                    </div> */}
                   </motion.div>
                 </div>
               </div>
