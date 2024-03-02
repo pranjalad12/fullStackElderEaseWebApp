@@ -29,16 +29,15 @@ const Homepage = () => {
   const [timer, setTimer] = useState(0);
   const [startTime, setStartTime] = useState(0);
   // const [totalDurationToday, setTotalDurationToday] = useState(0);
-  const [currentPose, setCurrentPose] = useState("default pose");
+  const [currentPose, setCurrentPose] = useState("Yoga, ElderEase");
 
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
   const db = getFirestore(app);
   useEffect(() => {
-    // Ensure user object exists before proceeding
     if (!user) {
-      return; // Exit early if user object is null
+      return; 
     }
     const fetchData = async () => {
       try {
@@ -72,19 +71,15 @@ const Homepage = () => {
       }
     };
 
-    // Set loading state to true while fetching data
     setLoading(true);
-
     fetchData().then(() => {
-      // After data fetching is complete, set loading state to false
       setLoading(false);
     });
-  }, [user]); // Include user in the dependency array to re-run the effect when user changes
+  }, [user]); 
 
   const urlToPose = {
     tPoseVideo: "T Pose",
     treePoseVideo: "Vrikshasana",
-    warriorPoseVideo: "Warrior",
     vajrasanaPoseVideo: "Vajrasana",
     plankPoseVideo: "Phalakasana",
     lotusPoseVideo: "Padmasana",
@@ -93,6 +88,7 @@ const Homepage = () => {
     backBendPoseVideo: "Back Bend",
     balasanaposevideo: "Balasana",
     corpsePoseVideo: "Savasana",
+    warriorPoseVideo: "Virabhadrasana II",
   };
 
   const fetchUserTime = async () => {
@@ -123,7 +119,7 @@ const Homepage = () => {
   };
 
   const endSession = async () => {
-    setCurrentPose("default pose");
+    setCurrentPose("Yoga, ElderEase");
     console.log("endsession u laxi");
     setVideoSrc(
       "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHlvZ2ElMjBwb3NlfGVufDB8fDB8fHww"
@@ -167,7 +163,6 @@ const Homepage = () => {
   const poseUrls = {
     "T Pose": "tPoseVideo",
     "Vrikshasana": "treePoseVideo",
-    "Warrior": "warriorPoseVideo",
     "Vajrasana": "vajrasanaPoseVideo",
     "Phalakasana": "plankPoseVideo",
     "Padmasana": "lotusPoseVideo",
@@ -176,6 +171,7 @@ const Homepage = () => {
     "Back Bend": "backBendPoseVideo",
     "Balasana": "balasanaposevideo",
     "Savasana": "corpsePoseVideo",
+    "Virabhadrasana II": "warriorPoseVideo",
   };
   const WarmUpPoses = ["Back Bend", "Toe Touch"];
   const EndPoses = ["T Pose"];
@@ -277,26 +273,7 @@ const Homepage = () => {
                         </div>
                       </div>
                     </h3>
-                    <p>290 Maryam Springs 260, Courbevoie, Paris, France</p>
-
-                    {/* <button type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pink to Orange</button> */}
                   </div>
-                  {/* <div className="5 mb-7">
-             <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-               Email Address
-             </h3>
-             <p>
-               <a href="#">yourmail@domainname.com</a>
-             </p>
-           </div>
-           <div>
-             <h4 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
-               Phone Number
-             </h4>
-             <p>
-               <a href="#">+009 42334 6343 843</a>
-             </p>
-           </div> */}
                 </motion.div>
                 <motion.div
                   variants={{
@@ -357,20 +334,16 @@ const Homepage = () => {
                     viewport={{ once: true }}
                     className="animate_left relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/3 h-1/2 "
                   >
-                    
                     <Image
-                      src={poseData.find(pose => pose.Name === currentPose)?.photoURL} 
+                      src={
+                        poseData.find((pose) => pose.Name === currentPose)
+                          ?.photoURL ||
+                        "https://images.unsplash.com/photo-1517363898874-737b62a7db91?q=80&w=1963&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      }
                       alt="About"
                       className="dark:hidden m-3 p-15"
                       fill
                     />
-                    {console.log("url of curretpose hopefulyl",currentPose.photoURL)}
-                    {/* <Image
-                      src="/images/about/about-dark-01.png"
-                      alt="About"
-                      className="hidden dark:block"
-                      fill
-                    /> */}
                   </motion.div>
                   <motion.div
                     variants={{
@@ -390,69 +363,71 @@ const Homepage = () => {
                     viewport={{ once: true }}
                     className="animate_right md:w-1/2"
                   >
-                    {/* <span className="font-medium uppercase text-black dark:text-white">
-                      <span className="mb-4 mr-4 inline-flex rounded-full bg-meta px-4.5 py-1 text-metatitle uppercase text-white ">
-                        New
-                      </span>{" "}
-                      SaaS Boilerplate for Next.js
-                    </span> */}
                     <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                      A Complete Guide to{" "}
+                      Your Complete Guide to{" "}
                       <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark">
                         {currentPose}
+                        {/* {console.log("current pose ye h ", currentPose)} */}
                       </span>
                     </h2>
-                    {poseData.map((pose, index) => {
-                      if (pose.Name === currentPose) {
-                        let des = pose.description;
+                    {(() => {
+                      const matchingPose = poseData.find(
+                        (pose) => pose.Name === currentPose
+                      );
+                      if (matchingPose) {
+                        let des = matchingPose.description; 
                         return (
                           <div>
-                            <ul key={index} className="mt-7.5">
+                            <ul className="mt-7.5">
                               {des.split(". ").map((line, index) => (
-                                <li key={index} className="flex items-center gap-5">
+                                <li
+                                  key={index}
+                                  className="flex items-center gap-5"
+                                >
                                   <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
                                     <p className="text-metatitle2 font-semibold text-black dark:text-white">
-                                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                                      {index + 1 < 10
+                                        ? `0${index + 1}`
+                                        : index + 1}
                                     </p>
                                   </div>
                                   <div className="w-3/4">
-                                    <p className="mb-0.5 text-metatitle2 text-black dark:text-white">{line}</p>
+                                    <p className="mb-0.5 text-metatitle2 text-black dark:text-white">
+                                      {line}
+                                    </p>
                                   </div>
                                 </li>
                               ))}
                             </ul>
                           </div>
                         );
-                        
                       }
-                      return null;
-                    })}
-{/* 
-                    <div className="mt-7.5 flex items-center gap-5">
-                      <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
-                        <p className="text-metatitle2 font-semibold text-black dark:text-white">
-                          01
-                        </p>
-                      </div>
-                      <div className="w-3/4">
-                        <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                          React 18, Next.js 13 and TypeScript
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="mt-7.5 flex items-center gap-5">
-                      <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
-                        <p className="text-metatitle2 font-semibold text-black dark:text-white">
-                          02
-                        </p>
-                      </div>
-                      <div className="w-3/4">
-                        <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                          Fully Customizable
-                        </h3>
-                        <p>consectetur adipiscing elit fermentum ultricies.</p>
-                      </div>
-                    </div> */}
+                      else if (currentPose === "Yoga, ElderEase") {
+                        let desc =
+                          "The word 'yoga' means to unite mind, body, and spirit. Step into ElderEase, where yoga meets personalized guidance. Receive tailored feedback in real-time, safeguarding against injuries and enhancing your practice. Embrace safety and mindfulness as our foremost principles, guiding you towards progress with confidence. Track Progress: Celebrate your milestones with our progress tracking feature, motivating you along your journey. Join us today for a transformative yoga experience, Namaste.";
+                        return (
+                          <div>
+                            <ul className="mt-7.5">
+                              {desc.split(". ").map((line, lineIndex) => ( 
+                                <li key={lineIndex} className="flex items-center gap-5"> 
+                                  <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
+                                    <p className="text-metatitle2 font-semibold text-black dark:text-white">
+                                      {lineIndex + 1 < 10 ? `0${lineIndex + 1}` : lineIndex + 1}
+                                    </p>
+                                  </div>
+                                  <div className="w-3/4">
+                                    <p className="mb-0.5 text-metatitle2 text-black dark:text-white">
+                                      {line}
+                                    </p>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        );
+                      }
+                      return null; 
+                    })()}
                   </motion.div>
                 </div>
               </div>
