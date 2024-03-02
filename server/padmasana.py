@@ -1,14 +1,22 @@
 #lotus/padmasana pose
-
 import math
 import cv2
 import mediapipe as mp
-import matplotlib.pyplot as plt
-from IPython.display import HTML
+import pyttsx3
+from threading import Thread
+import queue
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    def speak():
+        engine.say(label)
+        engine.runAndWait()
+    t = Thread(target=speak)
+    t.start()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -19,7 +27,9 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def GiveLabelForLotusPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle):
+    global prev_label
     label = 'Unknown'
     if left_elbow_angle > 130 and left_elbow_angle < 200 and right_elbow_angle > 130 and right_elbow_angle < 200:
         if left_shoulder_angle > 10 and left_shoulder_angle < 40 and right_shoulder_angle > 10 and right_shoulder_angle < 40:
@@ -32,6 +42,9 @@ def GiveLabelForLotusPose(left_elbow_angle, right_elbow_angle, left_shoulder_ang
     else:
         label = 'Keep your elbows straight'
     
+    if(label!=prev_label): 
+        speak_label(label)
+        prev_label=label
     return label   
 
 def classifyLotusPose(landmarks, output_image, display=False):
@@ -54,4 +67,4 @@ def classifyLotusPose(landmarks, output_image, display=False):
     cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
 
     if display: return output_image
-    else: return output_image, label
+    else: return output_image

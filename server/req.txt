@@ -49,3 +49,4 @@ wcwidth==0.2.6
 Flask==2.1.0
 Werkzeug==2.2.2
 Flask-Cors==4.0.0
+pyttsx3==2.90

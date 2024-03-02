@@ -2,6 +2,8 @@ import math
 import cv2
 import mediapipe as mp
 import pyttsx3
+from threading import Thread
+import queue
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
@@ -9,8 +11,11 @@ mp_drawing = mp.solutions.drawing_utils
 
 engine = pyttsx3.init()
 def speak_label(label):
-    engine.say(label)
-    engine.runAndWait()
+    def speak():
+        engine.say(label)
+        engine.runAndWait()
+    t = Thread(target=speak)
+    t.start()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -30,11 +35,11 @@ def GiveLabelForTPose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, 
             if left_knee_angle > 160 and left_knee_angle < 195 and right_knee_angle > 160 and right_knee_angle < 195:
                 label = 'Thats it, Perfect T Pose'
             else:
-                label='Straighten up your knees a little and you will be doing T Pose!'
+                label='Straighten up your knees'
         else:
-            label='Both shoulders should be straight out at 90 degrees with the waist.'
+            label='Shoulders should be 90 degrees'
     else:
-        label='Elbows should be at 90 degrees with arms'
+        label='Keep elbowws straight'
     
     if(label!=prev_label): 
         speak_label(label)
@@ -59,7 +64,7 @@ def classifyTPose(landmarks, output_image, display=False):
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
 
     if display: return output_image
-    else: return output_image, label
+    else: return output_image
 
 # cap = cv2.VideoCapture(0)
 
@@ -79,5 +84,4 @@ def classifyTPose(landmarks, output_image, display=False):
 
 # cap.release()
 # cv2.destroyAllWindows()
-
 

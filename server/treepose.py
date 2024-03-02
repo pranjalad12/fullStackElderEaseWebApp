@@ -2,6 +2,8 @@ import math
 import cv2
 import mediapipe as mp
 import pyttsx3
+from threading import Thread
+import queue
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
@@ -9,8 +11,11 @@ mp_drawing = mp.solutions.drawing_utils
 
 engine = pyttsx3.init()
 def speak_label(label):
-    engine.say(label)
-    engine.runAndWait()
+    def speak():
+        engine.say(label)
+        engine.runAndWait()
+    t = Thread(target=speak)
+    t.start()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -41,13 +46,13 @@ def classifyTreePose(landmarks, output_image, display=False):
                 if left_shoulder_angle > 80 and left_shoulder_angle < 110 and right_shoulder_angle > 80 and right_shoulder_angle < 110:
                     label = 'Thats it, Perfect Tree Pose'
                 else:
-                    label='Both left and right shoulders should be straight out at 90 degrees with the waist.'
+                    label='Both shoulders should be at 90 degrees with waist.'
             else:
                 label='Elbows should be at 90 degrees with arms'
         else:
-            label="Keep your either foot on the knee or above"
+            label="Keep either foot on the knee or above"
     else:
-        label="Keep your either foot on the knee or above"
+        label="Keep either foot on the knee or above"
     
     if(label!=prev_label): 
         speak_label(label)
@@ -59,4 +64,4 @@ def classifyTreePose(landmarks, output_image, display=False):
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
     
     if display: return output_image
-    else: return output_image, label
+    else: return output_image

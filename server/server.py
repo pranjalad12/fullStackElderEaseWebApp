@@ -34,12 +34,7 @@ def detectPose(image):
 
 #tpose
 def TPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyTPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect T Pose': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyTPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesTPose():
@@ -49,7 +44,7 @@ def generateFramesTPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = TPose(landmarks, frame)
@@ -62,12 +57,7 @@ def generateFramesTPose():
 
 #treePose
 def treePose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyTreePose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Tree Pose': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyTreePose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesTreePose():
@@ -77,7 +67,7 @@ def generateFramesTreePose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = treePose(landmarks, frame)
@@ -90,12 +80,7 @@ def generateFramesTreePose():
 
 #warrior
 def warriorPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyWarriorPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Warrior Pose': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyWarriorPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesWarriorPose():
@@ -105,7 +90,7 @@ def generateFramesWarriorPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = warriorPose(landmarks, frame)
@@ -116,14 +101,9 @@ def generateFramesWarriorPose():
 
     cap.release()
 
-#vajrasana
+# #vajrasana
 def vajrasanaPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyVajrasanaPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Vajrasana': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyVajrasanaPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesVajrasanaPose():
@@ -133,7 +113,7 @@ def generateFramesVajrasanaPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = vajrasanaPose(landmarks, frame)
@@ -144,14 +124,9 @@ def generateFramesVajrasanaPose():
 
     cap.release()
 
-#plank pose
+# #plank pose
 def plankPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyPlankPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Plank': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyPlankPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesPlankPose():
@@ -161,7 +136,7 @@ def generateFramesPlankPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = plankPose(landmarks, frame)
@@ -172,14 +147,9 @@ def generateFramesPlankPose():
 
     cap.release()
 
-#lotus pose
+# #lotus pose
 def lotusPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyLotusPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Padmasana': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyLotusPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesLotusPose():
@@ -189,7 +159,7 @@ def generateFramesLotusPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = lotusPose(landmarks, frame)
@@ -200,14 +170,9 @@ def generateFramesLotusPose():
 
     cap.release()
 
-#cobra pose
+# #cobra pose
 def cobraPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyCobraPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Bhujangasana': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyCobraPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesCobraPose():
@@ -217,7 +182,7 @@ def generateFramesCobraPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = cobraPose(landmarks, frame)
@@ -228,14 +193,9 @@ def generateFramesCobraPose():
 
     cap.release()
 
-#toe touch
+# #toe touch
 def toeTouchPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyToeTouchPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Toe Touch': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyToeTouchPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesToeTouchPose():
@@ -245,7 +205,7 @@ def generateFramesToeTouchPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = toeTouchPose(landmarks, frame)
@@ -256,14 +216,9 @@ def generateFramesToeTouchPose():
 
     cap.release()
 
-#backBend
+# #backBend
 def backBendPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyBackBendPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Back Bend': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyBackBendPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesBackBendPose():
@@ -273,7 +228,7 @@ def generateFramesBackBendPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = backBendPose(landmarks, frame)
@@ -284,14 +239,9 @@ def generateFramesBackBendPose():
 
     cap.release()
 
-# #balasana
+# # #balasana
 def balasanaPose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyBalasanaPose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Balasana': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyBalasanaPose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesBalasanaPose():
@@ -301,7 +251,7 @@ def generateFramesBalasanaPose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = balasanaPose(landmarks, frame)
@@ -312,14 +262,9 @@ def generateFramesBalasanaPose():
 
     cap.release()
 
-#corpse pose
+# #corpse pose
 def corpsePose(landmarks, output_image):
-    color = (0, 0, 255)
-    output_image, label = classifyCorpsePose(landmarks, output_image, False)
-
-    if label == 'Thats it, Perfect Savasana': color = (0,255,0)
-
-    output_image = cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
+    output_image = classifyCorpsePose(landmarks, output_image, False)
     _, jpeg = cv2.imencode('.jpg', output_image)
     return jpeg.tobytes()
 def generateFramesCorpsePose():
@@ -329,7 +274,7 @@ def generateFramesCorpsePose():
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
         landmarks = detectPose(frame)
         if landmarks:
             output_image = corpsePose(landmarks, frame)

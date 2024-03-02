@@ -1,12 +1,21 @@
 import math
 import cv2
 import mediapipe as mp
-import matplotlib.pyplot as plt
-from IPython.display import HTML
+import pyttsx3
+from threading import Thread
+import queue
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    def speak():
+        engine.say(label)
+        engine.runAndWait()
+    t = Thread(target=speak)
+    t.start()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -17,7 +26,9 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def giveLabelForCobraPose(left_elbow_angle, right_elbow_angle, left_hip_angle, right_hip_angle, left_knee_angle, right_knee_angle):
+    global prev_label
     label = 'Unknown'
     if (left_elbow_angle > 150 and left_elbow_angle < 190) or (right_elbow_angle > 150 and right_elbow_angle < 190):
         if (left_hip_angle > 205 and left_hip_angle < 245) or (right_hip_angle > 75 and right_hip_angle < 145):
@@ -30,7 +41,10 @@ def giveLabelForCobraPose(left_elbow_angle, right_elbow_angle, left_hip_angle, r
     else:
         label = 'Keep your elbows straight'
     
-    return label
+    if(label!=prev_label): 
+        speak_label(label)
+        prev_label=label
+    return label  
 
 def classifyCobraPose(landmarks, output_image, display=False):
     label = 'Unknown Pose'
@@ -38,8 +52,8 @@ def classifyCobraPose(landmarks, output_image, display=False):
 
     left_elbow_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value], landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value])
     right_elbow_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value], landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value])
-    left_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value], landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
-    right_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value], landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value])
+    # left_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value], landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_HIP.value])
+    # right_shoulder_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value], landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value])
     left_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_HIP.value], landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value], landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value])
     right_knee_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value], landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value], landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value])
     left_hip_angle = calculateAngle(landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value], landmarks[mp_pose.PoseLandmark.LEFT_HIP.value], landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value])
@@ -52,4 +66,4 @@ def classifyCobraPose(landmarks, output_image, display=False):
     cv2.putText(output_image, label, (10, 30), cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
 
     if display: return output_image
-    else: return output_image, label
+    else: return output_image

@@ -1,10 +1,21 @@
 import math
 import cv2
 import mediapipe as mp
+import pyttsx3
+from threading import Thread
+import queue
 
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_complexity=2)
 mp_drawing = mp.solutions.drawing_utils
+
+engine = pyttsx3.init()
+def speak_label(label):
+    def speak():
+        engine.say(label)
+        engine.runAndWait()
+    t = Thread(target=speak)
+    t.start()
 
 def calculateAngle(landmark1, landmark2, landmark3):
     x1, y1, _ = landmark1
@@ -15,7 +26,9 @@ def calculateAngle(landmark1, landmark2, landmark3):
 
     return angle
 
+prev_label = "prev"
 def giveLabelForCorpsePose(left_elbow_angle, right_elbow_angle, left_shoulder_angle, right_shoulder_angle, left_knee_angle, right_knee_angle, left_hip_angle, right_hip_angle):
+    global prev_label
     label = 'Unknown'
     
     if (left_elbow_angle > 170 and left_elbow_angle < 210) or (right_elbow_angle > 170 and right_elbow_angle < 210):
@@ -54,5 +67,5 @@ def classifyCorpsePose(landmarks, output_image, display=False):
     cv2.putText(output_image, label, (10, 30),cv2.FONT_HERSHEY_PLAIN, 2, color, 5)
 
     if display: return output_image
-    else: return output_image, label
+    else: return output_image
 
