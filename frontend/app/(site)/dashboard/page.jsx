@@ -195,8 +195,9 @@ export default function Home() {
         
         
       <section className="grid place-items-center">
-  <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-600 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Experience yoga in a whole new way  mats</span>
-</section>
+      <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Experience yoga in a whole
+              new way  mats</span>
+  </section>
 
          
         <CardContent>
