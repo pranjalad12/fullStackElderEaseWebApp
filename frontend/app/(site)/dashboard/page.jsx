@@ -174,7 +174,7 @@ export default function Home() {
           />
         ))}
       </section>
-      <section className="grid grid-cols-1  gap-10 transition-all lg:grid-cols-2">
+      <section className="grid grid-cols-1  gap-10 transition-all lg:grid-cols-2 mb-10">
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
             
@@ -182,9 +182,15 @@ export default function Home() {
           
         </CardContent>
         
-          <section className="p-25">
-          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Experience yoga in a whole
-              new way  mats</span>
+        <section className="p-25 mt-25">
+          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center mb-15">Track your yoga journey daily</span>
+              <br/>
+              
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center px-20">effortlessly with our 
+              </span>
+              <br/>
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center  px-20">time-tracking graph
+              </span>
             
           </section>
           
@@ -194,11 +200,19 @@ export default function Home() {
       <section className="grid grid-cols-2 gap-4">
         
         
-      <section className="grid place-items-center">
-      <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Experience yoga in a whole
-              new way  mats</span>
-  </section>
-
+      <section className="p-25 mt-25">
+          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center mb-15">Stay updated on your daily yoga  
+              </span>
+              <br/>
+              
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center px-20">practice with our time
+              </span>
+              <br/>
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center  px-30">-tracking graph.
+              </span>
+            
+          </section>
+          
          
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
