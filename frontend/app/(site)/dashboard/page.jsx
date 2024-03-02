@@ -7,7 +7,19 @@ import BarChart from "@/components/BarChart";
 import SalesCard, { SalesProps } from "@/components/SalesCard";
 import { UserAuth} from "app/context/AuthContext.js"
 import ErrorPage from "app/(site)/error/page"
-
+import {app} from "app/(site)/firebase";
+import {
+  getFirestore,
+  collection,
+  where,
+  query,
+  getDocs,
+  or,
+  doc,
+  updateDoc,
+  getDoc,
+  setDoc
+} from "firebase/firestore";
 const cardData = [
   {
     label: "Total Revenue",
@@ -65,6 +77,21 @@ const uesrSalesData = [
 
 export default function Home() {
     const {user}=UserAuth();
+    const db= getFirestore(app);
+
+    const fetchUserData = async () => {
+      try {
+        const docRef = doc(db, "users", user.uid);
+        const docSnapshot = await getDoc(docRef);
+        console.log(docSnapshot?.data()?.timeSpentPerDay || {}); 
+        console.log(docSnapshot?.data()?.noOfPosesInADay );
+        console.log(docSnapshot?.data()?.noOfClicksAllTime);
+      } catch (error) {
+        console.log("Error fetching document data:", error);
+      }
+    }
+      fetchUserData();
+
   return (
    <>
    {user ? (
@@ -228,4 +255,5 @@ export default function Home() {
     )}
    </>
   );
+  
 }

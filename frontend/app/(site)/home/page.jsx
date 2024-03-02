@@ -134,24 +134,32 @@ const Homepage = () => {
     // console.log("start time:", startTime); // Log the start time for debugging
 
     const existingTimeObj = await fetchUserTime(); // Fetch existing time
-    const currentDate = new Date(Date.now());
-    const formattedDate = currentDate.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const currentDateTimeIST = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    const formattedDate = currentDateTimeIST.split(',')[0] // Format: YYYY-MM-DD
     const timeSpentToday = existingTimeObj[formattedDate];
     // console.log("timeSpentToday, ", timeSpentToday)
 
     const userRef = doc(db, "users", user.uid);
     const userDoc = await getDoc(userRef);
     elapsedTime=Math.floor(elapsedTime/1000)
+    const currentTimeSpentPerDay = userDoc.data()?.timeSpentPerDay|| {};
     // console.log("elapsedTime", elapsedTime)
     // console.log("timeSpentToday, ", timeSpentToday)
     const toBeUpdatedtime=elapsedTime+timeSpentToday;
     
-    // console.log("fordate", formattedDate)
+    console.log("fordate", formattedDate)
     // console.log("tobeupdatetime", toBeUpdatedtime)
-    //tobeupdated ko fb me update
-    // await updateDoc(userRef, {
-    //   timeSpentPerDay: {formattedDate: toBeUpdatedtime}
-    // });
+    // tobeupdated ko fb me update
+    if ( !currentTimeSpentPerDay.hasOwnProperty(formattedDate) ) {
+      await setDoc(userRef, {
+        timeSpentPerDay: {[`${formattedDate}`]: el}
+      });
+    }
+    else{
+      await updateDoc(userRef, {
+        timeSpentPerDay: {[`${formattedDate}`]: toBeUpdatedtime}
+      });
+    }
   };
   const poseUrls = {
     "T Pose": "tPoseVideo",

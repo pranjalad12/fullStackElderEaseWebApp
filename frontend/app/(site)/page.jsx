@@ -22,7 +22,15 @@ import { doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
 export default function Home() {
   const [user, setUser] = useState(null);
   const db = getFirestore(app);
-  const currentDate = new Date().toISOString().split('T')[0];
+  // Get the current date and time in Indian Standard Time (IST)
+  const currentDateTimeIST = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+  const currentDate = currentDateTimeIST.split(',')[0]; // Format: YYYY-MM-DD
+
+  console.log("Current Date and Time in IST:", currentDate);
+
+
+  // console.log("Current Date in IST:", currentDateIST);
+  // console.log("Current Time in IST:", currentTimeIST);
 
   useEffect(() => {
     const callFast = async () => {
@@ -31,7 +39,7 @@ export default function Home() {
         const userDocRef = doc(db, 'users', user.uid);
         const userDocSnapshot = await getDoc(userDocRef);
 
-        if (!userDocSnapshot.exists()) {
+        // if (!userDocSnapshot.exists()) {
           // Document doesn't exist, create it
           await setDoc(userDocRef, {
             userId: user.uid,
@@ -41,11 +49,13 @@ export default function Home() {
             painAreas: [],
             diseases: [],
             motive: [],
+            noOfPosesInADay:0,
+            noOfClicksAllTime:0,
             timeSpentPerDay: {
               [currentDate]: 0
             }
           });
-        }
+        // }
       }
     }
 
