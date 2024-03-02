@@ -183,7 +183,7 @@ export default function Home() {
         </CardContent>
         
           <section className="p-25">
-          <span className="bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Experience yoga in a whole
+          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Experience yoga in a whole
               new way  mats</span>
             
           </section>
@@ -194,12 +194,10 @@ export default function Home() {
       <section className="grid grid-cols-2 gap-4">
         
         
-          <section>
-            <p>Recent Sales</p>
-            <p className="text-sm text-gray-400">
-              You made 265 sales this month.
-            </p>
-          </section>
+      <section className="grid place-items-center">
+  <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-600 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Experience yoga in a whole new way  mats</span>
+</section>
+
          
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
