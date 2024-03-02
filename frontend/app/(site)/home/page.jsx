@@ -107,9 +107,8 @@ const Homepage = () => {
   // fetchUserTime();
 
   const [loading, setLoading] = useState(false);
-    const [videoSrc, setVideoSrc] = useState(
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHlvZ2ElMjBwb3NlfGVufDB8fDB8fHww" );
-  
+    const [videoSrc, setVideoSrc] = useState("https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8eW9nYSUyMHBvc2V8ZW58MHx8MHx8fDA%3D"
+    );
   const startVideo = async (poseName) => {
     console.log("startvideo call hua for", poseName)
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
