@@ -13,11 +13,11 @@ const Hero = () => {
 
   return (
     <>
-      <section className="overflow-hidden pb-20 pt-35 md:pt-40 xl:pb-25 xl:pt-46">
-        <div className="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0 
+      <section className="overflow-hidden pb-20 pt-35 md:pt-40 xl:pb-25 xl:pt-46 ">
+        <div className="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0 bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]
 ">
-          <div className="flex lg:items-center lg:gap-8 xl:gap-32.5">
-            <div className=" md:w-1/2">
+          <div className="flex lg:items-center lg:gap-8 xl:gap-32.5 ">
+            <div className=" md:w-1/2 ">
             <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Elder Ease Yoga</h1>
               {/* <div className="head_text">
               <h1 className="mb-5 pr-16  font-bold text-5xl bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent dark:text-white xl:text-hero ">

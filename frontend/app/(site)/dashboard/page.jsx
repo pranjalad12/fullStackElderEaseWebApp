@@ -67,7 +67,8 @@ export default function Home() {
     const {user}=UserAuth();
   return (
    <>
-   {user ? (<div className="my-10 mx-60 pl-10">
+   {user ? (
+   <div className="my-10 mx-60 pl-10 bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]">
    <div></div>
    
    <br/>
