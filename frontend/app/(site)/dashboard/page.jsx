@@ -79,19 +79,39 @@ export default function Home() {
     const {user}=UserAuth();
     const db= getFirestore(app);
 
-    const fetchUserData = async () => {
+    const fetchUserTimeSpentPerDay = async () => {
       try {
         const docRef = doc(db, "users", user.uid);
         const docSnapshot = await getDoc(docRef);
-        console.log(docSnapshot?.data()?.timeSpentPerDay || {}); 
-        console.log(docSnapshot?.data()?.noOfPosesInADay );
-        console.log(docSnapshot?.data()?.noOfClicksAllTime);
+        return docSnapshot?.data()?.timeSpentPerDay; 
+      
       } catch (error) {
         console.log("Error fetching document data:", error);
       }
     }
-      fetchUserData();
-
+    
+    const fetchUserNoOfPosesADay= async () => {
+      try {
+        const docRef = doc(db, "users", user.uid);
+        const docSnapshot = await getDoc(docRef);
+        return docSnapshot?.data()?.noOfPosesInADay; 
+      
+      } catch (error) {
+        console.log("Error fetching document data:", error);
+      }
+    }
+    // const fetchUserNoOfClicksAllTime= async () => {
+    //   try {
+    //     const docRef = doc(db, "users", user.uid);
+    //     const docSnapshot = await getDoc(docRef);
+    //     return docSnapshot?.data()?.noOfPosesInADay || {}; 
+      
+    //   } catch (error) {
+    //     console.log("Error fetching document data:", error);
+    //   }
+    // }
+    fetchUserTimeSpentPerDay();
+    fetchUserNoOfPosesADay();
   return (
    <>
    {user ? (

@@ -49,8 +49,12 @@ export default function Home() {
             painAreas: [],
             diseases: [],
             motive: [],
-            noOfPosesInADay:0,
-            noOfClicksAllTime:0,
+            noOfPosesInADay:{
+              [currentDate]: 0
+            },
+            noOfClicksAllTime:{
+
+            },
             timeSpentPerDay: {
               [currentDate]: 0
             }
