@@ -83,6 +83,9 @@ export default function Home() {
       try {
         const docRef = doc(db, "users", user.uid);
         const docSnapshot = await getDoc(docRef);
+        // const data=await docSnapshot?.data()?.timeSpentPerDay;
+        // console.log("data")
+        // console.log(data)
         return docSnapshot?.data()?.timeSpentPerDay; 
       
       } catch (error) {
@@ -94,6 +97,7 @@ export default function Home() {
       try {
         const docRef = doc(db, "users", user.uid);
         const docSnapshot = await getDoc(docRef);
+        
         return docSnapshot?.data()?.noOfPosesInADay; 
       
       } catch (error) {
@@ -104,6 +108,9 @@ export default function Home() {
       try {
         const docRef = doc(db, "users", user.uid);
         const docSnapshot = await getDoc(docRef);
+        const data=await docSnapshot?.data()?.noOfClicksAllTime; 
+        console.log("data")
+        console.log(data)
         return docSnapshot?.data()?.noOfClicksAllTime; 
       } catch (error) {
         console.log("Error fetching document data:", error);
