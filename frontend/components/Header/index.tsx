@@ -137,12 +137,7 @@ const Header = () => {
         </div>
         <div className="mt-7 flex items-center gap-6 xl:mt-0">
 
-          <button
-             onClick={handleSignIn}
-            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11"
-          >
-            Sign Up
-          </button>
+        
           <button
              onClick={handleSignIn}
             className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11"
