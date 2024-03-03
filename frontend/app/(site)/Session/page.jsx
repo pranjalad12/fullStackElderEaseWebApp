@@ -172,6 +172,29 @@ const Homepage = () => {
     "Savasana": "corpsePoseVideo",
     "Virabhadrasana II": "warriorPoseVideo",
   };
+
+
+  const posesData = [
+    {
+        Name: "T Pose",
+        photoUrl: "https://preview.free3d.com/img/2020/07/2399392636998780345/ni8pdb84.jpg",
+        description: ["In this pose, the arms are stretched out horizontally to the sides, forming a straight line with the torso, while the feet are placed firmly on the ground."," The T-pose is known for its ability to promote balance, alignment, and stability throughout the body."," It can help strengthen the core, improve posture, and increase flexibility in the shoulders and chest."],
+        benefits: ["Holding the T-pose and focusing on deep breathing can help calm the mind and reduce stress and anxiety.", "The expansive nature of the T-pose encourages better circulation throughout the body.", "By extending the arms out to the sides and keeping the spine straight, the T-pose helps align the shoulders, spine, and hips, promoting better posture."]
+    },
+    {
+        Name: "Back Bend",
+        photoUrl: "https://example.com/pose2.jpg",
+        description: ["Description 2.1", "Description 2.2"],
+        benefits: ["Benefits 2.1", "Benefits 2.2"]
+    },
+    {
+        Name: "Toe Touch",
+        photoUrl: "https://example.com/pose3.jpg",
+        description: ["Description 3.1"],
+        benefits: ["Benefits 3.1"]
+    }
+];
+
   const WarmUpPoses = ["Back Bend", "Toe Touch"];
   const EndPoses = ["T Pose"];
 
@@ -390,36 +413,37 @@ const Homepage = () => {
                       </span>
                     </h2>
                     {(() => {
-                      const matchingPose = poseData.find(
-                        (pose) => pose.Name === currentPose
-                      );
-                      if (matchingPose) {
-                        let des = matchingPose.description;
-                        return (
-                          <div>
-                            <ul className="mt-7.5">
-                              {des.split(". ").map((line, index) => (
-                                <li
-                                  key={index}
-                                  className="flex items-center gap-5"
-                                >
-                                  <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
-                                    <p className="text-metatitle2 font-semibold text-black dark:text-white">
-                                      {index + 1 < 10
+    const matchingPose = poseData.find(
+        (pose) => pose.Name === currentPose
+    ) || posesData.find((pose) => pose.Name === currentPose);
+
+    if (matchingPose) {
+        let des = matchingPose.description;
+        return (
+            <div>
+                <ul className="mt-7.5">
+                    {des.map((line, index) => (
+                        <li
+                            key={index}
+                            className="flex items-center gap-5"
+                        >
+                            <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
+                                <p className="text-metatitle2 font-semibold text-black dark:text-white">
+                                    {index + 1 < 10
                                         ? `0${index + 1}`
                                         : index + 1}
-                                    </p>
-                                  </div>
-                                  <div className="w-3/4">
-                                    <p className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                                      {line}
-                                    </p>
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        );
+                                </p>
+                            </div>
+                            <div className="w-3/4">
+                                <p className="mb-0.5 text-metatitle2 text-black dark:text-white">
+                                    {line}
+                                </p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
                       } else if (currentPose === "Yoga, ElderEase") {
                         let desc =
                           "The word 'yoga' means to unite mind, body, and spirit. Step into ElderEase, where yoga meets personalized guidance. Receive tailored feedback in real-time, safeguarding against injuries and enhancing your practice. Embrace safety and mindfulness as our foremost principles, guiding you towards progress with confidence. Track Progress: Celebrate your milestones with our progress tracking feature, motivating you along your journey. Join us today for a transformative yoga experience, Namaste.";
