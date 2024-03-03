@@ -77,7 +77,7 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
-                        href="/Start Session"
+                        href="/Session"
                         className="mb-3 inline-block hover:text-primary text-lg"
                       >
                         Start Session
