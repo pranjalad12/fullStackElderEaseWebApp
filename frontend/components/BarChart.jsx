@@ -82,7 +82,7 @@ export default function BarChart({datas}) {
           axisLine={false}
           stroke="red-orange"
           fontSize={12}
-          tickFormatter={(value) => `$${value}`}
+          tickFormatter={(value) => `${value}`}
         />
         <Bar dataKey={"total"} radius={[4, 4, 0, 0]} fill="crimson" />
       </BarGraph>
