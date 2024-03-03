@@ -413,37 +413,36 @@ const Homepage = () => {
                       </span>
                     </h2>
                     {(() => {
-    const matchingPose = poseData.find(
-        (pose) => pose.Name === currentPose
-    ) || posesData.find((pose) => pose.Name === currentPose);
-
-    if (matchingPose) {
-        let des = matchingPose.description;
-        return (
-            <div>
-                <ul className="mt-7.5">
-                    {des.map((line, index) => (
-                        <li
-                            key={index}
-                            className="flex items-center gap-5"
-                        >
-                            <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
-                                <p className="text-metatitle2 font-semibold text-black dark:text-white">
-                                    {index + 1 < 10
+                      const matchingPose = poseData.find(
+                        (pose) => pose.Name === currentPose
+                      ) || posesData.find((pose) => pose.Name === currentPose);
+                      if (matchingPose) {
+                        let des = matchingPose.description;
+                        return (
+                          <div>
+                            <ul className="mt-7.5">
+                              {des.split(". ").map((line, index) => (
+                                <li
+                                  key={index}
+                                  className="flex items-center gap-5"
+                                >
+                                  <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
+                                    <p className="text-metatitle2 font-semibold text-black dark:text-white">
+                                      {index + 1 < 10
                                         ? `0${index + 1}`
                                         : index + 1}
-                                </p>
-                            </div>
-                            <div className="w-3/4">
-                                <p className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                                    {line}
-                                </p>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        );
+                                    </p>
+                                  </div>
+                                  <div className="w-3/4">
+                                    <p className="mb-0.5 text-metatitle2 text-black dark:text-white">
+                                      {line}
+                                    </p>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        );
                       } else if (currentPose === "Yoga, ElderEase") {
                         let desc =
                           "The word 'yoga' means to unite mind, body, and spirit. Step into ElderEase, where yoga meets personalized guidance. Receive tailored feedback in real-time, safeguarding against injuries and enhancing your practice. Embrace safety and mindfulness as our foremost principles, guiding you towards progress with confidence. Track Progress: Celebrate your milestones with our progress tracking feature, motivating you along your journey. Join us today for a transformative yoga experience, Namaste.";
