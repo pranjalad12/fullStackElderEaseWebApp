@@ -29,6 +29,8 @@ const Homepage = () => {
   const [poseData, setPosesData] = useState([]);
   const [timer, setTimer] = useState(0);
   const [startTime, setStartTime] = useState(0);
+  const [array1, setarray1] = useState([]);
+  const [array2, setarray2] = useState([]);
   // const [totalDurationToday, setTotalDurationToday] = useState(0);
   const [currentPose, setCurrentPose] = useState("Yoga, ElderEase");
 
@@ -78,6 +80,23 @@ const Homepage = () => {
     });
   }, [user]);
 
+  useEffect(() => {
+    const updateArrays = async () => {
+      const docRef = doc(db, "users", user?.uid);
+      const docSnapshot = await getDoc(docRef);
+      const array1 = await docSnapshot?.data()?.noOfClicksAllTime;
+      const array2 = await docSnapshot?.data()?.noOfPosesInADay;
+      console.log(docSnapshot?.data()?.noOfPosesInADay);
+
+      setarray1(array1 || []);
+      setarray2(array2 || []);
+    };
+
+    updateArrays();
+  }, [user, db]);
+  console.log("a1", array1);
+  console.log("a2", array2);
+
   const urlToPose = {
     tPoseVideo: "T Pose",
     treePoseVideo: "Vrikshasana",
@@ -114,9 +133,26 @@ const Homepage = () => {
     console.log("ye start time set hua h wen i called startsesion", startTime);
   };
 
-  const handleStartVideo = (poseName) => {
+  const handleStartVideo = async (poseName) => {
     setCurrentPose(urlToPose[poseName]);
     startVideo(poseName);
+
+    //poseName=tPoseVideo
+    //urlToPose[poseName]="T Pose"
+    const userRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userRef);
+
+    array1[urlToPose[poseName]]++;
+
+    const currentDate = new Date().toLocaleDateString();
+    array2[currentDate]++;
+
+    await updateDoc(userRef, {
+      noOfClicksAllTime: array1,
+    });
+    await updateDoc(userRef, {
+      noOfPosesInADay: array2,
+    });
   };
 
   const endSession = async () => {
@@ -158,7 +194,10 @@ const Homepage = () => {
     } else {
       const existingTimeSpent = userDoc.data().timeSpentPerDay;
       await updateDoc(userRef, {
-        timeSpentPerDay: { ...existingTimeSpent,[`${formattedDate}`]: toBeUpdatedtime },
+        timeSpentPerDay: {
+          ...existingTimeSpent,
+          [`${formattedDate}`]: toBeUpdatedtime,
+        },
       });
     }
   };
@@ -389,9 +428,12 @@ const Homepage = () => {
                   >
                     <Image
                       src={
-                        (poseData.find((pose) => pose.Name === currentPose) || posesData.find((pose) => pose.Name === currentPose))
-                          ?.photoURL ||
-                        "https://omstars.com/blog/wp-content/uploads/2021/04/How-to-do-Surya-Namaskar-A-Sun-Salutation-A.jpg"}
+                        (
+                          poseData.find((pose) => pose.Name === currentPose) ||
+                          posesData.find((pose) => pose.Name === currentPose)
+                        )?.photoURL ||
+                        "https://omstars.com/blog/wp-content/uploads/2021/04/How-to-do-Surya-Namaskar-A-Sun-Salutation-A.jpg"
+                      }
                       alt="About"
                       className="dark:hidden m-3 p-15 w-100 h-100"
                       fill
