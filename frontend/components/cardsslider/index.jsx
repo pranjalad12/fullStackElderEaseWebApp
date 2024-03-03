@@ -87,7 +87,7 @@ const Testimonial = ({clicks}) => {
 								},
 								// when window width is >= 768px
 								768: {
-									slidesPerView: 3,
+									slidesPerView: 4,
 								},
 							}}
 						>
@@ -157,7 +157,7 @@ const Testimonial = ({clicks}) => {
 											</div>
 											
 											<p class="px-4 text-gray-500 text-xl">{clicks["Virabhadrasana II"]}</p>
-											<h1 class="text-darken mb-3 text-xl font-medium lg:px-14">Virabhadrasana II</h1>
+											<h1 class="text-darken mb-3 text-xl font-medium lg:px-14">Virabhadrasana</h1>
 										</div>
 
 								</div>
