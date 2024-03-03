@@ -29,7 +29,7 @@ const About = () => {
               className="animate_left relative mx-auto hidden aspect-[588/526.5] md:block md:w-1/3 h-1/2 ">
               
               <Image
-                src="/images/about/oldwoman.jpg"
+                src="/images/hero/hero1.jpg"
                 alt="About"
                 className="dark:hidden h-auto w-auto m-3 rounded-lg shadow-xl"
                 fill

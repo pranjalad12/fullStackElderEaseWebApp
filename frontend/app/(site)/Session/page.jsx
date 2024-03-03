@@ -432,8 +432,7 @@ const Homepage = () => {
                           poseData.find((pose) => pose.Name === currentPose) ||
                           posesData.find((pose) => pose.Name === currentPose)
                         )?.photoURL ||
-                        "https://omstars.com/blog/wp-content/uploads/2021/04/How-to-do-Surya-Namaskar-A-Sun-Salutation-A.jpg"
-                      }
+                        "/images/about/defaultimg.webp" }
                       alt="About"
                       className="dark:hidden m-3 p-15 w-100 h-100"
                       fill
