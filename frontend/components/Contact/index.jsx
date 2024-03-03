@@ -31,7 +31,7 @@ const Contact = () => {
     "Indigestion",
     "diabetes",
     "Hypertension",
-     "None"
+    "None"
   ];
   const options1 = ["neck", "shoulders", "back", "knee", "hips", "None"];
   const options3 = [
@@ -241,7 +241,7 @@ const Contact = () => {
             alt='profile'
           /> */}
 
-                {/* <h2 className="mb-20 text-metatitle3  font-semibold text-black dark:text-white xl:text-sectiontitle2">
+              {/* <h2 className="mb-20 text-metatitle3  font-semibold text-black dark:text-white xl:text-sectiontitle2">
                   Hello, {user?.displayName.split(" ")[0]}
                   <h3 className="mb-4 mt-5 text-metatitle3 font-medium text-black dark:text-white">
                     Email
@@ -255,28 +255,28 @@ const Contact = () => {
                     />
                   </h3>
                 </h2> */}
-              {/* </div> */} 
-              {/* <main class='main w-full-screen  flex justify-center items-center before:absolute before:top-0 before:bottom-0 before:left-0 before:right-0 before:opacity-20'>
-	<section class="cursor-pointer rounded-md min-w-72 min-h-96 bg-white flex flex-col items-center drop-shadow-lg hover:scale-105 active:scale-95 transition">
-		<div class='relative h-32 w-72'>
-			<div class='absolute bg-orange-400 opacity-80 w-full h-full rounded-t-md'></div>
-			<img src="https://images.unsplash.com/photo-1632377082529-611764ce0fef?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDg4MjU5NTF8&ixlib=rb-4.0.3&q=85" alt="card cover" class='w-full h-full object-cover rounded-t-md'/>
-		</div>
-		<div class="-m-9 z-10 bg-white rounded-full"><img src={user?.photoURL} alt="profile image" class='w-24 h-24 rounded-full object-cover p-2' /></div>
-		<div class='text-center mt-12'>
-			<h1 class='mb-1 text-xl font-medium dark:text-gray-900'>{user?.displayName}</h1>
-			{/* <p class='text-sm text-gray-400 dark:text-gray-500'>Michigan, United States</p> */}
-		{/* </div>
-    <input
-                      type="text"
-                      id="input-group-1"
-                      value={user?.email}
-                      disabled={true}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 ps-4 p-5 mt-5 mb-8 ml-4 mr-4 font-bold border-2"
-                    />
-		
-	</section>
-</main> */}
+              {/* </div> */}
+              <main class='main w-full-screen  flex justify-center items-center before:z-[-1] before:absolute before:top-0 before:bottom-0 before:left-0 before:right-0 before:opacity-20'>
+                <section class="cursor-pointer rounded-md min-w-72 min-h-96 bg-white flex flex-col items-center drop-shadow-lg hover:scale-105 active:scale-95 transition">
+                  <div class='relative h-32 w-72'>
+                    <div class='absolute bg-orange-400 opacity-80 w-full h-full rounded-t-md'></div>
+                    <img src="https://images.unsplash.com/photo-1632377082529-611764ce0fef?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDg4MjU5NTF8&ixlib=rb-4.0.3&q=85" alt="card cover" class='w-full h-full object-cover rounded-t-md' />
+                  </div>
+                  <div class="-m-9 z-10 bg-white rounded-full"><img src={user?.photoURL} alt="profile image" class='w-24 h-24 rounded-full object-cover p-2' /></div>
+                  <div class='text-center mt-12'>
+                    <h1 class='mb-1 text-xl font-medium dark:text-gray-900'>{user?.displayName}</h1>
+                    <p class='text-sm text-gray-400 dark:text-gray-500'>Michigan, United States</p>
+                  </div>
+                  <input
+                    type="text"
+                    id="input-group-1"
+                    value={user?.email}
+                    disabled={true}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 ps-4 p-5 mt-5 mb-8 ml-4 mr-4 font-bold border-2"
+                  />
+
+                </section>
+              </main>
               <div className="">
                 {/* <h3 className="mb-4 text-metatitle3 font-medium text-black dark:text-white">
                   Email
@@ -472,14 +472,14 @@ const Contact = () => {
                 </div>
               </div>
               <div className="relative">
-              <button
-                onClick={() => bothFxn()}
-                aria-label="send message"
-                className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark absolute top-0 right-0 mb-20"
-              >
-                Save Preferences
-               
-              </button>
+                <button
+                  onClick={() => bothFxn()}
+                  aria-label="send message"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark absolute top-0 right-0 mb-20"
+                >
+                  Save Preferences
+
+                </button>
               </div>
             </motion.div>
           </div>

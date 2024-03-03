@@ -103,8 +103,7 @@ const Homepage = () => {
   };
   const [loading, setLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState(
-    "https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8eW9nYSUyMHBvc2V8ZW58MHx8MHx8fDA%3D"
-  );
+    "https://www.athulyaliving.com/blogs/wp-content/uploads/2017/07/yoga-for-seniors.jpg");
   const startVideo = async (poseName) => {
     console.log("startvideo call hua for", poseName);
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
@@ -122,8 +121,7 @@ const Homepage = () => {
     setCurrentPose("Yoga, ElderEase");
     console.log("endsession u laxi");
     setVideoSrc(
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHlvZ2ElMjBwb3NlfGVufDB8fDB8fHww"
-    );
+      "https://www.athulyaliving.com/blogs/wp-content/uploads/2017/07/yoga-for-seniors.jpg" );
 
     const endTime = Date.now();
     let elapsedTime = endTime - startTime;
@@ -173,7 +171,7 @@ const Homepage = () => {
     "Savasana": "corpsePoseVideo",
     "Virabhadrasana II": "warriorPoseVideo",
   };
-  const WarmUpPoses = ["Back Bend", "Toe Touch"];
+  const WarmUpPoses = ["Back Bend", "Toe Touch","Back Bend","Back Bend","Back Bend"];
   const EndPoses = ["T Pose"];
 
   if (!hasMounted) {
@@ -231,13 +229,13 @@ const Homepage = () => {
                   whileInView="visible"
                   transition={{ duration: 2, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15"
+                  className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15 grid grid-template-rows-[auto_1fr]"
                 >
                   <h2 className="mb-12.5 text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2">
                     Choose your Pose
                   </h2>
 
-                  <div className="5 mb-7 overflow-y-auto">
+                  <div className="5 mb-7 overflow-y-auto w-full">
                     <h3 className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
                       <div className="overflow-y-auto">
                         <div className="overflow-y-auto mb-4 text-metatitle3 font-medium text-black dark:text-white">
