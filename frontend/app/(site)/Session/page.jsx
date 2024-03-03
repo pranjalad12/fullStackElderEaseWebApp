@@ -171,7 +171,7 @@ const Homepage = () => {
     "Savasana": "corpsePoseVideo",
     "Virabhadrasana II": "warriorPoseVideo",
   };
-  const WarmUpPoses = ["Back Bend", "Toe Touch","Back Bend","Back Bend","Back Bend"];
+  const WarmUpPoses = ["Back Bend", "Toe Touch"];
   const EndPoses = ["T Pose"];
 
   if (!hasMounted) {
