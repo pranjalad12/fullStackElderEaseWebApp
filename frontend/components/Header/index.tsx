@@ -90,7 +90,12 @@ const Header = () => {
             Progress 🌟
           </Link>
          
-          
+          <button
+             onClick={handleSignOut}
+            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center            h-11"
+          >
+            Sign Out
+          </button>
            
           <Link href='/profile'>
                 <Image
