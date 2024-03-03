@@ -31,14 +31,14 @@ const Footer = () => {
                 <div className="flex items-center justify-start">
           <a href="/">
             <Image
-              src="/images/brand/logo.svg"
+              src="/images/brand/logo1.png"
               alt="logo"
               width={19.03}
               height={10}
               className="hidden  dark:block"
             />
             <Image
-              src="/images/brand/logo.svg"
+              src="/images/brand/logo1.png"
               alt="logo"
               width={50.03}
               height={30}
