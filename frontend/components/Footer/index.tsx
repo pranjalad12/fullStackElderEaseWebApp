@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0">
           {/* <!-- Footer Top --> */}
           <div className="py-20 lg:py-25">
-            <div className="flex flex-wrap gap-8 lg:justify-between lg:gap-0">
+            <div className="flex flex-wrap gap-8 lg:justify-around lg:gap-0">
               <motion.div
                 variants={{
                   hidden: {
@@ -29,29 +29,52 @@ const Footer = () => {
                 className="animate_top w-1/2 lg:w-1/4"
               >
                 <div className="flex items-center justify-start">
-          <a href="/">
-            <Image
-              src="/images/brand/logo1.png"
-              alt="logo"
-              width={19.03}
-              height={10}
-              className="hidden  dark:block"
-            />
-            <Image
-              src="/images/brand/logo1.png"
-              alt="logo"
-              width={50.03}
-              height={30}
-              className=" dark:hidden"
-            />
-           
-          </a>
-          <p className="text-orange-500 px-2 font-bold text-3xl">ElderEase</p>
-        </div>
-
+                  <a href="/">
+                    <Image
+                      src="/images/brand/logo1.png"
+                      alt="logo"
+                      width={19.03}
+                      height={10}
+                      className="hidden  dark:block"
+                    />
+                    <Image
+                      src="/images/brand/logo1.png" 
+                      alt="logo"
+                      width={50.03}
+                      height={30}
+                      className=" dark:hidden"
+                    />
+                  </a>
+                  <p className="text-orange-500 px-2 font-bold text-3xl">
+                    ElderEase
+                  </p>
+                </div>
               </motion.div>
 
               <div className="flex w-full flex-col gap-8 md:flex-row md:justify-between md:gap-0 lg:w-2/3 xl:w-7/12">
+                <motion.div
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      y: -20,
+                    },
+
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                  initial="hidden"
+                  whileInView="visible"
+                  transition={{ duration: 1, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="animate_top"
+                >
+                  <h4 className="mb-9 text-itemtitle2 font-medium text-black dark:text-white">
+                    Developed for
+                  </h4>
+                  <p className="mb-4 w-[100%] text-lg">Servicenow <br/>Code To Win 2024</p>
+                </motion.div>
                 <motion.div
                   variants={{
                     hidden: {
@@ -99,7 +122,6 @@ const Footer = () => {
                         Profile
                       </a>
                     </li>
-                    
                   </ul>
                 </motion.div>
 
@@ -122,14 +144,14 @@ const Footer = () => {
                   className="animate_top"
                 >
                   <h4 className="mb-9 text-itemtitle2 font-medium text-black dark:text-white">
-                   Made By
+                    Made By
                   </h4>
 
                   <ul>
                     <li>
                       <a
                         href="#"
-                        className="mb-3 inline-block hover:text-primary"
+                        className="mb-3 inline-block hover:text-primary text-lg"
                       >
                         Bhavya choudhary
                       </a>
@@ -137,7 +159,7 @@ const Footer = () => {
                     <li>
                       <a
                         href="#"
-                        className="mb-3 inline-block hover:text-primary"
+                        className="mb-3 inline-block hover:text-primary text-lg"
                       >
                         Pranjal Adwani
                       </a>
@@ -145,41 +167,12 @@ const Footer = () => {
                     <li>
                       <a
                         href="#"
-                        className="mb-3 inline-block hover:text-primary"
+                        className="mb-3 inline-block hover:text-primary text-lg"
                       >
                         Vidisha Agarwal
                       </a>
                     </li>
-                   
                   </ul>
-                </motion.div>
-
-                <motion.div
-                  variants={{
-                    hidden: {
-                      opacity: 0,
-                      y: -20,
-                    },
-
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                    },
-                  }}
-                  initial="hidden"
-                  whileInView="visible"
-                  transition={{ duration: 1, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="animate_top"
-                >
-                  <h4 className="mb-9 text-itemtitle2 font-medium text-black dark:text-white">
-                  Developed for
-                  </h4>
-                  <p className="mb-4 w-[100%]">
-                  Servicenow Code To Win 
-                  </p>
-
-                 
                 </motion.div>
               </div>
             </div>
@@ -267,13 +260,11 @@ const Footer = () => {
               className="animate_top"
             >
               <ul className="flex items-center gap-5">
-                <li>
-                 
-                </li>
+                <li></li>
                 <li>
                   <a href="#" aria-label="social icon">
                     <svg
-                      className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
+                      className="fill-black transition-all duration-300 hover:fill-primary"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -297,7 +288,7 @@ const Footer = () => {
                 <li>
                   <a href="#" aria-label="social icon">
                     <svg
-                      className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
+                      className="fill-black transition-all duration-300 hover:fill-primary"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -319,22 +310,15 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" aria-label="social icon">
+                  <a href="#" aria-label="GitHub icon">
                     <svg
-                      className="fill-[#D1D8E0] transition-all duration-300 hover:fill-primary"
+                      className="fill-black transition-all duration-300 hover:fill-primary"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g clipPath="url(#clip0_48_1508)">
-                        <path d="M7.443 5.3501C8.082 5.3501 8.673 5.4001 9.213 5.5481C9.70301 5.63814 10.1708 5.82293 10.59 6.0921C10.984 6.3391 11.279 6.6861 11.475 7.1311C11.672 7.5761 11.77 8.1211 11.77 8.7141C11.77 9.4071 11.623 10.0001 11.279 10.4451C10.984 10.8911 10.492 11.2861 9.902 11.5831C10.738 11.8311 11.377 12.2761 11.77 12.8691C12.164 13.4631 12.41 14.2051 12.41 15.0461C12.41 15.7391 12.262 16.3321 12.016 16.8271C11.77 17.3221 11.377 17.7671 10.934 18.0641C10.4528 18.3825 9.92084 18.6165 9.361 18.7561C8.771 18.9051 8.181 19.0041 7.591 19.0041H1V5.3501H7.443ZM7.049 10.8901C7.59 10.8901 8.033 10.7421 8.377 10.4951C8.721 10.2481 8.869 9.8021 8.869 9.2581C8.869 8.9611 8.819 8.6641 8.721 8.4671C8.623 8.2691 8.475 8.1201 8.279 7.9721C8.082 7.8731 7.885 7.7741 7.639 7.7251C7.393 7.6751 7.148 7.6751 6.852 7.6751H4V10.8911H7.05L7.049 10.8901ZM7.197 16.7281C7.492 16.7281 7.787 16.6781 8.033 16.6291C8.28138 16.5819 8.51628 16.4805 8.721 16.3321C8.92139 16.1873 9.08903 16.002 9.213 15.7881C9.311 15.5411 9.41 15.2441 9.41 14.8981C9.41 14.2051 9.213 13.7101 8.82 13.3641C8.426 13.0671 7.885 12.9191 7.246 12.9191H4V16.7291H7.197V16.7281ZM16.689 16.6781C17.082 17.0741 17.672 17.2721 18.459 17.2721C19 17.2721 19.492 17.1241 19.885 16.8771C20.279 16.5801 20.525 16.2831 20.623 15.9861H23.033C22.639 17.1731 22.049 18.0141 21.263 18.5581C20.475 19.0531 19.541 19.3501 18.41 19.3501C17.6864 19.3523 16.9688 19.2179 16.295 18.9541C15.6887 18.7266 15.148 18.3529 14.721 17.8661C14.2643 17.4107 13.9267 16.8498 13.738 16.2331C13.492 15.5901 13.393 14.8981 13.393 14.1061C13.393 13.3641 13.492 12.6721 13.738 12.0281C13.9745 11.4082 14.3245 10.8378 14.77 10.3461C15.213 9.9011 15.754 9.5061 16.344 9.2581C17.0007 8.99416 17.7022 8.85969 18.41 8.8621C19.246 8.8621 19.984 9.0111 20.623 9.3571C21.263 9.7031 21.754 10.0991 22.148 10.6931C22.5499 11.2636 22.8494 11.8998 23.033 12.5731C23.131 13.2651 23.18 13.9581 23.131 14.7491H16C16 15.5411 16.295 16.2831 16.689 16.6791V16.6781ZM19.787 11.4841C19.443 11.1381 18.902 10.9401 18.262 10.9401C17.82 10.9401 17.475 11.0391 17.18 11.1871C16.885 11.3361 16.689 11.5341 16.492 11.7321C16.311 11.9234 16.1912 12.1643 16.148 12.4241C16.098 12.6721 16.049 12.8691 16.049 13.0671H20.475C20.377 12.3251 20.131 11.8311 19.787 11.4841V11.4841ZM15.459 6.2901H20.967V7.6261H15.46V6.2901H15.459Z" />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_48_1508">
-                          <rect width="24" height="24" fill="white" />
-                        </clipPath>
-                      </defs>
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.303 3.438 9.798 8.208 11.385.6.11.822-.258.822-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.65-4.042-1.65-.546-1.382-1.333-1.75-1.333-1.75-1.09-.744.083-.729.083-.729 1.205.085 1.838 1.235 1.838 1.235 1.07 1.834 2.805 1.305 3.487.996.108-.773.417-1.305.76-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.655 1.653.244 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.807 5.625-5.475 5.918.43.372.81 1.102.81 2.222 0 1.605-.015 2.896-.015 3.287 0 .315.216.692.825.572C20.565 21.795 24 17.3 24 12c0-6.63-5.37-12-12-12"></path>
                     </svg>
                   </a>
                 </li>
