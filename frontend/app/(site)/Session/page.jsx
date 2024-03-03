@@ -1,6 +1,7 @@
 "use client";
 import Contact from "components/window";
 import { motion } from "framer-motion";
+import Typewriter from "typewriter-effect";
 import Image from "next/image";
 import Testimonial from "@/components/Testimonial";
 import React, { useEffect, useState } from "react";
@@ -37,7 +38,7 @@ const Homepage = () => {
   const db = getFirestore(app);
   useEffect(() => {
     if (!user) {
-      return; 
+      return;
     }
     const fetchData = async () => {
       try {
@@ -75,7 +76,7 @@ const Homepage = () => {
     fetchData().then(() => {
       setLoading(false);
     });
-  }, [user]); 
+  }, [user]);
 
   const urlToPose = {
     tPoseVideo: "T Pose",
@@ -187,12 +188,33 @@ const Homepage = () => {
             <br />
             <br />
             <br />
+            <br />
+            <div>
+              <div className="flex justify-center lg:gap-8 xl:gap-32.5 ">
+                <div className=" md:w-1/2 ">
+                  <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center">
+                    Welcome to your session! 
+                  </h1>
+                </div>
+              </div>
+              <div className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-3xl text-center">
+                <h1 className="bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent text-center">
+                  <Typewriter
+                    options={{
+                      strings: [user.displayName],
+                      autoStart: true,
+                      loop: true,
+                    }}
+                  />
+                </h1>
+              </div>
+            </div>
           </div>
           <section
             id="support"
-            className="px-44 pt-10 md:px-8 2xl:px-0 w-90/100"
+            className="px-44 pt-0 md:px-8 2xl:px-0 w-90/100"
           >
-            <div className="relative mx-auto w-full px-7.5 pt-10 lg:px-15 lg:pt-15 xl:px-20 xl:pt-20">
+            <div className="relative mx-auto w-full px-7.5 pt-0 lg:px-15 lg:pt-5 xl:px-20 xl:pt-20">
               <div className="absolute left-0 top-0 -z-1 h-2/3 w-full rounded-lg bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]"></div>
               <div className="absolute bottom-[-255px] left-0 -z-1 h-full w-full">
                 <Image
@@ -365,7 +387,6 @@ const Homepage = () => {
                       Your Complete Guide to{" "}
                       <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark">
                         {currentPose}
-                        {/* {console.log("current pose ye h ", currentPose)} */}
                       </span>
                     </h2>
                     {(() => {
@@ -373,7 +394,7 @@ const Homepage = () => {
                         (pose) => pose.Name === currentPose
                       );
                       if (matchingPose) {
-                        let des = matchingPose.description; 
+                        let des = matchingPose.description;
                         return (
                           <div>
                             <ul className="mt-7.5">
@@ -399,18 +420,22 @@ const Homepage = () => {
                             </ul>
                           </div>
                         );
-                      }
-                      else if (currentPose === "Yoga, ElderEase") {
+                      } else if (currentPose === "Yoga, ElderEase") {
                         let desc =
                           "The word 'yoga' means to unite mind, body, and spirit. Step into ElderEase, where yoga meets personalized guidance. Receive tailored feedback in real-time, safeguarding against injuries and enhancing your practice. Embrace safety and mindfulness as our foremost principles, guiding you towards progress with confidence. Track Progress: Celebrate your milestones with our progress tracking feature, motivating you along your journey. Join us today for a transformative yoga experience, Namaste.";
                         return (
                           <div>
                             <ul className="mt-7.5">
-                              {desc.split(". ").map((line, lineIndex) => ( 
-                                <li key={lineIndex} className="flex items-center gap-5"> 
+                              {desc.split(". ").map((line, lineIndex) => (
+                                <li
+                                  key={lineIndex}
+                                  className="flex items-center gap-5"
+                                >
                                   <div className="flex h-15 w-15 items-center justify-center rounded-[50%] border border-stroke dark:border-strokedark dark:bg-blacksection">
                                     <p className="text-metatitle2 font-semibold text-black dark:text-white">
-                                      {lineIndex + 1 < 10 ? `0${lineIndex + 1}` : lineIndex + 1}
+                                      {lineIndex + 1 < 10
+                                        ? `0${lineIndex + 1}`
+                                        : lineIndex + 1}
                                     </p>
                                   </div>
                                   <div className="w-3/4">
@@ -424,7 +449,7 @@ const Homepage = () => {
                           </div>
                         );
                       }
-                      return null; 
+                      return null;
                     })()}
                   </motion.div>
                 </div>
