@@ -35,7 +35,7 @@ export default function Home() {
         const userDocRef = doc(db, 'users', user.uid);
         const userDocSnapshot = await getDoc(userDocRef);
 
-        // if (!userDocSnapshot.exists()) {
+        if (!userDocSnapshot.exists()) {
           // Document doesn't exist, create it
           await setDoc(userDocRef, {
             userId: user.uid,
@@ -64,7 +64,7 @@ export default function Home() {
               [currentDate]: 0
             }
           });
-        // }
+        }
       }
     }
 
