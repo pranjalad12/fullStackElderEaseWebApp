@@ -78,10 +78,10 @@ const Header = () => {
           {/* <ThemeToggler /> */}
 
           <Link
-            href="/home"
+            href="/Session"
             className="text-xl font-medium text-black hover:text-primary font-extrabold "
           >
-            Home Page 🌟
+            Start Session 🌟
           </Link>
           <Link
             href="/dashboard"
@@ -131,14 +131,6 @@ const Header = () => {
           <p className="text-orange-500 px-2 font-bold text-3xl">ElderEase</p>
         </div>
         <div className="mt-7 flex items-center gap-6 xl:mt-0">
-          {/* <ThemeToggler /> */}
-
-          {/* <Link
-            href="/home"
-            className="text-regular font-medium text-waterloo hover:text-primary"
-          >
-            Home Page 🌟
-          </Link> */}
 
           <button
              onClick={handleSignIn}

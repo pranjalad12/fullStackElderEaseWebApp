@@ -28,10 +28,6 @@ export default function Home() {
 
   console.log("Current Date and Time in IST:", currentDate);
 
-
-  // console.log("Current Date in IST:", currentDateIST);
-  // console.log("Current Time in IST:", currentTimeIST);
-
   useEffect(() => {
     const callFast = async () => {
       if (user && user.uid) {
@@ -73,19 +69,10 @@ export default function Home() {
     return (
     <main>
       <Hero />
-      {/* <Brands /> */}
-      
       <Testimonial />
       <About />
       <FeaturesTab />
       <FunFact />
-       {/* <Integration />
-      <CTA />  */}
-      {/* <FAQ /> */}
-      {/* <Feature />
-      <Pricing />
-       <Contact />
-      <Blog />  */}
     </main>
   );
 }

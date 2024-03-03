@@ -77,10 +77,10 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
-                        href="/home"
+                        href="/Start Session"
                         className="mb-3 inline-block hover:text-primary text-lg"
                       >
-                        Home
+                        Start Session
                       </a>
                     </li>
                     <li>
