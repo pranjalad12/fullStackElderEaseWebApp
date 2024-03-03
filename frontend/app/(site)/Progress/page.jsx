@@ -89,6 +89,9 @@ export default function Home() {
 
     useEffect(() => {
       const updateArrays = async () => {
+        if (!user || !user.uid) {
+          return;
+        }
         const docRef = doc(db, "users", user?.uid);
         const docSnapshot = await getDoc(docRef);
         const array1 =await docSnapshot?.data()?.noOfClicksAllTime;  

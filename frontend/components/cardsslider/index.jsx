@@ -316,7 +316,7 @@ const Testimonial = ({clicks}) => {
 												</svg>
 											</div>
 											<p class="px-4 text-gray-500 text-xl">{clicks["Back Bend"]}</p>
-											<h1 class="text-darken mb-3 text-xl font-medium lg:px-14">Back Bend</h1>
+											<h1 class="text-darken mb-3 text-xl font-medium lg:px-14">BackBend</h1>
 										</div>
 
 
