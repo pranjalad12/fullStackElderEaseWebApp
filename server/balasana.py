@@ -72,3 +72,8 @@ def classifyBalasanaPose(landmarks, output_image, display=False):
     if display: return output_image
     else: return output_image
 
+def release_resources():
+    pose.close()
+
+try: pass
+finally: release_resources()

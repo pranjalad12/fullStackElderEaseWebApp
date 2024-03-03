@@ -12,7 +12,7 @@ from bhujangasana import classifyCobraPose
 from toeTouch import classifyToeTouchPose
 from backBend import classifyBackBendPose
 from balasana import classifyBalasanaPose
-from corpse import classifyCorpsePose
+# from corpse import classifyCorpsePose
 
 #initialisation
 app = Flask(__name__)
@@ -263,27 +263,27 @@ def generateFramesBalasanaPose():
     cap.release()
 
 # #corpse pose
-def corpsePose(landmarks, output_image):
-    output_image = classifyCorpsePose(landmarks, output_image, False)
-    _, jpeg = cv2.imencode('.jpg', output_image)
-    return jpeg.tobytes()
-def generateFramesCorpsePose():
-    cap = cv2.VideoCapture(0)
-    while True:
+# def corpsePose(landmarks, output_image):
+#     output_image = classifyCorpsePose(landmarks, output_image, False)
+#     _, jpeg = cv2.imencode('.jpg', output_image)
+#     return jpeg.tobytes()
+# def generateFramesCorpsePose():
+#     cap = cv2.VideoCapture(0)
+#     while True:
 
-        success, frame = cap.read()
-        if not success:
-            break
-        # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
-        landmarks = detectPose(frame)
-        if landmarks:
-            output_image = corpsePose(landmarks, frame)
-            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
-        else:
-            _, jpeg = cv2.imencode('.jpg', frame)
-            yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
+#         success, frame = cap.read()
+#         if not success:
+#             break
+#         # frame = cv2.resize(frame, (0, 0), fx=1.7, fy=1.7)
+#         landmarks = detectPose(frame)
+#         if landmarks:
+#             output_image = corpsePose(landmarks, frame)
+#             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + output_image + b'\r\n')
+#         else:
+#             _, jpeg = cv2.imencode('.jpg', frame)
+#             yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n')
 
-    cap.release()
+#     cap.release()
 
 @app.route("/")
 def default():
@@ -331,9 +331,9 @@ def video_feed_back_bend():
 def video_feed_balasana():
     return Response(generateFramesBalasanaPose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/corpsePoseVideo')
-def video_feed_corpse():
-    return Response(generateFramesCorpsePose(), mimetype='multipart/x-mixed-replace; boundary=frame')
+# @app.route('/corpsePoseVideo')
+# def video_feed_corpse():
+#     return Response(generateFramesCorpsePose(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080) 
