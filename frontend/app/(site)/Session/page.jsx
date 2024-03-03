@@ -145,6 +145,7 @@ const Homepage = () => {
     array1[urlToPose[poseName]]++;
 
     const currentDate = new Date().toLocaleDateString();
+    // currentDate=currentDateTimeIST.split(",")[0]
     array2[currentDate]++;
 
     await updateDoc(userRef, {
@@ -256,11 +257,6 @@ const Homepage = () => {
       {user ? (
         <>
           <div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
             <div>
               <div className="flex justify-center lg:gap-8 xl:gap-32.5 ">
                 <div className=" md:w-1/2 ">
