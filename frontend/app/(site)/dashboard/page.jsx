@@ -100,16 +100,16 @@ export default function Home() {
         console.log("Error fetching document data:", error);
       }
     }
-    // const fetchUserNoOfClicksAllTime= async () => {
-    //   try {
-    //     const docRef = doc(db, "users", user.uid);
-    //     const docSnapshot = await getDoc(docRef);
-    //     return docSnapshot?.data()?.noOfPosesInADay || {}; 
-      
-    //   } catch (error) {
-    //     console.log("Error fetching document data:", error);
-    //   }
-    // }
+    const fetchUserNoOfClicksAllTime= async () => {
+      try {
+        const docRef = doc(db, "users", user.uid);
+        const docSnapshot = await getDoc(docRef);
+        return docSnapshot?.data()?.noOfClicksAllTime; 
+      } catch (error) {
+        console.log("Error fetching document data:", error);
+      }
+    }
+    fetchUserNoOfClicksAllTime();
     fetchUserTimeSpentPerDay();
     fetchUserNoOfPosesADay();
   return (

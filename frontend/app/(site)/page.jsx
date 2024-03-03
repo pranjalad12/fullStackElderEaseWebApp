@@ -49,7 +49,16 @@ export default function Home() {
               [currentDate]: 0
             },
             noOfClicksAllTime:{
-
+                ["Balasana"]:0,
+                ["Vrikshasana"]:0,
+                ["Padmasana"]:0,
+                ["T Pose"]:0,
+                ["Toe Touch"]:0,
+                ["Bhujangasana"]:0,
+                ["Phalakasana"]:0,
+                ["Vajrasana"]:0,
+                ["Virabhadrasana II"]:0,
+                ["Back Bend"]:0
             },
             timeSpentPerDay: {
               [currentDate]: 0
