@@ -63,20 +63,15 @@ const About = () => {
               className="animate_right md:w-1/2"
             >
               <span className="font-medium uppercase text-black dark:text-white">
-                <span className="mb-4 mr-4 inline-flex rounded-full bg-meta px-4.5 py-1 text-metatitle uppercase text-white ">
-                  New
                 </span>{" "}
-                SaaS Boilerplate for Next.js
-              </span>
               <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                A Complete Solution for
+                Real Time Feedback
                 <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg dark:before:bg-titlebgdark">
-                  SaaS Startup
+                  Through AI
                 </span>
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                ultricies lacus non fermentum ultrices. Fusce consectetur le.
+                Use of artificial intelligence to correct your posture and poses in real time, in the comfort of your home.
               </p>
 
               <div className="mt-7.5 flex items-center gap-5">
@@ -87,9 +82,9 @@ const About = () => {
                 </div>
                 <div className="w-3/4">
                   <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                    React 18, Next.js 13 and TypeScript
+                    Voice Enabled Feedback During Your Session
                   </h3>
-                  <p>Ut ultricies lacus non fermentum ultrices.</p>
+                  <p>Ensures that you perfect the art of yoga! </p>
                 </div>
               </div>
               <div className="mt-7.5 flex items-center gap-5">
@@ -100,9 +95,9 @@ const About = () => {
                 </div>
                 <div className="w-3/4">
                   <h3 className="mb-0.5 text-metatitle2 text-black dark:text-white">
-                    Fully Customizable
+                    Progress tracking
                   </h3>
-                  <p>consectetur adipiscing elit fermentum ultricies.</p>
+                  <p>We offer analytics on your performance so that you can plan accordingly.</p>
                 </div>
               </div>
             </motion.div>
@@ -134,34 +129,21 @@ const About = () => {
               className="animate_left md:w-1/2"
             >
               <h4 className="font-medium uppercase text-black dark:text-white">
-                Launch Your SaaS Fast
               </h4>
               <h2 className="relative mb-6 text-3xl font-bold text-black dark:text-white xl:text-hero">
-                Solving for a greater problem {"   "}
+              Empowering Elders Through Accessible Yoga {"   "}
                 <span className="relative inline-block before:absolute before:bottom-2.5 before:left-0 before:-z-1 before:h-3 before:w-full before:bg-titlebg2 dark:before:bg-titlebgdark">
-                  Integrations
+                A Safer Approach to Wellness
                 </span>
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                ultricies lacus non fermentum ultrices. Fusce consectetur le.
+              Our app offers personalized and age-appropriate yoga training to prevent injuries by considering users' health history. Utilizing AI-powered posture analysis, we provide instant feedback to ensure proper alignment during practice, catering to seniors who may face mobility challenges and prefer convenient at-home sessions over traditional or expensive private practitioners.
               </p>
               <div>
                 <a
                   href="#"
                   className="group mt-7.5 inline-flex items-center gap-2.5 text-black hover:text-primary dark:text-white dark:hover:text-primary"
                 >
-                  <span className="duration-300 group-hover:pr-2">
-                    Know More
-                  </span>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="currentColor"
-                  >
-                    <path d="M10.4767 6.16701L6.00668 1.69701L7.18501 0.518677L13.6667 7.00034L7.18501 13.482L6.00668 12.3037L10.4767 7.83368H0.333344V6.16701H10.4767Z" />
-                  </svg>
                 </a>
               </div>
             </motion.div>
