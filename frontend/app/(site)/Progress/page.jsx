@@ -217,7 +217,7 @@ export default function Home() {
   </div>
 
 </div>
-      <PageTitle title="Dashboard" />
+      <PageTitle title="Progress" />
       <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4 mb-8">
         {cardData.map((d, i) => (
           <Card

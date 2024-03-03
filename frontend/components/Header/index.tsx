@@ -84,7 +84,7 @@ const Header = () => {
             Start Session 🌟
           </Link>
           <Link
-            href="/dashboard"
+            href="/Progress"
             className="text-xl font-medium text-black hover:text-primary font-extrabold "
           >
             Progress 🌟
