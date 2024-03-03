@@ -156,8 +156,8 @@ const Testimonial = ({clicks}) => {
 												</svg>
 											</div>
 											
-											<p class="px-4 text-gray-500 text-xl">{clicks["Virabhadrasana"]}</p>
-											<h1 class="text-darken mb-3 text-xl font-medium lg:px-14">Virabhadrasana</h1>
+											<p class="px-4 text-gray-500 text-xl">{clicks["Virabhadrasana II"]}</p>
+											<h1 class="text-darken mb-3 text-xl font-medium lg:px-14">Virabhadrasana II</h1>
 										</div>
 
 								</div>
