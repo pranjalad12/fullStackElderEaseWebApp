@@ -26,11 +26,11 @@ const Contact = () => {
   const [second, setsecond] = useState([]);
   const [third, setthird] = useState([]);
   const options2 = [
-    "Arthritis",
+    "arthritis",
     "sciatica",
-    "Indigestion",
+    "indigestion",
     "diabetes",
-    "Hypertension",
+    "hypertension",
     "None"
   ];
   const options1 = ["neck", "shoulders", "back", "knee", "hips", "None"];

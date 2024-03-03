@@ -11,6 +11,7 @@ pose = mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.3, model_
 mp_drawing = mp.solutions.drawing_utils
 
 engine = pyttsx3.init()
+engine.setProperty('voice', 'english+f4')
 def speak_label(label):
     def speak():
         engine.say(label)

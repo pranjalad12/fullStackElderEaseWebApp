@@ -156,8 +156,9 @@ const Homepage = () => {
         timeSpentPerDay: { [`${formattedDate}`]: elapsedTime },
       });
     } else {
+      const existingTimeSpent = userDoc.data().timeSpentPerDay;
       await updateDoc(userRef, {
-        timeSpentPerDay: { [`${formattedDate}`]: toBeUpdatedtime },
+        timeSpentPerDay: { ...existingTimeSpent,[`${formattedDate}`]: toBeUpdatedtime },
       });
     }
   };

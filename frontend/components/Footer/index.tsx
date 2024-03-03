@@ -108,7 +108,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        href="/progress"
+                        href="/Progress"
                         className="mb-3 inline-block hover:text-primary text-lg"
                       >
                         Progress
