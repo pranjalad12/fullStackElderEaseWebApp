@@ -92,10 +92,10 @@ export default function Home() {
         const docRef = doc(db, "users", user?.uid);
         const docSnapshot = await getDoc(docRef);
         const array1 =await docSnapshot?.data()?.noOfClicksAllTime;  
-        const array2 =await docSnapshot?.data()?.noOfClicksToday;
+        const array2 =await docSnapshot?.data()?.noOfPosesInADay;
         const array3 =await docSnapshot?.data()?.timeSpentPerDay;
         console.log("please chal ja")
-        console.log(docSnapshot?.data()?.noOfClicksToday);
+        console.log(docSnapshot?.data()?.noOfPosesInADay);
   
         // Update state variables
         setarray1(array1 || []);
@@ -176,7 +176,7 @@ export default function Home() {
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
             
-          <BarChart datas={array1}/>
+          <BarChart datas={array2}/>
           
         </CardContent>
         
