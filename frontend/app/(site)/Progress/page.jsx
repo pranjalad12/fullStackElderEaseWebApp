@@ -176,7 +176,7 @@ export default function Home() {
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
             
-          <BarChart datas={array2}/>
+          <BarChart datas={array3}/>
           
         </CardContent>
         
@@ -215,7 +215,7 @@ export default function Home() {
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
 
-          <BarChart  datas={array1}/>
+          <BarChart  datas={array2}/>
         </CardContent>
         {/*  */}
       </section>
