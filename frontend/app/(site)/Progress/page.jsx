@@ -84,22 +84,29 @@ export default function Home() {
   const {user}=UserAuth();
   const [array1,setarray1]=useState([]);
   const [array2,setarray2]=useState([]);
+  const [array3,setarray3]=useState([]);
     const db= getFirestore(app);
 
     useEffect(() => {
       const updateArrays = async () => {
         const docRef = doc(db, "users", user?.uid);
         const docSnapshot = await getDoc(docRef);
-        const array1 =await docSnapshot?.data()?.noOfClicksAllTime; 
-       
+        const array1 =await docSnapshot?.data()?.noOfClicksAllTime;  
+        const array2 =await docSnapshot?.data()?.noOfClicksToday;
+        const array3 =await docSnapshot?.data()?.timeSpentPerDay;
+        console.log("please chal ja")
+        console.log(docSnapshot?.data()?.noOfClicksToday);
   
         // Update state variables
-        setarray1(array1 || []); // If diseasesData is null or undefined, set an empty array
+        setarray1(array1 || []);
+        setarray2(array2 || []);
+        setarray3(array3 || []); // If diseasesData is null or undefined, set an empty array
         
       };
   
       updateArrays();
     }, [user, db]);
+    
     // const fetchUserTimeSpentPerDay = async () => {
     //   try {
     //     const docRef = doc(db, "users", user.uid);
