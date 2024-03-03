@@ -40,7 +40,7 @@ const Testimonial = ({clicks}) => {
 						<SectionHeader
 							headerInfo={{
 								title: `Recommendations`,
-								subtitle: `Recommended For You!`,
+								subtitle: `Your Personalised Dashboard`,
 								description: ``,
 							}}
 						/>
@@ -71,7 +71,7 @@ const Testimonial = ({clicks}) => {
 						{/* <!-- Additional required wrapper --> */}
 						<Swiper
 							spaceBetween={50}
-							slidesPerView={3}
+							slidesPerView={4}
 							autoplay={{
 								delay: 2500,
 								disableOnInteraction: false,
@@ -156,7 +156,7 @@ const Testimonial = ({clicks}) => {
 												</svg>
 											</div>
 											
-											<p class="px-4 text-gray-500 text-xl">{clicks["Virabhadrasana"]}</p>
+											<p class="px-4 text-gray-500 text-xl">{clicks["Virabhadrasana II"]}</p>
 											<h1 class="text-darken mb-3 text-xl font-medium lg:px-14">Virabhadrasana</h1>
 										</div>
 
