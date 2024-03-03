@@ -10,7 +10,7 @@ import {
   Bar
 } from "recharts";
 
-type Props = {};
+
 
 const data = [
   {
@@ -63,10 +63,13 @@ const data = [
   }
 ];
 
-export default function BarChart({}: Props) {
+export default function BarChart({datas}) {
+  const dataArray = Object.entries(datas).map(([name, total]) => ({ name, total }));
+  console.log("received");
+  console.log(dataArray);
   return (
     <ResponsiveContainer width={"100%"} height={350}>
-      <BarGraph data={data}>
+      <BarGraph data={dataArray}>
         <XAxis
           dataKey={"name"}
           tickLine={false}

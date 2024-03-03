@@ -22,8 +22,7 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { app, auth } from "app/(site)/firebase";
 import { motion } from "framer-motion";
-import SingleTestimonial from "./SingleTestimonial";
-import { testimonialData } from "./testimonialData";
+
 // Include user in the dependency array to re-run the effect when user changes
 import { UserAuth } from "app/context/AuthContext.js";
 
