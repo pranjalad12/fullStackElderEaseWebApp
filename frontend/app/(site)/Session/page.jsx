@@ -29,6 +29,8 @@ const Homepage = () => {
   const [poseData, setPosesData] = useState([]);
   const [timer, setTimer] = useState(0);
   const [startTime, setStartTime] = useState(0);
+  const [array1,setarray1]=useState([]);
+  const [array2,setarray2]=useState([]);
   // const [totalDurationToday, setTotalDurationToday] = useState(0);
   const [currentPose, setCurrentPose] = useState("Yoga, ElderEase");
 
@@ -78,6 +80,23 @@ const Homepage = () => {
     });
   }, [user]);
 
+  
+
+    useEffect(() => {
+      const updateArrays = async () => {
+        const docRef = doc(db, "users", user?.uid);
+        const docSnapshot = await getDoc(docRef);
+        const array1 =await docSnapshot?.data()?.noOfClicksAllTime; 
+       
+  
+        // Update state variables
+        setarray1(array1 || []); // If diseasesData is null or undefined, set an empty array
+        
+      };
+  
+      updateArrays();
+    }, [user, db]);
+    console.log("array1: ", array1)
   const urlToPose = {
     tPoseVideo: "T Pose",
     treePoseVideo: "Vrikshasana",
@@ -114,9 +133,20 @@ const Homepage = () => {
     console.log("ye start time set hua h wen i called startsesion", startTime);
   };
 
-  const handleStartVideo = (poseName) => {
+  const handleStartVideo  = async (poseName) => {
     setCurrentPose(urlToPose[poseName]);
     startVideo(poseName);
+    //poseName=tPoseVideo
+    //urlToPose[poseName]="T Pose"
+    let newArray = array1;
+    // console.log("pose:", poseName, "cnt before adding", newArray[urlToPose[poseName]])
+    newArray[urlToPose[poseName]]++;
+    setarray1(newArray)
+    const userRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userRef);
+    await updateDoc(userRef, {
+      noOfClicksAllTime: array1,
+    });
   };
 
   const endSession = async () => {
