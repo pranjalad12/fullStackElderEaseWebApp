@@ -94,8 +94,8 @@ const Homepage = () => {
 
     updateArrays();
   }, [user, db]);
-  console.log("a1" ,array1)
-  console.log("a2" ,array2)
+  console.log("a1", array1);
+  console.log("a2", array2);
 
   const urlToPose = {
     tPoseVideo: "T Pose",
@@ -142,17 +142,15 @@ const Homepage = () => {
     const userRef = doc(db, "users", user.uid);
     const userDoc = await getDoc(userRef);
 
-    let newArray = array1;
-    newArray[urlToPose[poseName]]++;
-    setarray1(newArray);
+    array1[urlToPose[poseName]]++;
 
     const currentDate = new Date().toLocaleDateString();
     array2[currentDate]++;
-    
+
     await updateDoc(userRef, {
       noOfClicksAllTime: array1,
     });
-    await  updateDoc(userRef, {
+    await updateDoc(userRef, {
       noOfPosesInADay: array2,
     });
   };
