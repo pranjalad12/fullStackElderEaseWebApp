@@ -104,7 +104,8 @@ const Homepage = () => {
   };
   const [loading, setLoading] = useState(false);
   const [videoSrc, setVideoSrc] = useState(
-    "https://www.athulyaliving.com/blogs/wp-content/uploads/2017/07/yoga-for-seniors.jpg");
+    "https://www.athulyaliving.com/blogs/wp-content/uploads/2017/07/yoga-for-seniors.jpg"
+  );
   const startVideo = async (poseName) => {
     console.log("startvideo call hua for", poseName);
     setVideoSrc(`http://127.0.0.1:8080/${poseName}`);
@@ -122,7 +123,8 @@ const Homepage = () => {
     setCurrentPose("Yoga, ElderEase");
     console.log("endsession u laxi");
     setVideoSrc(
-      "https://www.athulyaliving.com/blogs/wp-content/uploads/2017/07/yoga-for-seniors.jpg" );
+      "https://www.athulyaliving.com/blogs/wp-content/uploads/2017/07/yoga-for-seniors.jpg"
+    );
 
     const endTime = Date.now();
     let elapsedTime = endTime - startTime;
@@ -161,39 +163,46 @@ const Homepage = () => {
   };
   const poseUrls = {
     "T Pose": "tPoseVideo",
-    "Vrikshasana": "treePoseVideo",
-    "Vajrasana": "vajrasanaPoseVideo",
-    "Phalakasana": "plankPoseVideo",
-    "Padmasana": "lotusPoseVideo",
-    "Bhujangasana": "cobraPoseVideo",
+    Vrikshasana: "treePoseVideo",
+    Vajrasana: "vajrasanaPoseVideo",
+    Phalakasana: "plankPoseVideo",
+    Padmasana: "lotusPoseVideo",
+    Bhujangasana: "cobraPoseVideo",
     "Toe Touch": "toeTouchPoseVideo",
     "Back Bend": "backBendPoseVideo",
-    "Balasana": "balasanaposevideo",
-    "Savasana": "corpsePoseVideo",
+    Balasana: "balasanaposevideo",
+    Savasana: "corpsePoseVideo",
     "Virabhadrasana II": "warriorPoseVideo",
   };
 
-
   const posesData = [
     {
-        Name: "T Pose",
-        photoUrl: "https://preview.free3d.com/img/2020/07/2399392636998780345/ni8pdb84.jpg",
-        description: ["In this pose, the arms are stretched out horizontally to the sides, forming a straight line with the torso, while the feet are placed firmly on the ground."," The T-pose is known for its ability to promote balance, alignment, and stability throughout the body."," It can help strengthen the core, improve posture, and increase flexibility in the shoulders and chest."],
-        benefits: ["Holding the T-pose and focusing on deep breathing can help calm the mind and reduce stress and anxiety.", "The expansive nature of the T-pose encourages better circulation throughout the body.", "By extending the arms out to the sides and keeping the spine straight, the T-pose helps align the shoulders, spine, and hips, promoting better posture."]
+      Name: "T Pose",
+      photoURL:
+        "https://preview.free3d.com/img/2020/07/2399392636998780345/ni8pdb84.jpg",
+      description:
+        "In this pose, the arms are stretched out horizontally to the sides, forming a straight line with the torso, while the feet are placed firmly on the ground. The T-pose is known for its ability to promote balance, alignment, and stability throughout the body. It can help strengthen the core, improve posture, and increase flexibility in the shoulders and chest.",
+      benefits:
+        "Holding the T-pose and focusing on deep breathing can help calm the mind and reduce stress and anxiety. The expansive nature of the T-pose encourages better circulation throughout the body. By extending the arms out to the sides and keeping the spine straight, the T-pose helps align the shoulders, spine, and hips, promoting better posture.",
     },
     {
-        Name: "Back Bend",
-        photoUrl: "https://example.com/pose2.jpg",
-        description: ["Description 2.1", "Description 2.2"],
-        benefits: ["Benefits 2.1", "Benefits 2.2"]
+      Name: "Back Bend",
+      photoURL: "https://pocketyoga.com/assets/images/full/MountainArmsUp.png",
+      description:
+        "Stand with feet hip-width apart, lift arms overhead, and arch your upper back while exhaling. Open your chest, gaze upwards, and maintain active legs. Hold for a few breaths, reaching hands towards the floor if comfortable. To exit, engage your core and slowly return to an upright position",
+      benefits:
+        "It slowly helps in stimulating the internal organs leading to an improved digestion. It improves the flexibility of the hips and lower back. This stretching improves the functioning of the lungs reducing any respiratory disorders.",
     },
     {
-        Name: "Toe Touch",
-        photoUrl: "https://example.com/pose3.jpg",
-        description: ["Description 3.1"],
-        benefits: ["Benefits 3.1"]
-    }
-];
+      Name: "Toe Touch",
+      photoURL:
+        "https://t3.ftcdn.net/jpg/02/53/35/80/360_F_253358090_cQPRo5XDpYZ2qqxk0kQPQYdyjLtcVqAx.jpg",
+      description:
+        "Start by standing with your feet hip-width apart. Take a deep breath in and as you exhale, hinge at your hips and bend forward from your waist. Keep your back straight as you reach your hands toward your toes. If you can, allow your fingertips or palms to touch the floor. If not, go as far as your flexibility allows. Hold the stretch for a few breaths, continuing to deepen the stretch with each exhale. To come out of the pose, engage your core muscles, bend your knees slightly, and slowly roll up to a standing position, stacking each vertebra.",
+      benefits:
+        "Stretching the back of the legs and spine enhances blood flow, contributing to better circulation throughout the body. The forward bend promotes relaxation, calms the mind, and helps reduce stress and anxiety. The compression of the abdomen in this pose may aid digestion by stimulating the digestive organs.",
+    },
+  ];
 
   const WarmUpPoses = ["Back Bend", "Toe Touch"];
   const EndPoses = ["T Pose"];
@@ -216,7 +225,7 @@ const Homepage = () => {
               <div className="flex justify-center lg:gap-8 xl:gap-32.5 ">
                 <div className=" md:w-1/2 ">
                   <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center">
-                    Welcome to your session! 
+                    Welcome to your session!
                   </h1>
                 </div>
               </div>
@@ -379,7 +388,7 @@ const Homepage = () => {
                   >
                     <Image
                       src={
-                        poseData.find((pose) => pose.Name === currentPose)
+                        (poseData.find((pose) => pose.Name === currentPose) || posesData.find((pose) => pose.Name === currentPose))
                           ?.photoURL ||
                         "https://images.unsplash.com/photo-1517363898874-737b62a7db91?q=80&w=1963&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                       }
@@ -413,9 +422,9 @@ const Homepage = () => {
                       </span>
                     </h2>
                     {(() => {
-                      const matchingPose = poseData.find(
-                        (pose) => pose.Name === currentPose
-                      ) || posesData.find((pose) => pose.Name === currentPose);
+                      const matchingPose =
+                        poseData.find((pose) => pose.Name === currentPose) ||
+                        posesData.find((pose) => pose.Name === currentPose);
                       if (matchingPose) {
                         let des = matchingPose.description;
                         return (

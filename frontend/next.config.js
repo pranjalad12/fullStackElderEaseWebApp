@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["*", "localhost", "lh3.googleusercontent.com", "www.vinyasayogaashram.com", "www.shutterstock.com", "static.vecteezy.com", "images.unsplash.com", "tintyoga.com"],
+    domains: ["*", "pocketyoga.com", "t3.ftcdn.net", "preview.free3d.com","localhost", "lh3.googleusercontent.com", "www.vinyasayogaashram.com", "www.shutterstock.com", "static.vecteezy.com", "images.unsplash.com", "tintyoga.com"],
     remotePatterns: [
       {
         protocol: "https",
