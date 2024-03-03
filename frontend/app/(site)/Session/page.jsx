@@ -149,7 +149,7 @@ const Homepage = () => {
     console.log("fordate", formattedDate);
     // console.log("tobeupdatetime", toBeUpdatedtime)
     if (!currentTimeSpentPerDay.hasOwnProperty(formattedDate)) {
-      await setDoc(userRef, {
+      await updateDoc(userRef, {
         timeSpentPerDay: { [`${formattedDate}`]: elapsedTime },
       });
     } else {
