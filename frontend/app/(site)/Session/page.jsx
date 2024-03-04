@@ -256,6 +256,10 @@ const Homepage = () => {
     <>
       {user ? (
         <>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
           <div>
             <div>
               <div className="flex justify-center lg:gap-8 xl:gap-32.5 ">
