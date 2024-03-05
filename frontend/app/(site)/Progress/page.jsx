@@ -1,14 +1,14 @@
 "use client"
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "components/PageTitle";
 import Image from "next/image";
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
-import Card, { CardContent, CardProps } from "@/components/Card";
-import BarChart from "@/components/BarChart";
-import SalesCard, { SalesProps } from "@/components/SalesCard";
+import Card, { CardContent, CardProps } from "components/Card";
+import BarChart from "components/BarChart";
+import SalesCard, { SalesProps } from "components/SalesCard";
 
 import ErrorPage from "app/(site)/error/page"
 import {app} from "app/(site)/firebase";
-import Testimonial from "@/components/cardsslider";
+import Testimonial from "components/cardsslider";
 import React, { useEffect, useState } from "react";
 import { UserAuth } from "app/context/AuthContext.js";
 
