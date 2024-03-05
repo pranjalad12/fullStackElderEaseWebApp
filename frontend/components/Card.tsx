@@ -2,7 +2,7 @@
 
 import React from "react";
 import { LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 export type CardProps = {
   label: string;

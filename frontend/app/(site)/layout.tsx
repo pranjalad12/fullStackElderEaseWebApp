@@ -1,10 +1,10 @@
 "use client";
-
-import Footer from "components/Footer";
-import Header from "components/Header";
-import {AuthContextProvider} from "app/context/AuthContext.js";
-import Lines from "components/Lines";
-import ScrollToTop from "components/ScrollToTop";
+import React from "react";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import {AuthContextProvider} from "../context/AuthContext";
+import Lines from "../../components/Lines";
+import ScrollToTop from "../../components/ScrollToTop";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";

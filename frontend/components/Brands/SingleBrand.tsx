@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
-import { Brand } from "@/types/brand";
+import { Brand } from "../../../frontend/types/brand";
 import { motion } from "framer-motion";
 
 const SingleBrand = ({ brand }: { brand: Brand }) => {
