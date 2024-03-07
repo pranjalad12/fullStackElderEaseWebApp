@@ -433,11 +433,11 @@ const Contact = () => {
                   />
                 </div>
               </div>
-              <div className="relative">
+              <div className="">
                 <button
                   onClick={() => bothFxn()}
                   aria-label="send message"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark absolute top-0 right-0 mb-20"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-black px-6 py-3 font-medium text-white duration-300 ease-in-out hover:bg-blackho dark:bg-btndark float:right mb-20"
                 >
                   Save Preferences
 
