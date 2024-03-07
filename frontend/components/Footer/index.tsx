@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0">
           {/* <!-- Footer Top --> */}
           <div className="py-20 lg:py-25">
-            <div className="flex flex-wrap gap-8 lg:justify-around lg:gap-0">
+            <div className="flex flex-wrap gap-8 items-center md:items-start justify-center lg:justify-around lg:gap-0">
               <motion.div
                 variants={{
                   hidden: {
@@ -28,7 +28,7 @@ const Footer = () => {
                 viewport={{ once: true }}
                 className="animate_top w-1/2 lg:w-1/4"
               >
-                <div className="flex items-center justify-start">
+                <div className="flex items-center  md:justify-start  justify-center">
                   <a href="/">
                     <Image
                       src="/images/brand/logo1.png"
@@ -51,7 +51,7 @@ const Footer = () => {
                 </div>
               </motion.div>
 
-              <div className="flex w-full flex-col gap-8 md:flex-row md:justify-between md:gap-0 lg:w-2/3 xl:w-7/12">
+              <div className="flex w-full flex-col gap-8 md:flex-row md:justify-between md:gap-0 lg:w-2/3 xl:w-7/12 text-center md:text-left">
                 <motion.div
                   variants={{
                     hidden: {
@@ -327,6 +327,8 @@ const Footer = () => {
           </div>
           {/* <!-- Footer Bottom --> */}
         </div>
+      
+      
       </footer>
     </>
   );
