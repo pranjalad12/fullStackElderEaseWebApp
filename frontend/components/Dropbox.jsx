@@ -46,7 +46,7 @@ export default function MultipleSelect({
   };
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+      <FormControl sx={{ m: 1, width: 250, mt: 3 }}>
         <Select
           multiple
           displayEmpty
