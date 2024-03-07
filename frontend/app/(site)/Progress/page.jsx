@@ -184,14 +184,13 @@ export default function Home() {
         </CardContent>
         
         <section className="p-25 mt-25">
-          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center mb-15">Track your yoga journey daily</span>
+          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center mb-15">Track your yoga journey daily
+          <br/>
+          effortlessly with our time
+          <br/>
+          tracking graph
+          </span>
               <br/>
-              
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center px-20">effortlessly with our 
-              </span>
-              <br/>
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center  px-20">time-tracking graph
-              </span>
             
           </section>
           
@@ -203,14 +202,15 @@ export default function Home() {
         
       <section className="p-25 mt-25">
           <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center mb-15">Stay updated on your daily yoga  
+          <br/>
+          practice with our time
+          <br/>
+          tracking graph.
+          <br/>
               </span>
-              <br/>
+             
               
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center px-20">practice with our time
-              </span>
-              <br/>
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center  px-30">-tracking graph.
-              </span>
+           
             
           </section>
           
