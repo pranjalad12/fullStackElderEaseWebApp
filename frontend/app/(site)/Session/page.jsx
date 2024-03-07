@@ -82,14 +82,18 @@ const Homepage = () => {
 
   useEffect(() => {
     const updateArrays = async () => {
-      const docRef = doc(db, "users", user?.uid);
-      const docSnapshot = await getDoc(docRef);
-      const array1 = await docSnapshot?.data()?.noOfClicksAllTime;
-      const array2 = await docSnapshot?.data()?.noOfPosesInADay;
-      console.log(docSnapshot?.data()?.noOfPosesInADay);
+      if(!user && !user?.id) 
+      {
+        return;
+      }
+        const docRef = doc(db, "users", user?.uid);
+        const docSnapshot = await getDoc(docRef);
+        const array1 = await docSnapshot?.data()?.noOfClicksAllTime;
+        const array2 = await docSnapshot?.data()?.noOfPosesInADay;
+        console.log(docSnapshot?.data()?.noOfPosesInADay);
 
-      setarray1(array1 || []);
-      setarray2(array2 || []);
+        setarray1(array1 || []);
+        setarray2(array2 || []);
     };
 
     updateArrays();
@@ -304,7 +308,7 @@ const Homepage = () => {
               </div>
 
               <div
-                className="flex flex-col-reverse flex-wrap gap-8 md:flex-row md:flex-nowrap md:justify-between xl:gap-20"
+                className="flex flex-col flex-wrap gap-8 md:flex-row md:flex-nowrap md:justify-between xl:gap-20"
               >
                 <motion.div
                   variants={{

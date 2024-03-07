@@ -59,13 +59,14 @@ const FunFact = () => {
               Built especially for elders
             </h2>
             <p className="mx-auto lg:w-11/12">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-              convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam
-              ante in maximus.
+            Built Especially for Elders: Our web app prioritizes accessibility and user comfort, offering gentle yoga sessions tailored to older adults' needs. 
+            <br/>
+            <br/>
+            Additionally, our platform serves as a comprehensive wellness hub, providing educational resources and progress tracking. Join us on the journey to healthy aging and improved well-being.
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-8 lg:gap-42.5">
+          {/* <div className="flex flex-wrap justify-center gap-8 lg:gap-42.5">
             <motion.div
               variants={{
                 hidden: {
@@ -135,7 +136,7 @@ const FunFact = () => {
               </h3>
               <p className="text-lg lg:text-para2">Winning Award</p>
             </motion.div>
-          </div>
+          </div> */}
         </div>
       </section>
       {/* <!-- ===== Funfact End ===== --> */}
