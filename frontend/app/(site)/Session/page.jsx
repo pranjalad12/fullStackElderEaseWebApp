@@ -284,9 +284,9 @@ const Homepage = () => {
           </div>
           <section
             id="support"
-            className="px-44 pt-0 md:px-8 2xl:px-0 w-90/100"
+            className="md:px-44  px:4 pt-0 md:px-8 2xl:px-0 w-90/100"
           >
-            <div className="relative mx-auto w-full px-7.5 pt-0 lg:px-15 lg:pt-5 xl:px-20 xl:pt-20">
+            <div className="relative mx-auto w-full px-2 md:px-7.5 pt-0 lg:px-15 lg:pt-5 xl:px-20 xl:pt-20">
               <div className="absolute left-0 top-0 -z-1 h-2/3 w-full rounded-lg bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]"></div>
               <div className="absolute bottom-[-255px] left-0 -z-1 h-full w-full">
                 <Image
@@ -305,7 +305,6 @@ const Homepage = () => {
 
               <div
                 className="flex flex-col-reverse flex-wrap gap-8 md:flex-row md:flex-nowrap md:justify-between xl:gap-20"
-                style={{ height: "900px" }}
               >
                 <motion.div
                   variants={{
@@ -323,7 +322,7 @@ const Homepage = () => {
                   whileInView="visible"
                   transition={{ duration: 2, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15 grid grid-template-rows-[auto_1fr]"
+                  className="animate_top w-full md:w-2/5 md:p-7.5 lg:w-[26%] xl:pt-15 grid grid-template-rows-[auto_1fr] "
                 >
                   <h2 className="mb-12.5 text-3xl font-semibold text-black dark:text-white xl:text-sectiontitle2">
                     Choose your Pose
