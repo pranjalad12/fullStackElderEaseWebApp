@@ -155,7 +155,7 @@ export default function Home() {
   return (
    <>
    {user ? (
-   <div className="my-10 mx-60 pl-10 bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]">
+   <div className="my-10  mx-5 md:mx-60 pl-10 bg-gradient-to-t from-transparent to-[#dee7ff47] dark:bg-gradient-to-t dark:to-[#252A42]">
    <div></div>
    
    <br/>
@@ -184,13 +184,13 @@ export default function Home() {
         </CardContent>
         
         <section className="p-25 mt-25">
-          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center mb-15">Track your yoga journey daily</span>
+          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center mb-15">Track your yoga journey daily</span>
               <br/>
               
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center px-20">effortlessly with our 
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center px-20">effortlessly with our 
               </span>
               <br/>
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center  px-20">time-tracking graph
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center  px-20">time-tracking graph
               </span>
             
           </section>
@@ -198,18 +198,18 @@ export default function Home() {
 
         {/*  */}
       </section>
-      <section className="grid grid-cols-2 gap-4">
+      <section className="grid md:grid-cols-2 grid-cols-1 gap-4">
         
         
       <section className="p-25 mt-25">
-          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center mb-15">Stay updated on your daily yoga  
+          <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center mb-15">Stay updated on your daily yoga  
               </span>
               <br/>
               
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center px-20">practice with our time
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center px-20">practice with our time
               </span>
               <br/>
-              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-4xl text-center  px-30">-tracking graph.
+              <span className="bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center mt-5 text-3xl font-extrabold leading-[1.15] text-black md:text-4xl text-center  px-30">-tracking graph.
               </span>
             
           </section>
