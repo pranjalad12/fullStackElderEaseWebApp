@@ -12,12 +12,11 @@ import {
 	doc,
 	updateDoc,
 	getDoc,
-
 } from "firebase/firestore";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Image from 'next/image';
+import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { app, auth } from "app/(site)/firebase";
@@ -25,7 +24,6 @@ import { motion } from "framer-motion";
 
 // Include user in the dependency array to re-run the effect when user changes
 import { UserAuth } from "app/context/AuthContext.js";
-
 
 const Testimonial = () => {
 	const { user } = UserAuth();
@@ -64,7 +62,7 @@ const Testimonial = () => {
 				const querySnapshot = await getDocs(q);
 				const matchingPosesData = querySnapshot.docs.map((doc) => doc.data());
 				setPosesData(matchingPosesData);
-				console.log(matchingPosesData)
+				console.log(matchingPosesData);
 				// console.log(poseData.length);
 			} catch (error) {
 				console.error(error);
@@ -120,7 +118,7 @@ const Testimonial = () => {
 	];
 	return (
 		<>
-			<section >
+			<section>
 				<div className="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0 mt-5">
 					{/* <!-- Section Title Start --> */}
 					<div className="animate_top mx-auto text-center">
@@ -154,7 +152,7 @@ const Testimonial = () => {
 					className="animate_top mx-auto mt-15 max-w-c-1235 px-4 md:px-8 xl:mt-10 xl:px-0"
 				>
 					{/* <!-- Slider main container --> */}
-					<div className="swiper testimonial-01 mb-20 pb-22.5">
+					<div className="flex items-center swiper testimonial-01 mb-20 pb-22.5">
 						{/* <!-- Additional required wrapper --> */}
 						<Swiper
 							spaceBetween={50}
@@ -182,32 +180,12 @@ const Testimonial = () => {
 								<SwiperSlide key={index}>
 									{/* <SingleTestimonial review={pose} /> */}
 									<div className="rounded-lg bg-white p-9 pt-7.5 shadow-solid-9 dark:border dark:border-strokedark dark:bg-blacksection dark:shadow-none">
-										<div className="mb-7.5 flex flex-col-reverse md:flex-row  justify-between border-b border-stroke pb-6 dark:border-strokedark items-start text-justify gap-4">
-											<div>
-												<h3 className="mb-1.5 text-metatitle3 text-black dark:text-white">
-													<strong>
-														{pose.Name}
-													</strong>
-												</h3>
-												<ul>
-													{pose.benefits.map((benefit, index) => (
-														<li key={index}>{`${index + 1}. ${benefit}`}</li>
-													))}
-												</ul>
-
-
-											</div>
-											<img style={{ width: '60%', height: '50%' }} className="" src={pose.photoURL} />
-										</div>
-
-										{/* <p>{content}</p> */}
-									</div>
-								</SwiperSlide>
-							))}
-							{posesData.map((pose, index) => (
-								<SwiperSlide key={index}>
-									<div className="rounded-lg bg-white p-9 pt-7.5 shadow-solid-9 dark:border dark:border-strokedark dark:bg-blacksection dark:shadow-none">
-										<div className="mb-7.5 flex flex-col-reverse md:flex-row justify-between border-b border-stroke pb-6 dark:border-strokedark items-start text-justify gap-4">
+										<div className="mb-7.5 border-b border-stroke pb-6 dark:border-strokedark items-start text-justify gap-4">
+											<img
+												style={{ width: "60%", height: "50%", float: "right", margin: "10px" }}
+												className=""
+												src={pose.photoURL}
+											/>
 											<div>
 												<h3 className="mb-1.5 text-metatitle3 text-black dark:text-white">
 													<strong>{pose.Name}</strong>
@@ -218,17 +196,35 @@ const Testimonial = () => {
 													))}
 												</ul>
 											</div>
-											<img
-												style={{ width: "60%", height: "50%" }}
-												className=""
-												src={pose.photoURL}
-											/>
+										</div>
+									</div>
+								</SwiperSlide>
+							))}
+							{posesData.map((pose, index) => (
+								<SwiperSlide key={index}>
+									<div className="rounded-lg bg-white p-9 pt-7.5 shadow-solid-9 dark:border dark:border-strokedark dark:bg-blacksection dark:shadow-none">
+										<div className="mb-7.5 border-b border-stroke pb-6 dark:border-strokedark items-start text-justify gap-4">
+											<div>
+												<img
+													style={{ width: "60%", height: "50%", float: "right", margin: "10px" }}
+													className=""
+													src={pose.photoURL}
+												/>
+												<h3 className="mb-1.5 text-metatitle3 text-black dark:text-white">
+													<strong>{pose.Name}</strong>
+												</h3>
+												<ul>
+													{pose.benefits.map((benefit, index) => (
+														<li key={index}>{`${index + 1}. ${benefit}`}</li>
+													))}
+												</ul>
+											</div>
+
 										</div>
 										{/* <p>{content}</p> */}
 									</div>
 								</SwiperSlide>
 							))}
-
 						</Swiper>
 					</div>
 				</motion.div>
@@ -238,5 +234,3 @@ const Testimonial = () => {
 };
 
 export default Testimonial;
-
-
