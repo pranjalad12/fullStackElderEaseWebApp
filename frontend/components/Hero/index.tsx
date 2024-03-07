@@ -19,7 +19,7 @@ const Hero = () => {
         >
           <div className="flex lg:items-center lg:gap-8 xl:gap-32.5 ">
             <div className=" md:w-1/2 ">
-              <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
+              <h1 className="mt-5 text-4xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
                 Elder Ease Yoga
               </h1>
               {/* <div className="head_text">
@@ -30,7 +30,7 @@ const Hero = () => {
                 </span>
               </h1>
               </div> */}
-              <div className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
+              <div className="mt-5 text-4xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">
                 <span className="bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent text-center">
                   Experience yoga in a whole
                   <h1 className="bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent text-center">

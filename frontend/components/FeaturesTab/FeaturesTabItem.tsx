@@ -9,7 +9,7 @@ const FeaturesTabItem = ({ featureTab }: { featureTab: FeatureTab }) => {
     <>
       <div className="flex items-center gap-8 lg:gap-19">
         <div className="md:w-1/2">
-          <h2 className="mb-7 text-3xl font-bold text-black dark:text-white xl:text-sectiontitle2">
+          <h2 className="mb-7 text-2xl md:text:3xl font-bold text-black dark:text-white xl:text-sectiontitle2">
             {title}
           </h2>
           <p className="mb-5">{desc1}</p>
