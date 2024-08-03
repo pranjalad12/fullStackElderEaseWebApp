@@ -181,13 +181,14 @@ To get started with our app, follow these steps:
     ```bash
     python3 server.py
     ```
-
+    
 ## Prerequisites
 
 - **Node version 18.x.x**
 - **Python 3.x**
 
 Make sure you have the necessary versions of Node.js and Python installed before proceeding with the setup.
+- Deployed : https://elder-ease-app.vercel.app
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
